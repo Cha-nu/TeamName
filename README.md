@@ -2,13 +2,17 @@
 # 🎮 한국 남자 RPG (Korean Male RPG)
 
 > **"수능부터 취업까지, 한 남자의 치열한 성장 궤적을 그린 텍스트 기반 성장 RPG"** > 본 프로젝트는 C++ 프로그래밍 언어를 기반으로 하며, 객체지향 설계(OOP)를 통해 게임의 각 요소를 모듈화하여 구현한 팀 프로젝트입니다.
+<div align="center">
+  <img width="710" height="764" alt="image" src="https://github.com/user-attachments/assets/f999f853-db8b-48f1-87be-d9334c872ddd" />
+</div>
+
 
 ---
 
 ## 🛠 1. 개발 환경 (Development Environment)
 
 * **Language:** C++
-* **IDE:** Visual Studio 2022
+* **IDE:** Visual Studio 2022, Rider
 * **Architecture:** Manager Pattern (Game, Scene, Event)
 * **Target Platform:** Windows Console (x64)
 

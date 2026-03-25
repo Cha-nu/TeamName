@@ -11,7 +11,12 @@ int main()
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    std::cout << "Hello World!\n";
+    system("chcp 64001");
+
+    GameManager gameManager;
+
+    // 게임 시작
+    gameManager.Run();
 
     return 0;
 }

@@ -201,7 +201,7 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
-    <ClCompile Include="Monster\Monster.cpp" />
+    <ClCompile Include="Monster\NormalMonster.cpp" />
     <ClCompile Include="Monster\MonsterTest.cpp" />
     <ClCompile Include="Manager\SceneManager\SceneManager.cpp" />
     <ClCompile Include="TeamName.cpp" />

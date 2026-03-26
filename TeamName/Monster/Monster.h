@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include "MonsterEnum.h"
 
 struct MonsterStat {
 	std::string name = "N/A";
@@ -12,22 +11,35 @@ struct MonsterStat {
 
 
 class Monster{
+public:
+    virtual ~Monster() {}
+	virtual void InitializeStat(MonsterStat stat = {}) = 0;
+	virtual std::string getName() const { return "N/A"; }	
+	virtual int getHealth() const { return -1; }
+	virtual int getAttack() const { return -1; }
+	virtual bool isDead() const { return true; }
+	virtual void playerAttack() = 0;
+	virtual void takeDamage(int damage) = 0;
+
+
+};
+
+class NormalMonster : public Monster {
 private:
 	MonsterStat stat;
 
 public:
-    Monster();    
-    Monster(MonsterStat stat);    
-    virtual ~Monster() {}
-	virtual void InitializeStat(MonsterStat stat = {});
-    virtual std::string getName() const; 
-    virtual int getHealth() const;
-    virtual int getAttack() const;
-	virtual void playerAttack();
-    virtual void takeDamage(int damage);        
-    virtual bool isDead() const;
+	NormalMonster(MonsterStat stat = {});
+	virtual ~NormalMonster() {}
 
+	void InitializeStat(MonsterStat stat = {}) override;
+	virtual std::string getName() const override;
+	virtual int getHealth() const override;
+	virtual int getAttack() const override;
+	virtual bool isDead() const override;
+	virtual void playerAttack() override;
+	virtual void takeDamage(int damage) override;
+	//디버그용 연산자 오버라이딩
+	friend std::ostream& operator<<(std::ostream& os , const NormalMonster& m);
 
-    //디버그용 연산자 오버라이딩
-    friend std::ostream& operator<<(std::ostream& os, const Monster& m);
 };

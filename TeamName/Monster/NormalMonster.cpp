@@ -1,7 +1,7 @@
 ﻿#include "Monster.h"
 #include <iostream>
 
-//이름/체력/공격력/몬스터 타입 생성자
+//생성자
 NormalMonster::NormalMonster(MonsterStat stat){
 	InitializeStat(stat);
 }
@@ -33,9 +33,6 @@ void NormalMonster::takeDamage(int damage){
         std::cout << this->stat.name << ", " << damage << " 데미지! 남은 체력: " << this->stat.hp <<  std::endl; // 피격 로그
     }
 }
-
-void NormalMonster::playerAttack() {}
-
 //사망 판정
 bool NormalMonster::isDead() const{
     return this->stat.hp < 0;

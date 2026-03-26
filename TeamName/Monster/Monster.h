@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include "../Player/Player.h"
 
 struct MonsterStat {
 	std::string name = "N/A";
@@ -17,11 +18,8 @@ public:
 	virtual std::string getName() const { return "N/A"; }	
 	virtual int getHealth() const { return -1; }
 	virtual int getAttack() const { return -1; }
-	virtual bool isDead() const { return true; }
-	virtual void playerAttack() = 0;
+	virtual bool isDead() const { return true; }	
 	virtual void takeDamage(int damage) = 0;
-
-
 };
 
 class NormalMonster : public Monster {
@@ -37,9 +35,7 @@ public:
 	virtual int getHealth() const override;
 	virtual int getAttack() const override;
 	virtual bool isDead() const override;
-	virtual void playerAttack() override;
 	virtual void takeDamage(int damage) override;
 	//디버그용 연산자 오버라이딩
 	friend std::ostream& operator<<(std::ostream& os , const NormalMonster& m);
-
 };

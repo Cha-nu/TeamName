@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <iostream>
 #include <string>
@@ -7,7 +7,8 @@
 class SceneManager;
 class Player;
 
-class GameManager {
+class GameManager
+{
 private:
     bool m_bIsRunning;      // 게임 실행 루프 제어 플래그
     SceneManager* m_pSceneManager;
@@ -17,21 +18,27 @@ public:
     GameManager();
     ~GameManager();
 
-	// 게임 시작 전 초기화 (클래스 생성)
+    // 게임 시작 전 초기화 (클래스 생성)
     bool Init();
 
-	// 메인 게임 루프 (TeamName.cpp에서 호출)
+    // 메인 게임 루프 (TeamName.cpp에서 호출)
     void Run();
 
-	// 시스템 로직 업데이트
+    // 시스템 로직 업데이트
     void Update();
 
-	// 화면 출력 관리
+    // 화면 출력 관리
     void Render();
 
-	// 메모리 해제 및 종료 처리
+	// 현재 상태 변경
+	void Exit();
+
+    // 메모리 해제 및 종료 처리
     void Release();
 
-	// 게임 종료 플래그 설정
+	// 플레이어 생서
+	void CreatePlayer();
+
+    // 게임 종료 플래그 설정
     void SetRunning(bool isRunning) { m_bIsRunning = isRunning; }
 };

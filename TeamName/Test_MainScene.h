@@ -1,12 +1,12 @@
-#pragma once
+ï»¿#pragma once
 #include"Scene.h"
-class Test_MainScene:public Scene
+class Test_MainScene :public Scene
 {
 public:
-    void Init() override;
-    void Render() override;
-    void Update() override;
-    void Exit() override;
-    int Save_Date = 0;//¾ÀÀÌ ´Ş¶óÁ®µµ ¸Ê µ¥ÀÌÅÍ À¯Áö°¡ µÇ´ÂÁö È®ÀÎ¿ë
+	void Init() override;
+	void Render() override;
+	void Update() override;
+	void Exit() override;
+	int Save_Date = 0;//ì”¬ì´ ë‹¬ë¼ì ¸ë„ ë§µ ë°ì´í„° ìœ ì§€ê°€ ë˜ëŠ”ì§€ í™•ì¸ìš©
 };
 

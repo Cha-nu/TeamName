@@ -1,30 +1,30 @@
-#include "Test_Lobby.h"
+ï»¿#include "Test_Lobby.h"
 #include"Manager/SceneManager/SceneManager.h"
 #include"Test_MainScene.h"
 #include <iostream>
 
-void Test_Lobby::Init() 
-{ 
-    system("cls");
+void Test_Lobby::Init()
+{
+	system("cls");
 }
 
-void Test_Lobby::Render() 
+void Test_Lobby::Render()
 {
-    std::cout << "==============================" << std::endl;
-    std::cout << "        [ ÀÎ»ı RPG ]        " << std::endl;
-    std::cout << " 1. °ÔÀÓ ½ÃÀÛ (Ä³¸¯ÅÍ »ı¼º)" << std::endl;
+	std::cout << "==============================" << std::endl;
+	std::cout << "        [ ì¸ìƒ RPG ]        " << std::endl;
+	std::cout << " 1. ê²Œì„ ì‹œì‘ (ìºë¦­í„° ìƒì„±)" << std::endl;
 }
 
 void Test_Lobby::Update() {
-    int input;
-    std::cin >> input;
-    if (input == 1) {
-        // ·Îºñ´Â ÀÏÈ¸¼ºÀÌ¶ó ¾²ÀÚ¸¶ÀÚ »èÁ¦
-        SceneManager::getInstance().Replace_Scene(new Test_MainScene());
-    }
+	int input;
+	std::cin >> input;
+	if ( input == 1 ) {
+		// ë¡œë¹„ëŠ” ì¼íšŒì„±ì´ë¼ ì“°ìë§ˆì ì‚­ì œ
+		SceneManager::getInstance().Replace_Scene(new Test_MainScene());
+	}
 }
 
 void Test_Lobby::Exit()
 {
-    std::cout << "Exit call" << std::endl;
+	std::cout << "Exit call" << std::endl;
 }

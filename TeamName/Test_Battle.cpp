@@ -1,4 +1,4 @@
-#include "Test_Battle.h"
+ï»¿#include "Test_Battle.h"
 #include"Test_MainScene.h"
 #include"Manager/SceneManager/SceneManager.h"
 #include<Windows.h>
@@ -11,16 +11,16 @@ void Test_Battle::Init()
 void Test_Battle::Render()
 {
 	std::cout << "==============================" << std::endl;
-	std::cout << "ÀûÀÌ µîÀÚÇÏÁö ¾Ê¾Ò´Ù...." << std::endl;
-	std::cout << "1.¸¶À»·Î µ¹¾Æ°¡±â " << std::endl;
+	std::cout << "ì ì´ ë“±ìí•˜ì§€ ì•Šì•˜ë‹¤...." << std::endl;
+	std::cout << "1.ë§ˆì„ë¡œ ëŒì•„ê°€ê¸° " << std::endl;
 }
 
 void Test_Battle::Update()
 {
 	int input;
 	std::cin >> input;
-	if (input == 1) {
-		// ÀüÅõ ¾ÀÀ» ÆË(Pop)ÇØ¼­ ºÎ½¤¹ö¸®°í, ¹Ø¿¡ ±ò¸° ¸¶À»À» ´Ù½Ã ±ú¿ò!
+	if ( input == 1 ) {
+		// ì „íˆ¬ ì”¬ì„ íŒ(Pop)í•´ì„œ ë¶€ìˆ´ë²„ë¦¬ê³ , ë°‘ì— ê¹”ë¦° ë§ˆì„ì„ ë‹¤ì‹œ ê¹¨ì›€!
 		SceneManager::getInstance().Return_Scene();
 	}
 }

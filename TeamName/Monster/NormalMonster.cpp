@@ -23,6 +23,10 @@ int NormalMonster::getHealth() const {
 	return this->stat.hp;
 }
 
+int NormalMonster::getExp() const {
+	return this->stat.give_exp;
+}
+
 bool NormalMonster::attackPlayer(Player& player) {	
 	player.ApplyDamage(this->getAttack());
 	return true; // 공격 성공 시 true 반환

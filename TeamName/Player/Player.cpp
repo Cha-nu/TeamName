@@ -4,10 +4,10 @@
 
 Player::Player(std::string name){
 	Playerstat.HP = 200;
-	Playerstat.Stamina = 30;
+	Playerstat.Stamina = 0;
 	Playerstat.name = name;
 	Playerstat.Gender = "Male";
-	Playerstat.Atk_Damage = 0;
+	Playerstat.Atk_Damage = 30;
 	Playerstat.Level = 1;
 	Playerstat.EXP = 0;
 }

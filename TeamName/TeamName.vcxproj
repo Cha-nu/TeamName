@@ -219,7 +219,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Inventory\Inventory.h" />
-    <ClInclude Include="Inventory\ItemManager\ItemManager.h" />
     <ClInclude Include="Inventory\Item\ConsumableItem.h" />
     <ClInclude Include="Inventory\Item\ItemBase.h" />
     <ClInclude Include="Manager\ItemManager\ItemManager.h" />

@@ -1,17 +1,21 @@
-
-// °ÔÀÓ ½ÇÇà ÆÄÀÏÀÔ´Ï´Ù.
+ï»¿
+// ê²Œì„ ì‹¤í–‰ íŒŒì¼ì…ë‹ˆë‹¤.
 
 #include <iostream>
 #include "Manager/GameManager/GameManager.h"
 
-using namespace std;
 
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+	std::ios::sync_with_stdio(false);
+	std::cin.tie(nullptr);
 
-    std::cout << "Hello World!\n";
+	std::cout << "[INFO] í•œê¸€ ì¶œë ¥ í™•ì¸" << '\n';
+
+    GameManager gameManager;
+
+    // ê²Œì„ ì‹œì‘
+    gameManager.Run();
 
     return 0;
 }

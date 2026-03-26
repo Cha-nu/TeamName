@@ -1,7 +1,8 @@
 ﻿// 캐릭터 생성 화면.cpp
 
 #include "CreatingCharacter.h"
-#include "Player.h"
+#include "Player/Player.h"
+#include "Manager/SceneManager/SceneManager.h" // Scene 매니저
 
 #include <iostream>
 #include <string>
@@ -103,6 +104,7 @@ void CharacterChoice::Update() {
 	system("pause"); // 잠시 멈추기(사용자에게 메시지 보여주기 위해 작성)
 
 	// SceneManager를 통해 다음 씬으로 전환
+	//SceneManger::getInstance().Replace_Scene(new);
 }
 
 // 종료 함수

@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "../Monster/Monster.h"
+#include "Inventory/Inventory.h"
 
 Player::Player(std::string name){
 	Playerstat.HP = 200;
@@ -9,9 +10,12 @@ Player::Player(std::string name){
 	Playerstat.Atk_Damage = 30;
 	Playerstat.Level = 1;
 	Playerstat.EXP = 0;
+	
+	PlayerInventory = new Inventory();
 }
 
 Player::~Player(){
+	PlayerInventory = nullptr;
 }
 
 void Player::InitializeStat(int _hp, std::string _name, int _atkdamage,int _level,int _stamina){

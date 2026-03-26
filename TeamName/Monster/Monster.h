@@ -20,6 +20,7 @@ public:
 	virtual int getAttack() const { return -1; }
 	virtual bool isDead() const { return true; }	
 	virtual void takeDamage(int damage) = 0;
+	virtual bool attackPlayer(Player& player) = 0;
 };
 
 class NormalMonster : public Monster {
@@ -36,6 +37,7 @@ public:
 	virtual int getAttack() const override;
 	virtual bool isDead() const override;
 	virtual void takeDamage(int damage) override;
+	virtual bool attackPlayer(Player& player) override;
 	//디버그용 연산자 오버라이딩
 	friend std::ostream& operator<<(std::ostream& os , const NormalMonster& m);
 };

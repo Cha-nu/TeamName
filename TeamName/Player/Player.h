@@ -1,7 +1,9 @@
 #pragma once
+#include <map>
 #include <string>
 #define MAX_EXP 100
 
+class Inventory;
 class Monster;
 
 struct FPlayerStat{
@@ -34,7 +36,10 @@ public:
     /*****Battle*****/
     void Attack(Monster* _monster) override;
     void ApplyDamage(int _damage) override;
+	/*****Utility*****/
+	_forceinline Inventory* GetInventory() const {return PlayerInventory;}
     
 private:
     FPlayerStat Playerstat;
+	Inventory* PlayerInventory;
 };

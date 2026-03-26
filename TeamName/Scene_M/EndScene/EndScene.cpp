@@ -1,6 +1,8 @@
 ﻿// 종료 화면.cpp
 
 #include "EndScene.h"
+#include "Manager/SceneManager/SceneManager.h" // Scene 매니저
+#include "Scene_M/CreateScene/CreatingCharacter.h" // 씬 전환을 위해 추가
 
 #include <iostream>
 #include <string>
@@ -49,6 +51,9 @@ void GameOverScene::Update() {
 		std::cout << "                    깨어나세요 용사여!!...                    \n";
 		std::cout << "============================================================\n";
 		system("pause"); // 잠시 멈추기(사용자에게 메시지 보여주기 위해 작성)
+
+		// 생성 화면(CreateScene)으로 이동
+		SceneManager::getInstance().Replace_Scene(new CharacterChoice());
 	}
 	else if (choice == 2) {
 		std::cout << "============================================================\n";

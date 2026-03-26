@@ -4,7 +4,7 @@
 #include <iostream>
 //#include "Manager/GameManager/GameManager.h"
 #include "Manager/SceneManager/SceneManager.h"
-#include"Test_Lobby.h"//테스트용 씬
+#include"TestScene\Test_Lobby.h"
 
 using namespace std;
 
@@ -27,6 +27,7 @@ int main()
 		SceneManager::getInstance().Update();
 	}
 	SceneManager::getInstance().SceneStack_Clear();
+	//
 
 	return 0;
 }

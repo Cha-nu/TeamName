@@ -1,6 +1,6 @@
 ﻿#include "Test_Battle.h"
 #include"Test_MainScene.h"
-#include"Manager/SceneManager/SceneManager.h"
+#include"../Manager/SceneManager/SceneManager.h"
 #include<Windows.h>
 #include<iostream>
 void Test_Battle::Init()

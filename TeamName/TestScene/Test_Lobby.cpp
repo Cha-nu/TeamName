@@ -1,5 +1,5 @@
 ﻿#include "Test_Lobby.h"
-#include"Manager/SceneManager/SceneManager.h"
+#include"../Manager/SceneManager/SceneManager.h"
 #include"Test_MainScene.h"
 #include <iostream>
 

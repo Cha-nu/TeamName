@@ -125,16 +125,16 @@
   <ItemGroup>
     <ClCompile Include="Manager\SceneManager\SceneManager.cpp" />
     <ClCompile Include="TeamName.cpp" />
-    <ClCompile Include="Test_Battle.cpp" />
-    <ClCompile Include="Test_Lobby.cpp" />
-    <ClCompile Include="Test_MainScene.cpp" />
+    <ClCompile Include="TestScene\Test_Battle.cpp" />
+    <ClCompile Include="TestScene\Test_Lobby.cpp" />
+    <ClCompile Include="TestScene\Test_MainScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Manager\SceneManager\SceneManager.h" />
-    <ClInclude Include="Scene.h" />
-    <ClInclude Include="Test_Battle.h" />
-    <ClInclude Include="Test_Lobby.h" />
-    <ClInclude Include="Test_MainScene.h" />
+    <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="TestScene\Test_Battle.h" />
+    <ClInclude Include="TestScene\Test_Lobby.h" />
+    <ClInclude Include="TestScene\Test_MainScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

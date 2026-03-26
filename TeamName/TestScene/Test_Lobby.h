@@ -1,6 +1,6 @@
 ﻿#pragma once
-#include"Scene.h"
-class Test_Battle :public Scene
+#include"../Scene/Scene.h"
+class Test_Lobby : public Scene
 {
 public:
 	void Init() override;

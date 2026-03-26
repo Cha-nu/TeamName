@@ -2,7 +2,7 @@
 #include"Test_Battle.h"
 #include<iostream>
 #include <Windows.h>
-#include"Manager/SceneManager/SceneManager.h"
+#include"../Manager/SceneManager/SceneManager.h"
 
 void Test_MainScene::Init()
 {

@@ -1,3 +1,9 @@
+﻿/*
+ * 소모성 아이템을 정의하는 클래스입니다.
+ *
+ */
+
+
 #pragma once
 
 #include "ItemBase.h"

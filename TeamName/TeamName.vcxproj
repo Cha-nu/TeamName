@@ -123,7 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Manager\GameManager\Manager\GameManager\GameManager.cpp" />
+    <ClCompile Include="Manager\GameManager\GameManager.cpp" />
     <ClCompile Include="Player\Player.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -209,7 +209,7 @@
     <ClCompile Include="TestScene\Test_MainScene.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Manager\GameManager\Manager\GameManager\GameManager.h" />
+    <ClInclude Include="Manager\GameManager\GameManager.h" />
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Monster\Monster.h" />
     <ClInclude Include="Monster\MonsterEnum.h" />

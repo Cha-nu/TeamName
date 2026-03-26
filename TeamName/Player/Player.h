@@ -11,7 +11,7 @@ struct FPlayerStat{
 };
 class IPlayer{
 public:
-    virtual void InitializeStat(int _hp, int _stamina, std::string _name, int _atkdamage) = 0;
+    virtual void InitializeStat(int _hp, std::string _name, int _atkdamage,int _stamina = 0) = 0;
     virtual const FPlayerStat& Getstat() = 0;
     virtual FPlayerStat& SetStat() = 0;
     virtual void Attack() = 0;
@@ -23,7 +23,7 @@ public:
     Player();
     ~Player();
     /*****Stat*****/
-    void InitializeStat(int _hp, int _stamina, std::string _name,int _atkdamage) override;
+    void InitializeStat(int _hp,std::string _name,int _atkdamage, int _stamina = 0) override;
     _forceinline const FPlayerStat& Getstat() override{return Playerstat;}
     _forceinline FPlayerStat& SetStat() override {return Playerstat;}
     /*****Battle*****/

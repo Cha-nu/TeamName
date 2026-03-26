@@ -11,12 +11,13 @@ Player::Player() : Playerstat(){
 Player::~Player(){
 }
 
-void Player::InitializeStat(int _hp, int _stamina, std::string _name, int _atkdamage){
-    Playerstat.HP = _hp;
-    Playerstat.Stamina = _stamina;
-    Playerstat.name = _name;
+void Player::InitializeStat(int _hp, std::string _name, int _atkdamage, int _stamina){
+	Playerstat.HP = _hp;
+	Playerstat.name = _name;
 	Playerstat.Atk_Damage = _atkdamage;
+	Playerstat.Stamina = _stamina;
 }
+
 
 void Player::Attack(){
     //Need to MonsterInterface

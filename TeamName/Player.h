@@ -30,5 +30,5 @@ public:
     void ApplyDamage(int _damage) override;
     
 private:
-    FPlayerStat& Playerstat;
+    FPlayerStat Playerstat;
 };

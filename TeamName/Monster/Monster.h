@@ -1,24 +1,29 @@
-#pragma once
+﻿#pragma once
 
 #include <string>
 #include <vector>
 #include "MonsterEnum.h"
 
+struct MonsterStat {
+	std::string name = "N/A";
+	int hp = -1;
+	int atk = -1;
+};
+
+
 class Monster{
 private:
-    std::string name;
-    int hp;
-    int atk;    
-    MonsterType m_type;
+	MonsterStat stat;
 
 public:
-    Monster();
-    Monster(std::string name);
-    Monster(std::string name, int hp, int atk, MonsterType m_type);    
+    Monster();    
+    Monster(MonsterStat stat);    
     virtual ~Monster() {}
+	virtual void InitializeStat(MonsterStat stat = {});
     virtual std::string getName() const; 
     virtual int getHealth() const;
     virtual int getAttack() const;
+	virtual void playerAttack();
     virtual void takeDamage(int damage);        
     virtual bool isDead() const;
 

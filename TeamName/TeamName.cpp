@@ -5,7 +5,6 @@
 #include "Manager/SceneManager/SceneManager.h"
 #include"TestScene\Test_Lobby.h"
 
-
 int main()
 {
 	std::ios::sync_with_stdio(false);

@@ -209,10 +209,14 @@
     <ClCompile Include="TestScene\Test_MainScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Inventory\Inventory.h" />
+    <ClInclude Include="Inventory\ItemManager\ItemManager.h" />
+    <ClInclude Include="Inventory\Item\ConsumableItem.h" />
+    <ClInclude Include="Inventory\Item\ItemBase.h" />
+    <ClInclude Include="Type\GameTypes.h" />
     <ClInclude Include="Manager\GameManager\GameManager.h" />
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Monster\Monster.h" />
-    <ClInclude Include="Monster\MonsterEnum.h" />
     <ClInclude Include="Manager\SceneManager\SceneManager.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="TestScene\Test_Battle.h" />

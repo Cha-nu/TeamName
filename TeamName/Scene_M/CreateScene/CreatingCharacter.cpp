@@ -106,9 +106,11 @@ void CharacterChoice::Update() {
 	std::cout << "                  캐릭터 생성이 완료되었습니다.                 \n";
 	std::cout << "============================================================\n";
 	std::cout << " [ 닉네임 ] : " << newPlayer.Getstat().name << "\n";
+	std::cout << " [ 레벨 ] : " << newPlayer.Getstat().name << "\n"; // 수정
 	std::cout << " [ 체력 ] : " << newPlayer.Getstat().HP << "\n";
 	std::cout << " [ 스테미나 ] : " << newPlayer.Getstat().Stamina << "\n";
 	std::cout << " [ 공격력 ] : " << newPlayer.Getstat().Atk_Damage << "\n";
+	std::cout << " [ 경험치 ] : " << newPlayer.Getstat().Atk_Damage << "\n"; 수정
 	std::cout << "============================================================\n";
 
 	system("pause"); // 잠시 멈추기(사용자에게 메시지 보여주기 위해 작성)

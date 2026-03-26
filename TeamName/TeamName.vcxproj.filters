@@ -21,6 +21,14 @@
     <ClCompile Include="Manager\GameManager\GameManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Inventory\Inventory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory\Item\ItemBase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory\Item\ConsumableItem.cpp">
+      <Filter>Source Files</Filter>
     <ClCompile Include="Manager\SceneManager\SceneManager.cpp">
       <Filter>Source Files\Manager</Filter>
     </ClCompile>
@@ -38,6 +46,20 @@
     <ClInclude Include="Manager\GameManager\GameManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Inventory\Inventory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory\Item\ItemBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory\Item\ConsumableItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Type\GameTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory\ItemManager\ItemManager.h">
+      <Filter>Header Files</Filter>
     <ClInclude Include="Manager\SceneManager\SceneManager.h">
       <Filter>Header Files\Manager</Filter>
     </ClInclude>

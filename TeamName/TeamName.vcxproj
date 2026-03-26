@@ -124,6 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Manager\GameManager\GameManager.cpp" />
+    <ClCompile Include="Monster\NormalMob.cpp" />
     <ClCompile Include="Player\Player.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>

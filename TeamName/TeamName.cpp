@@ -1,8 +1,9 @@
-﻿
-// 게임 실행 파일입니다.
+﻿// 게임 실행 파일입니다.
 
 #include <iostream>
 #include "Manager/GameManager/GameManager.h"
+#include "Manager/SceneManager/SceneManager.h"
+#include"TestScene\Test_Lobby.h"
 
 
 int main()
@@ -17,5 +18,5 @@ int main()
     // 게임 시작
     gameManager.Run();
 
-    return 0;
+	return 0;
 }

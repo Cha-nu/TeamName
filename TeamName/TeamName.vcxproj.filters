@@ -21,10 +21,37 @@
     <ClCompile Include="Manager\GameManager\GameManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Manager\SceneManager\SceneManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene\Test_Battle.cpp">
+      <Filter>Source Files\Sceens</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene\Test_Lobby.cpp">
+      <Filter>Source Files\Sceens</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene\Test_MainScene.cpp">
+      <Filter>Source Files\Sceens</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Manager\GameManager\GameManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\SceneManager\SceneManager.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene\Test_Battle.h">
+      <Filter>Header Files\Sceens</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene\Test_Lobby.h">
+      <Filter>Header Files\Sceens</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene\Test_MainScene.h">
+      <Filter>Header Files\Sceens</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

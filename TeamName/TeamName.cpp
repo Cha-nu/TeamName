@@ -1,5 +1,5 @@
-
-// °ÔÀÓ ½ÇÇà ÆÄÀÏÀÔ´Ï´Ù.
+ï»¿
+// ê²Œì„ ì‹¤í–‰ íŒŒì¼ì…ë‹ˆë‹¤.
 
 #include <iostream>
 #include "Manager/GameManager/GameManager.h"
@@ -11,11 +11,11 @@ int main()
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    system("chcp 64001");
+	cout << "[INFO] í•œê¸€ ì¶œë ¥ í™•ì¸" << '\n';
 
     GameManager gameManager;
 
-    // °ÔÀÓ ½ÃÀÛ
+    // ê²Œì„ ì‹œì‘
     gameManager.Run();
 
     return 0;

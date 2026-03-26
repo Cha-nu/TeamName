@@ -17,11 +17,11 @@ int main()
 
 	std::cout << "[INFO] 한글 출력 확인" << '\n';
 
-	GameManager gameManager;
-
 	// 게임 시작
-	gameManager.Run();
-	gameManager.Release();
+	GameManager::getInstance().Run();
+
+	// 게임 종료
+	GameManager::getInstance().Release();
 
 	return 0;
 }

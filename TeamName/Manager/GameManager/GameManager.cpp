@@ -4,7 +4,7 @@
 #include "../../Scene/Scene.h"
 #include "../../Scene_M/StartScene/StartScene.h"
 
-GameManager::GameManager(): IsRunning(true)
+GameManager::GameManager() : IsRunning(true), m_pPlayer(nullptr)
 {
 
 }

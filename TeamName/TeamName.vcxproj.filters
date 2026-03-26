@@ -13,30 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Manager">
-      <UniqueIdentifier>{e99d1120-9edc-4a3f-a7db-7becf7139a19}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Manager">
-      <UniqueIdentifier>{242db226-e1f6-4922-93b2-3d853df53f19}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Player">
-      <UniqueIdentifier>{48e4befa-dc7c-4717-957f-18e98c63109c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Monster">
-      <UniqueIdentifier>{2cea013e-837f-4fd4-bc4e-2f77f0a7618e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Monster">
-      <UniqueIdentifier>{69dffcd9-8d1a-41df-b435-6745f77acf7d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Player">
-      <UniqueIdentifier>{38ee05d1-99fb-455f-8087-39ac284cfb22}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Sceens">
-      <UniqueIdentifier>{ba6c777d-a870-41ae-968d-2f9cf986e61d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Sceens">
-      <UniqueIdentifier>{f2149267-c23f-4ccd-8553-bd11b6009c0b}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TeamName.cpp">
@@ -53,6 +29,17 @@
     </ClCompile>
     <ClCompile Include="Inventory\Item\ConsumableItem.cpp">
       <Filter>Source Files</Filter>
+    <ClCompile Include="Manager\SceneManager\SceneManager.cpp">
+      <Filter>Source Files\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene\Test_Battle.cpp">
+      <Filter>Source Files\Sceens</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene\Test_Lobby.cpp">
+      <Filter>Source Files\Sceens</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene\Test_MainScene.cpp">
+      <Filter>Source Files\Sceens</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +60,20 @@
     </ClInclude>
     <ClInclude Include="Inventory\ItemManager\ItemManager.h">
       <Filter>Header Files</Filter>
+    <ClInclude Include="Manager\SceneManager\SceneManager.h">
+      <Filter>Header Files\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene\Test_Battle.h">
+      <Filter>Header Files\Sceens</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene\Test_Lobby.h">
+      <Filter>Header Files\Sceens</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene\Test_MainScene.h">
+      <Filter>Header Files\Sceens</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

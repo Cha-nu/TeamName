@@ -31,7 +31,7 @@ Player::~Player(){
 	PlayerInventory = nullptr;
 }
 
-void Player::InitializeStat(int _hp, std::string _name, int _atkdamage,int _level,int _stamina){
+void Player::InitializeStat(float _hp, std::string _name, float _atkdamage, int _level, int _stamina){
 	Playerstat.HP = _hp;
 	Playerstat.name = _name;
 	Playerstat.Atk_Damage = _atkdamage;

@@ -7,7 +7,8 @@
 class SceneManager;
 class Player;
 
-class GameManager {
+class GameManager
+{
 private:
     bool m_bIsRunning;      // 게임 실행 루프 제어 플래그
     SceneManager* m_pSceneManager;

@@ -51,5 +51,5 @@ private:
 
 	// 아래 변수는 GameManager처럼 상위 매니저에서 가져와야 된다고 판단하나, 현재는 ItemManager에서 직접 가져오는 것으로 구현
 	ItemManager itemManager;
-
+	 
 };

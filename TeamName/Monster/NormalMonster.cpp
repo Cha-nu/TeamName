@@ -27,8 +27,8 @@ int NormalMonster::getExp() const {
 	return this->stat.give_exp;
 }
 
-bool NormalMonster::attackPlayer(Player& player) {	
-	player.ApplyDamage(this->getAttack());
+bool NormalMonster::attackPlayer(Player* player) {	
+	player->ApplyDamage(this->getAttack());		
 	return true; // 공격 성공 시 true 반환
 	// 공격 실패시 false 반환
 	// 플레이어 체력이 0 이하거나... 기타등등...

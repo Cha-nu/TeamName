@@ -1,7 +1,7 @@
 ﻿// 캐릭터 생성 화면.cpp
 
 #include "CreatingCharacter.h"
-#include "Player/Player.h"
+#include "../../Player/Player.h"
 #include "Manager/SceneManager/SceneManager.h" // Scene 매니저
 
 #include <iostream>

@@ -1,4 +1,5 @@
-﻿# Visual Studio generated .editorconfig file with C++ settings.
+# Visual Studio generated .editorconfig file with C++ settings.
+
 root = true
 
 [*.{c++,cc,cpp,cppm,cxx,h,h++,hh,hpp,hxx,inl,ipp,ixx,tlh,tli}]

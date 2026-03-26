@@ -1,0 +1,3 @@
+id,name,rank,target_stat,basic_amount,is_damage
+1,Health Potion Common,Common,HP,10,0
+2,Health Potion UnCommon,UnCommon,HP,10,0

@@ -4,14 +4,13 @@
 #include <iostream>
 #include "Manager/GameManager/GameManager.h"
 
-using namespace std;
 
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+	std::ios::sync_with_stdio(false);
+	std::cin.tie(nullptr);
 
-	cout << "[INFO] 한글 출력 확인" << '\n';
+	std::cout << "[INFO] 한글 출력 확인" << '\n';
 
     GameManager gameManager;
 

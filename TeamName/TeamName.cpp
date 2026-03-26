@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "Manager/GameManager/GameManager.h"
-#include "SceneManager.h"
+#include "Manager/SceneManager/SceneManager.h"
     
 using namespace std;
 

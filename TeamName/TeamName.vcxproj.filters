@@ -45,7 +45,7 @@
     <ClCompile Include="GameManager.cpp">
       <Filter>Source Files\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
+    <ClCompile Include="Manager\SceneManager\SceneManager.cpp">
       <Filter>Source Files\Manager</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,11 +53,11 @@
     <ClInclude Include="GameManager.h">
       <Filter>Header Files\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Header Files\Sceens</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\SceneManager\SceneManager.h">
+      <Filter>Header Files\Manager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

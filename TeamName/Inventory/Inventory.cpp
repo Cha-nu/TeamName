@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include "Inventory.h"
 #include "Item/ItemBase.h"
 
@@ -45,7 +45,7 @@ void Inventory::PrintItemList()
 
 int Inventory::IsExist(ItemID id) const
 {
-	for (int i = 0; i < m_itemSlots.size(); i++)
+	for (int i = 0; i < static_cast<int>(m_itemSlots.size()); i++)
 	{
 		if (m_itemSlots[i].GetItem() && m_itemSlots[i].GetItem()->GetID() == id)
 		{

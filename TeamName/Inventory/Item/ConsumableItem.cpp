@@ -18,7 +18,7 @@ ConsumableItem::ConsumableItem(const std::string& name, ItemRank rank, ItemID id
 	}
 	else
 	{
-		m_description = "이 아이템은 " + StatNames.at(m_targetStat) + "을 " + std::to_string(m_amount * static_cast<int>(m_rank)) + "만큼 회복합니다.";
+		m_description = "이 아이템은 " + StatNames.at(m_targetStat) + "�� " + std::to_string(m_amount * static_cast<int>(m_rank)) + "만큼 회복합니다.";
 	}
 }
 

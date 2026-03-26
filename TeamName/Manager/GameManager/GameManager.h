@@ -10,7 +10,8 @@ class Player;
 class GameManager
 {
 private:
-    bool m_bIsRunning;      // 게임 실행 루프 제어 플래그
+	bool DebugKey = false; // 디버그용 
+    bool IsRunning;      // 게임 실행 루프 제어 플래그
     SceneManager* m_pSceneManager;
     Player* m_pPlayer;
 
@@ -40,5 +41,5 @@ public:
 	void CreatePlayer();
 
     // 게임 종료 플래그 설정
-    void SetRunning(bool isRunning) { m_bIsRunning = isRunning; }
+    void SetRunning(bool isRunning) { IsRunning = isRunning; }
 };

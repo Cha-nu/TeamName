@@ -123,7 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Manager\GameManager\GameManager.cpp" />
+    <ClCompile Include="Manager\GameManager\Manager\GameManager\GameManager.cpp" />
     <ClCompile Include="Player\Player.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -200,11 +200,15 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
+    <ClCompile Include="Monster\Monster.cpp" />
+    <ClCompile Include="Monster\MonsterTest.cpp" />
     <ClCompile Include="TeamName.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Manager\GameManager\GameManager.h" />
+    <ClInclude Include="Manager\GameManager\Manager\GameManager\GameManager.h" />
     <ClInclude Include="Player\Player.h" />
+    <ClInclude Include="Monster\Monster.h" />
+    <ClInclude Include="Monster\MonsterEnum.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

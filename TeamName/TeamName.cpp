@@ -1,4 +1,4 @@
-﻿
+
 // 게임 실행 파일입니다.
 
 #include <iostream>

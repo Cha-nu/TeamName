@@ -38,7 +38,7 @@ class Inventory
 public:
 	Inventory();
 	~Inventory();
-
+	
 	void AddItem(ItemID id, int amount = 1);
 	void PrintItemList();
 	const std::vector<ItemSlot>& GetItemSlots() const { return m_itemSlots; }

@@ -1,9 +1,9 @@
 #pragma once
 #include <map>
 #include <string>
-#include "Inventory/Inventory.h"
 #define MAX_EXP 100
 
+class Inventory;
 class Monster;
 
 struct FPlayerStat{

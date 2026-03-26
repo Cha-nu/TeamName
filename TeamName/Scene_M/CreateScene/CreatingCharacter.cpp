@@ -1,6 +1,7 @@
 ﻿// 캐릭터 생성 화면.cpp
 
 #include "CreatingCharacter.h"
+#include "Player.h"
 
 #include <iostream>
 #include <string>
@@ -78,13 +79,14 @@ void CharacterChoice::Render() {
 
 // 입력 및 로직 처리
 void CharacterChoice::Update() {
-	Player newPlayer;
-
-	std::string name; // 플레이어 닉네임
+	std::string name; // 플레이어 닉네임 변수 선언
 
 	// 플레이어 이름 입력 받기
 	std::cout << "\n >> 닉네임을 입력하세요: ";
 	std::cin >> name;
+
+	// 입력받은 이름 전달
+	Player newPlayer(name);
 
 	// 입력 받은 정보 출력
 	std::cout << "============================================================\n";

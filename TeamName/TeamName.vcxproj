@@ -123,11 +123,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Inventory\Inventory.cpp" />
+    <ClCompile Include="Inventory\Item\ConsumableItem.cpp" />
+    <ClCompile Include="Inventory\Item\ItemBase.cpp" />
+    <ClCompile Include="Manager\GameManager\GameManager.cpp" />
     <ClCompile Include="TeamName.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Inventory\Inventory.h" />
+    <ClInclude Include="Inventory\ItemManager\ItemManager.h" />
+    <ClInclude Include="Inventory\Item\ConsumableItem.h" />
+    <ClInclude Include="Inventory\Item\ItemBase.h" />
+    <ClInclude Include="Manager\GameManager\GameManager.h" />
+    <ClInclude Include="Type\GameTypes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

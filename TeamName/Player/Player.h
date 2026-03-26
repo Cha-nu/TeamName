@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 
+#define MAX_EXP 100
 
 struct FPlayerStat{
     unsigned int HP; // PlayerHP

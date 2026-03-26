@@ -1,7 +1,7 @@
 ﻿// 종료 화면.h
 
 #pragma once
-#include "Scene.h"
+#include "../../Scene/Scene.h"
 
 // 실제 종료 화면 (자식 클래스)
 class GameOverScene : public Scene {

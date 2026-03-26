@@ -23,6 +23,13 @@ int NormalMonster::getHealth() const {
 	return this->stat.hp;
 }
 
+bool NormalMonster::attackPlayer(Player& player) {	
+	player.ApplyDamage(this->getAttack());
+	return true; // 공격 성공 시 true 반환
+	// 공격 실패시 false 반환
+	// 플레이어 체력이 0 이하거나... 기타등등...
+}
+
 //피격 처리
 void NormalMonster::takeDamage(int damage){
     this->stat.hp -= damage;

@@ -21,25 +21,29 @@
     <ClCompile Include="Manager\GameManager\GameManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Inventory\Inventory.cpp">
+    <ClCompile Include="Player\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Inventory\Item\ItemBase.cpp">
+    <ClCompile Include="Monster\Monster.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Inventory\Item\ConsumableItem.cpp">
+    <ClCompile Include="Monster\MonsterTest.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Manager\SceneManager\SceneManager.cpp">
-      <Filter>Source Files\Manager</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestScene\Test_Battle.cpp">
-      <Filter>Source Files\Sceens</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestScene\Test_Lobby.cpp">
-      <Filter>Source Files\Sceens</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestScene\Test_MainScene.cpp">
-      <Filter>Source Files\Sceens</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_M\StartScene\StartScene.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -60,20 +64,30 @@
     </ClInclude>
     <ClInclude Include="Inventory\ItemManager\ItemManager.h">
       <Filter>Header Files</Filter>
-    <ClInclude Include="Manager\SceneManager\SceneManager.h">
-      <Filter>Header Files\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Scene\Scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Player\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster\Monster.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\SceneManager\SceneManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="TestScene\Test_Battle.h">
-      <Filter>Header Files\Sceens</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TestScene\Test_Lobby.h">
-      <Filter>Header Files\Sceens</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TestScene\Test_MainScene.h">
-      <Filter>Header Files\Sceens</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_M\StartScene\StartScene.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -7,12 +7,12 @@
 #include <cstdlib> // system의 cls, pause 사용하기 위해 추가
 
 // 초기화 함수(1회 실행)
-void IntroScene::Init() {
+void StartScene::Init() {
 	// 씬 진입 시 변수 초기화 및 추가할 변수 작성
 }
 
 // 화면 출력
-void IntroScene::Render() {
+void StartScene::Render() {
 	// 콘솔 화면을 깨끗히 지우기
 	system("cls");
 
@@ -94,7 +94,7 @@ void IntroScene::Render() {
 }
 
 // 입력 및 로직 처리
-void IntroScene::Update() {
+void StartScene::Update() {
 	int choice; // 사용자 입력
 	std::cin >> choice;
 
@@ -106,7 +106,6 @@ void IntroScene::Update() {
 	}
 
 		// 씬 매니저와 연결을 위해 상의하여 작성하기.
-	}
 	else if (choice == 2) {
 		std::cout << "============================================================\n";
 		std::cout << "                      현실로 돌아갑니다...                    \n";
@@ -123,6 +122,6 @@ void IntroScene::Update() {
 }
 
 // 종료 함수
-void IntroScene::Exit() {
+void StartScene::Exit() {
 	// 씬을 나갈 때 메모리 해제 등의 필요한 부분이 있다면 작성
 }

@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include "MonsterEnum.h"
 
 struct MonsterStat {
 	std::string name = "N/A";

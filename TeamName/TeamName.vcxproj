@@ -70,6 +70,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -203,6 +206,7 @@
     <ClCompile Include="Monster\Monster.cpp" />
     <ClCompile Include="Monster\MonsterTest.cpp" />
     <ClCompile Include="Manager\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="Scene_M\StartScene\StartScene.cpp" />
     <ClCompile Include="TeamName.cpp" />
     <ClCompile Include="TestScene\Test_Battle.cpp" />
     <ClCompile Include="TestScene\Test_Lobby.cpp" />
@@ -213,6 +217,7 @@
     <ClInclude Include="Inventory\ItemManager\ItemManager.h" />
     <ClInclude Include="Inventory\Item\ConsumableItem.h" />
     <ClInclude Include="Inventory\Item\ItemBase.h" />
+    <ClInclude Include="Scene_M\StartScene\StartScene.h" />
     <ClInclude Include="Type\GameTypes.h" />
     <ClInclude Include="Manager\GameManager\GameManager.h" />
     <ClInclude Include="Player\Player.h" />

@@ -126,6 +126,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Inventory\Inventory.cpp" />
+    <ClCompile Include="Inventory\Item\ConsumableItem.cpp" />
+    <ClCompile Include="Inventory\Item\ItemBase.cpp" />
     <ClCompile Include="Manager\GameManager\GameManager.cpp" />
     <ClCompile Include="Player\Player.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
@@ -203,9 +206,11 @@
       <SDLCheck>true</SDLCheck>
       <LinkCompiled>true</LinkCompiled>
     </ClCompile>
-    <ClCompile Include="Monster\Monster.cpp" />
+    <ClCompile Include="Monster\NormalMonster.cpp" />
     <ClCompile Include="Monster\MonsterTest.cpp" />
     <ClCompile Include="Manager\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="Scene_M\CreateScene\CreatingCharacter.cpp" />
+    <ClCompile Include="Scene_M\EndScene\EndScene.cpp" />
     <ClCompile Include="Scene_M\StartScene\StartScene.cpp" />
     <ClCompile Include="TeamName.cpp" />
     <ClCompile Include="TestScene\Test_Battle.cpp" />
@@ -217,6 +222,9 @@
     <ClInclude Include="Inventory\ItemManager\ItemManager.h" />
     <ClInclude Include="Inventory\Item\ConsumableItem.h" />
     <ClInclude Include="Inventory\Item\ItemBase.h" />
+    <ClInclude Include="Manager\ItemManager\ItemManager.h" />
+    <ClInclude Include="Scene_M\CreateScene\CreatingCharacter.h" />
+    <ClInclude Include="Scene_M\EndScene\EndScene.h" />
     <ClInclude Include="Scene_M\StartScene\StartScene.h" />
     <ClInclude Include="Type\GameTypes.h" />
     <ClInclude Include="Manager\GameManager\GameManager.h" />

@@ -123,14 +123,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Manager\SceneManager\SceneManager.cpp" />
     <ClCompile Include="TeamName.cpp" />
+    <ClCompile Include="Test_Battle.cpp" />
+    <ClCompile Include="Test_Lobby.cpp" />
+    <ClCompile Include="Test_MainScene.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameManager.h" />
     <ClInclude Include="Manager\SceneManager\SceneManager.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Test_Battle.h" />
+    <ClInclude Include="Test_Lobby.h" />
+    <ClInclude Include="Test_MainScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

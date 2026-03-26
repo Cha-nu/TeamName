@@ -212,7 +212,6 @@
     <ClInclude Include="Manager\GameManager\GameManager.h" />
     <ClInclude Include="Player\Player.h" />
     <ClInclude Include="Monster\Monster.h" />
-    <ClInclude Include="Monster\MonsterEnum.h" />
     <ClInclude Include="Manager\SceneManager\SceneManager.h" />
     <ClInclude Include="Scene\Scene.h" />
     <ClInclude Include="TestScene\Test_Battle.h" />

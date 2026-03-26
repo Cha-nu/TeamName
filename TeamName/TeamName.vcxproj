@@ -123,13 +123,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="Manager\GameManager\GameManager.cpp" />
     <ClCompile Include="Monster\Monster.cpp" />
     <ClCompile Include="Monster\MonsterTest.cpp" />
     <ClCompile Include="TeamName.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="Manager\GameManager\GameManager.h" />
     <ClInclude Include="Monster\Monster.h" />
     <ClInclude Include="Monster\MonsterEnum.h" />
   </ItemGroup>

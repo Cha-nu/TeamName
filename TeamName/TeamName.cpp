@@ -1,10 +1,10 @@
 
-// 게임 실행 파일입니다.
-
+//// 게임 실행 파일입니다.
+//
 #include <iostream>
 #include "Manager/GameManager/GameManager.h"
 
-using namespace std;
+//using namespace std;
 
 int main()
 {

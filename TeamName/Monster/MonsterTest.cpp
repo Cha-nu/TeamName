@@ -10,6 +10,9 @@
 //    std::cout << monster->getName() << std::endl;
 //    std::cout << *monster << std::endl;
 //    std::cout << *monster2 << std::endl;
+//    while (!monster2->isDead()) {
+//        monster2->takeDamage(1);
+//    }
 //
 //    delete monster;
 //    delete monster2;

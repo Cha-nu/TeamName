@@ -1,12 +1,12 @@
 ﻿
 #include "GameManager.h"
+
 #include <conio.h> // _getch() 등을 이용한 입력 처리용
 
-// 팀원들의 헤더 파일
-// #include "SceneManager.h"
-// #include "Player.h"
+#include "Player.h"
+#include "SceneManager.h"
 
-GameManager::GameManager(): m_bIsRunning(true), m_pSceneManager(nullptr), m_pPlayer(nullptr)
+GameManager::GameManager(): IsRunning(true)
 {
 
 }
@@ -20,24 +20,15 @@ bool GameManager::Init()
 {
     std::cout << "[INFO] 게임 시스템 초기화 중..." << '\n';
 
-    // 1. SceneManager 초기화 
-    // m_pSceneManager = new SceneManager();
-
-    // 2. Player 데이터 초기화 
-    // m_pPlayer = new Player();
-
-    // 3. 초기 씬 설정 (Lobby Scene)
-    // m_pSceneManager->ChangeScene(SCENE_TYPE::LOBBY);
-
     return true;
 }
 
 void GameManager::Run()
 {
-    if (!Init()) return;
+    if (!Init()) return; // 초기화
 
     // 메인 게임 루프: 종료 조건이 만족될 때까지 반복
-    while (m_bIsRunning)
+    while (IsRunning)
 	{
         Update();
         Render();
@@ -70,11 +61,7 @@ void GameManager::Exit()
 
 void GameManager::Release()
 {
-    // 동적 할당된 메모리 안전하게 해제 (포인터 체크 필수)
-    /*
-    if (m_pSceneManager) { delete m_pSceneManager; m_pSceneManager = nullptr; }
-    if (m_pPlayer) { delete m_pPlayer; m_pPlayer = nullptr; }
-    */
+    
     std::cout << "[INFO] 시스템이 안전하게 종료되었습니다." << '\n';
 }
 

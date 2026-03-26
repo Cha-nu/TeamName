@@ -1,28 +1,41 @@
-#pragma once
+﻿#pragma once
 
 #include <string>
 #include <vector>
-#include "MonsterEnum.h"
+#include "../Player/Player.h"
+
+struct MonsterStat {
+	std::string name = "N/A";
+	int hp = -1;
+	int atk = -1;
+};
+
 
 class Monster{
+public:
+    virtual ~Monster() {}
+	virtual void InitializeStat(MonsterStat stat = {}) = 0;
+	virtual std::string getName() const { return "N/A"; }	
+	virtual int getHealth() const { return -1; }
+	virtual int getAttack() const { return -1; }
+	virtual bool isDead() const { return true; }	
+	virtual void takeDamage(int damage) = 0;
+};
+
+class NormalMonster : public Monster {
 private:
-    std::string name;
-    int hp;
-    int atk;    
-    MonsterType m_type;
+	MonsterStat stat;
 
 public:
-    Monster();
-    Monster(std::string name);
-    Monster(std::string name, int hp, int atk, MonsterType m_type);    
-    virtual ~Monster() {}
-    virtual std::string getName() const; 
-    virtual int getHealth() const;
-    virtual int getAttack() const;
-    virtual void takeDamage(int damage);        
-    virtual bool isDead() const;
+	NormalMonster(MonsterStat stat = {});
+	virtual ~NormalMonster() {}
 
-
-    //디버그용 연산자 오버라이딩
-    friend std::ostream& operator<<(std::ostream& os, const Monster& m);
+	void InitializeStat(MonsterStat stat = {}) override;
+	virtual std::string getName() const override;
+	virtual int getHealth() const override;
+	virtual int getAttack() const override;
+	virtual bool isDead() const override;
+	virtual void takeDamage(int damage) override;
+	//디버그용 연산자 오버라이딩
+	friend std::ostream& operator<<(std::ostream& os , const NormalMonster& m);
 };

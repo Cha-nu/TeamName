@@ -1,6 +1,7 @@
 ﻿// 캐릭터 생성 화면.cpp
 
 #include "CreatingCharacter.h"
+#include "Player.h"
 
 #include <iostream>
 #include <string>
@@ -72,32 +73,36 @@ void CharacterChoice::Render() {
 
 	std::cout << CharacterCreate << "\n"; // 아스키 아트 출력
 	std::cout << "============================================================\n";
-	std::cout << "                당신의 캐릭터를 선택하세요...                  \n";
+	std::cout << "                당신의 캐릭터를 생성하세요...                  \n";
 	std::cout << "============================================================\n";
-
-	std::cout << "============================================================\n";
-	std::cout << "         1.                  2.           \n";
-	std::cout << "============================================================\n";
-	std::cout << ">> 입력: ";
 }
 
 // 입력 및 로직 처리
 void CharacterChoice::Update() {
-	int choice; // 사용자 입력
-	std::cin >> choice;
+	std::string name; // 플레이어 닉네임 변수 선언
 
-	if (choice == 1) {
-		// 선택한 캐릭터로 진행
-	}
-	else (choice == 2) {
-		// 선택한 캐릭터로 진행
-	}
-	else {
-		std::cout << "============================================================\n";
-		std::cout << "               잘못된 입력입니다. 다시 입력하세요.              \n";
-		std::cout << "============================================================\n";
-		system("pause"); // 잠시 멈추기(사용자에게 메시지 보여주기 위해 작성)
-	}
+	// 플레이어 이름 입력 받기
+	std::cout << "\n >> 닉네임을 입력하세요: ";
+	std::cin >> name;
+
+	// 입력받은 이름 전달
+	Player newPlayer(name);
+
+	// 입력 받은 정보 출력
+	std::cout << "============================================================\n";
+	std::cout << "                  캐릭터 생성이 완료되었습니다.                 \n";
+	std::cout << "============================================================\n";
+	std::cout << " [ 닉네임 ] : " << newPlayer.Getstat().name << "\n";
+	std::cout << " [ Lv ] : " << newPlayer.Getstat().Level << "\n";
+	std::cout << " [ 체력 ] : " << newPlayer.Getstat().HP << "\n";
+	std::cout << " [ 스테미나 ] : " << newPlayer.Getstat().Stamina << "\n";
+	std::cout << " [ 공격력 ] : " << newPlayer.Getstat().Atk_Damage << "\n";
+	std::cout << " [ EXP ] : " << newPlayer.Getstat().EXP << "\n";
+	std::cout << "============================================================\n";
+
+	system("pause"); // 잠시 멈추기(사용자에게 메시지 보여주기 위해 작성)
+
+	// SceneManager를 통해 다음 씬으로 전환
 }
 
 // 종료 함수

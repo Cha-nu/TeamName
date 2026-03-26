@@ -1,6 +1,5 @@
 #include "Player.h"
-
-
+#include "../Monster/Monster.h"
 
 Player::Player(std::string name){
 	Playerstat.HP = 200;
@@ -37,8 +36,11 @@ void Player::AcquireEXP(int _exp)
 	}
 }
 
-void Player::Attack(){
-    //Need to MonsterInterface
+void Player::Attack(Monster* _monster){
+	
+	if (!_monster) return;
+	
+	_monster->takeDamage(Playerstat.Atk_Damage);
 }
 
 void Player::ApplyDamage(int _damage){

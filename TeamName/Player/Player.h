@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
-
 #define MAX_EXP 100
+
+class Monster;
 
 struct FPlayerStat{
     unsigned int HP; // PlayerHP
@@ -17,7 +18,7 @@ public:
     virtual void InitializeStat(int _hp, std::string _name, int _atkdamage,int _level,int _stamina = 0) = 0;
     virtual const FPlayerStat& Getstat() = 0;
     virtual FPlayerStat& SetStat() = 0;
-    virtual void Attack() = 0;
+    virtual void Attack(Monster* _monster) = 0;
     virtual void ApplyDamage(int _damage) = 0;
 };
 
@@ -31,7 +32,7 @@ public:
     _forceinline FPlayerStat& SetStat() override {return Playerstat;}
 	void AcquireEXP(int _exp);
     /*****Battle*****/
-    void Attack() override;
+    void Attack(Monster* _monster) override;
     void ApplyDamage(int _damage) override;
     
 private:

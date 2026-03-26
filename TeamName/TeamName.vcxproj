@@ -123,11 +123,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Manager\GameManager\GameManager.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="TeamName.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Manager\GameManager\GameManager.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

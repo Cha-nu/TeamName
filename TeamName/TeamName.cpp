@@ -12,10 +12,10 @@ int main()
 
 	std::cout << "[INFO] 한글 출력 확인" << '\n';
 
-    GameManager gameManager;
+	GameManager gameManager;
 
-    // 게임 시작
-    gameManager.Run();
+	// 게임 시작
+	gameManager.Run();
 
-    return 0;
+	return 0;
 }

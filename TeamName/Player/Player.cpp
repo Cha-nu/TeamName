@@ -32,7 +32,7 @@ void Player::AcquireEXP(int _exp)
 	Playerstat.EXP += _exp;
 	if (Playerstat.EXP >= 100)
 	{
-		Playerstat.EXP = 0;
+		Playerstat.EXP -= MAX_EXP;
 		Playerstat.Level++;
 	}
 }

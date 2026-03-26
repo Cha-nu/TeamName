@@ -1,7 +1,7 @@
 ﻿// 종료 화면.cpp
 
 #include "EndScene.h"
-#include "../Manager/SceneManager/SceneManager.h" // Scene 매니저
+#include "Manager/SceneManager/SceneManager.h" // Scene 매니저
 #include "CreatingCharacter.h" // 씬 전환을 위해 추가
 
 #include <iostream>

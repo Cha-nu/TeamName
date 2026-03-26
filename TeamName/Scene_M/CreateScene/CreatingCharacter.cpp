@@ -2,7 +2,7 @@
 
 #include "CreatingCharacter.h"
 #include "Player.h"
-#include "../Manager/SceneManager/SceneManager.h" // Scene 매니저
+#include "Manager/SceneManager/SceneManager.h" // Scene 매니저
 
 #include <iostream>
 #include <string>

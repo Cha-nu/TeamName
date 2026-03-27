@@ -5,10 +5,10 @@
 #include "../Player/Player.h"
 
 struct MonsterStat {
-	std::string name = "N/A";
-	int hp = -1;
-	int atk = -1;
-	int give_exp = 0;
+	std::string name;
+	int hp;
+	int atk;
+	int give_exp;
 };
 
 
@@ -20,6 +20,10 @@ public:
 	virtual int getHealth() const { return -1; }
 	virtual int getAttack() const { return -1; }
 	virtual int getExp() const { return 0; }
+	virtual void setName(std::string name) = 0;
+	virtual void setHealth(int hp) = 0;
+	virtual void setAttack(int atk) = 0;
+	virtual void setExp(int exp) = 0;
 	virtual bool isDead() const { return true; }	
 	virtual void takeDamage(int damage) = 0;
 	virtual bool attackPlayer(Player* player) = 0;
@@ -30,6 +34,7 @@ private:
 	MonsterStat stat;
 
 public:
+	NormalMonster();
 	NormalMonster(MonsterStat stat = {});
 	virtual ~NormalMonster() {}
 
@@ -38,6 +43,10 @@ public:
 	virtual int getHealth() const override;
 	virtual int getAttack() const override;
 	virtual int getExp() const override;
+	virtual void setName(std::string name) override;
+	virtual void setHealth(int hp) override;
+	virtual void setAttack(int atk) override;
+	virtual void setExp(int exp) override;
 	virtual bool isDead() const override;
 	virtual void takeDamage(int damage) override;
 	virtual bool attackPlayer(Player* player) override;

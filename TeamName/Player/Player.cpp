@@ -1,4 +1,4 @@
-#include "Player.h"
+﻿#include "Player.h"
 #include "../Monster/Monster.h"
 #include "Inventory/Inventory.h"
 
@@ -57,7 +57,7 @@ void Player::Attack(Monster* _monster){
 	
 	if (!_monster) return;
 	
-	_monster->takeDamage(Playerstat.Atk_Damage);
+	_monster->takeDamage(static_cast<int>(Playerstat.Atk_Damage));
 }
 
 void Player::ApplyDamage(int _damage){

@@ -11,10 +11,8 @@
 enum class TargetStat
 {
 	HP,
-	MP,
-	Attack,
-	Defense,
-	Intelligence
+	Stamina,
+	Attack
 	// 추가적인 스탯이 필요한 경우 여기에 추가
 };
 

@@ -4,6 +4,7 @@
 #include"Monster/Monster.h"
 #include"../Manager/GameManager/GameManager.h"
 #include "../Manager/SceneManager/SceneManager.h"
+#include"Scene_M/EndScene/EndScene.h"
 #include<iostream>
 #include<iomanip>
 #include<Windows.h>
@@ -12,7 +13,7 @@ void BattleScene::Init()
 {
 	system("cls");
 	player = GameManager::getInstance().GetPlayer();
-	monster = new NormalMonster({ "Test Normal Mob", 100, 10, 10 });//몬스터 동적할당
+	monster = new NormalMonster({ "Test Normal Mob", 100, 50, 10 });//몬스터 동적할당
 	//몬스터 호출 수정
 	
 }
@@ -61,8 +62,27 @@ void BattleScene::Update()
 		std::cout << " 몬스터 공격" << std::endl;
 		monster->attackPlayer(player);
 
-		std::cout << "\n계속하려면 아무 키나 누르세요...\n";
-		system("pause > nul"); // (> nul을 붙이면 지저분한 기본 시스템 메시지가 안 뜹니다)
+		if ( player->Getstat().HP <= 0 ) //몬스터가 죽을 경우
+		{
+			std::cout << "전투에서 패배하였습니다..." << std::endl;
+			std::cout << "사망하였습니다.." << std::endl;
+			std::cout << "\n계속하려면 아무 키나 누르세요...\n";
+			system("pause > nul");
+			SceneManager::getInstance().Replace_Scene(new GameOverScene());
+		}
+		else if ( monster->isDead() ) //몬스터가 죽을 경우
+		{
+			std::cout << "전투에서 승리하였습니다." << std::endl;
+			std::cout << "마을로 돌아갑니다!" << std::endl;
+			std::cout << "\n계속하려면 아무 키나 누르세요...\n";
+			system("pause > nul");
+			SceneManager::getInstance().Return_Scene();
+		}
+		else 
+		{
+			std::cout << "\n계속하려면 아무 키나 누르세요...\n";
+			system("pause > nul"); // (> nul을 붙이면 지저분한 기본 시스템 메시지가 안 뜹니다)
+		}
 	}
 	else if ( input == 2 )
 	{

@@ -7,7 +7,8 @@ class InventoryScene :public Scene
 {
 private:
 	Player* player;//
-	Inventory* player_Inventory;
+	//Inventory* player_Inventory;
+	//std::vector<ItemSlot>& player_ItemSlots;
 public:
 	void Init() override;
 	void Render() override;

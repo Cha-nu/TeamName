@@ -85,7 +85,7 @@ void ItemManager::LoadItemsFromFile(const std::string& filename)
 		int amount = std::stoi(amountStr);
 		bool isDamage = (isDamageStr == "true" || isDamageStr == "1");
 
-		std::cout << "아이템 로드: " << keyStr << ", " << name << ", " << rankStr << ", " << statStr << ", " << amountStr << ", " << isDamageStr << std::endl;
+		// std::cout << "아이템 로드: " << keyStr << ", " << name << ", " << rankStr << ", " << statStr << ", " << amountStr << ", " << isDamageStr << std::endl;
 		
 		// 현재는 ConsumableItem만 할당하도록 구현되어 있으나, 다른 아이템 타입이 추가될 경우 데이터 시트에서 이를 구분한 후 예외처리를 할 수 있습니다.
 		m_itemDataBase[keyStr] = new ConsumableItem(keyStr, name, itemRank, targetState, amount, isDamage);

@@ -25,9 +25,6 @@ bool GameManager::Init()
 	// 씬 매니저 초기화면
 	SceneManager::getInstance().Add_Scene(new StartScene()); 
 
-	CurrentMonster = new BossMonster({ "수능", 10, 1, 120 });       
-
-
 	void DisableQuickEdit();//마우스 클릭해도 화면이 안멈추게 하는 함수
 
 	//if ( DebugKey ) std::cout << "[GameManager] Init 완료" << '\n';
@@ -102,26 +99,31 @@ Player* GameManager::GetPlayer()
 	return Character;
 }
 
-Monster* GameManager::ManageMonster() const
+Monster* GameManager::GetMonster() const
 {
 	return CurrentMonster;
 }
 
-void GameManager::CreateMonster()
+bool GameManager::CreateMonster()
 {
 	int level = Character->Getstat().Level;
-	if (Character->Getstat().Level < 10)
+	if ( level < 2)
+	{
+		CurrentMonster = new BossMonster({ "수능", 10, 1, 120 });
+		return true;
+	}
+	else if (level < 10)
 	{
 		int randomMonsterNum = rand() % static_cast<int>(MonsterName.size()); // 몬스터 수에 맞춰 랜덤 번호 생성
-		delete CurrentMonster; // 기존 몬스터 메모리 해제
+		std::cout << "랜덤 몬스터 번호: " << randomMonsterNum << '\n'; // 디버그용 랜덤 번호 출력	
 		if (DebugKey) CurrentMonster = new NormalMonster({ MonsterName[randomMonsterNum], 1, 1, 100 });
 		else CurrentMonster = new NormalMonster({ MonsterName[randomMonsterNum], level*20, level*5, level * 10 });
 	}
-	else if ( Character->Getstat().Level >= 10 )
+	else if ( level >= 10 )
 	{
-		delete CurrentMonster; // 기존 몬스터 메모리 해제
 		if (DebugKey) CurrentMonster = new BossMonster({ "취업", 1, 1, 0 });
 		else CurrentMonster = new BossMonster({ "취업",level * 30 , level * 10, 0 });
 	}
+	return false;
 }
 

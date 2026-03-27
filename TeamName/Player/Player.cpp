@@ -41,7 +41,6 @@ void Player::InitializeStat(float _hp, std::string _name, float _atkdamage, int 
 	Playerstat.Stamina = _stamina;
 }
 
-
 void Player::AcquireEXP(int _exp)
 {
 	// if EXP amount over 100
@@ -71,6 +70,12 @@ void Player::Attack(Monster* _monster){
 
 void Player::ApplyDamage(int _damage){
     Playerstat.HP -= _damage;
+	
+	// 임시로 bool값으로 캐릭터의 사망여부를 판단
+	if (Playerstat.HP <= 0)
+	{
+		bIsDead = true;
+	}
 	
 	//if (Playerstat.HP <= 0){
 	//	// 게임매니저 클래스에서 초기화나 캐릭터 생성 함수에서

@@ -38,17 +38,22 @@ public:
 	/*****함수객체*****/
 	// 언리얼엔진의 델리게이트랑 비슷하다 생각하시면 됩니다.
 	std::function<void()> OnDead;
+	
     /*****Stat*****/
     void InitializeStat(float _hp,std::string _name,float _atkdamage, int _level,int _stamina = 0) override;
     _forceinline const FPlayerStat& Getstat() override{return Playerstat;}
     _forceinline FPlayerStat& SetStat() override {return Playerstat;}
 	void AcquireEXP(int _exp);
+	
     /*****Battle*****/
     void Attack(Monster* _monster) override;
     void ApplyDamage(int _damage) override;
+	_forceinline bool bIsPlayerDead() const {return bIsDead;}
+	
 	/*****Utility*****/
 	_forceinline Inventory* GetInventory() const {return PlayerInventory;}
 	void P_UseItem(int _index);
+	
 	// DebugFunc
 	// 플레이어 모든 스탯 출력용 디버그 함수입니다.
 	void ShowPlayerStat();
@@ -56,4 +61,5 @@ public:
 private:
     FPlayerStat Playerstat;
 	Inventory* PlayerInventory;
+	bool bIsDead = false;
 };

@@ -1,7 +1,7 @@
 ﻿#include "GameManager.h"
 
 #include <iostream>
-#include <windows.h>
+#include"ConsoleHelper.h"//여기에 windows.h 이미 선언되어있습니다.
 
 #include "../../Player/Player.h"
 #include "../SceneManager/SceneManager.h"
@@ -34,13 +34,8 @@ bool GameManager::Init()
 	MonsterQueue.push(new NormalMonster({ "Unreal", 10, 1, 200 }));    
 	MonsterQueue.push(new BossMonster({ "취업", 10, 1, 1000 }));    
 
-	//마우스 클릭해도 화면이 안멈추게 하는 함수
-	HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);
-	DWORD prev_mode;
-	GetConsoleMode(hInput , &prev_mode);
-	// '빠른 편집 모드'를 꺼버리는 마법의 비트 연산
-	SetConsoleMode(hInput , prev_mode & ~ENABLE_QUICK_EDIT_MODE);
-	//////////////////////////////////////////////////////////////
+
+	void DisableQuickEdit();//마우스 클릭해도 화면이 안멈추게 하는 함수
 
 	if ( DebugKey ) std::cout << "[GameManager] Init 완료" << '\n';
 	return true;

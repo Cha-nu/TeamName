@@ -1,10 +1,20 @@
 ﻿#include "MainScene.h"
 #include"BattleScene.h"
+#include"Scene/InventoryScene.h"
 #include "../Manager/SceneManager/SceneManager.h"
 #include"Manager/GameManager/GameManager.h"
 #include"Player/Player.h"
 #include<iostream>
 #include<Windows.h>
+
+void Main_gotoxy(int x , int y) //나중에 함수빼서 한번에 관리하기
+{
+	COORD pos;
+	pos.X = x;
+	pos.Y = y;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE) , pos);
+}
+
 void MainScene::Init()
 {
 	system("cls");
@@ -60,18 +70,10 @@ void MainScene::Update()
 		std::cout << " 플레이어 경험치: " << player->Getstat().EXP << std::endl;
 		std::cout << "\n계속하려면 아무 키나 누르세요...\n";
 		system("pause > nul"); // (> nul을 붙이면 지저분한 기본 시스템 메시지가 안 뜹니다)
-		//player->Getstate().name
-		//player->Getstate().HP
-		//player->Getstate().Atk_Damage
-		//player->Getstate().Level
-		//player->Getstate().EXP
 	}
 	else if ( input == 3 ) 
 	{
-		//여기 고민 부분 인벤토리 Scene을 만들지
-		std::cout << "플레이어 인벤토리 씬 아직 준비중" << std::endl;
-		std::cout << "\n계속하려면 아무 키나 누르세요...\n";
-		system("pause > nul"); // (> nul을 붙이면 지저분한 기본 시스템 메시지가 안 뜹니다)
+		SceneManager::getInstance().Add_Scene(new InventoryScene());
 	}
 	else if ( input == 99 ) 
 	{

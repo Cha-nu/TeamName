@@ -1,6 +1,7 @@
 ﻿#include "GameManager.h"
 
 #include <iostream>
+#include <windows.h>
 
 #include "../../Player/Player.h"
 #include "../SceneManager/SceneManager.h"
@@ -18,6 +19,14 @@ GameManager::~GameManager()
 bool GameManager::Init()
 {
 	SceneManager::getInstance().Add_Scene(new StartScene()); // 초기화면
+
+	//마우스 클릭해도 화면이 안멈추게 하는 함수
+	HANDLE hInput = GetStdHandle(STD_INPUT_HANDLE);
+	DWORD prev_mode;
+	GetConsoleMode(hInput , &prev_mode);
+	// '빠른 편집 모드'를 꺼버리는 마법의 비트 연산
+	SetConsoleMode(hInput , prev_mode & ~ENABLE_QUICK_EDIT_MODE);
+	//////////////////////////////////////////////////////////////
 
 	if ( DebugKey ) std::cout << "[GameManager] Init 완료" << '\n';
 	return true;

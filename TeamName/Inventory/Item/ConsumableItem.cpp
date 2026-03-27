@@ -1,8 +1,8 @@
 ﻿#include <unordered_map>
 #include "ConsumableItem.h"
 
-ConsumableItem::ConsumableItem(const std::string& name, ItemRank rank, ItemID id, TargetStat stat, int amount, bool isDamage)
-	: ItemBase(name, rank, id), m_targetStat(stat), m_amount(amount), m_isDamage(isDamage)
+ConsumableItem::ConsumableItem(std::string id, const std::string& name, ItemRank rank, TargetStat stat, int amount, bool isDamage)
+	: ItemBase(id, name, rank), m_targetStat(stat), m_amount(amount), m_isDamage(isDamage)
 {
 	static const std::unordered_map<TargetStat, std::string> StatNames = {
 		{ TargetStat::HP, "체력" },

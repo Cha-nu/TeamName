@@ -131,6 +131,7 @@
     <ClCompile Include="Inventory\Item\ConsumableItem.cpp" />
     <ClCompile Include="Inventory\Item\ItemBase.cpp" />
     <ClCompile Include="Manager\GameManager\GameManager.cpp" />
+    <ClCompile Include="Manager\ItemManager\ItemManager.cpp" />
     <ClCompile Include="Player\Player.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -210,6 +211,7 @@
     <ClCompile Include="Monster\NormalMonster.cpp" />
     <ClCompile Include="Monster\MonsterTest.cpp" />
     <ClCompile Include="Manager\SceneManager\SceneManager.cpp" />
+    <ClCompile Include="Scene\InventoryScene.cpp" />
     <ClCompile Include="Scene_M\CreateScene\CreatingCharacter.cpp" />
     <ClCompile Include="Scene_M\EndScene\EndScene.cpp" />
     <ClCompile Include="Scene_M\StartScene\StartScene.cpp" />
@@ -221,10 +223,12 @@
     <ClCompile Include="TestScene\Test_MainScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Data\ItemKey.h" />
     <ClInclude Include="Inventory\Inventory.h" />
     <ClInclude Include="Inventory\Item\ConsumableItem.h" />
     <ClInclude Include="Inventory\Item\ItemBase.h" />
     <ClInclude Include="Manager\ItemManager\ItemManager.h" />
+    <ClInclude Include="Scene\InventoryScene.h" />
     <ClInclude Include="Scene_M\CreateScene\CreatingCharacter.h" />
     <ClInclude Include="Scene_M\EndScene\EndScene.h" />
     <ClInclude Include="Scene_M\StartScene\StartScene.h" />

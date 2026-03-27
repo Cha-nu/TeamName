@@ -11,13 +11,13 @@
 // 초기화 함수(1회 실행)
 void GameOverScene::Init() {
 	// 씬 진입 시 변수 초기화 및 추가할 변수 작성
+
+	// 콘솔 화면을 깨끗히 지우기
+	system("cls");
 }
 
 // 화면 출력
 void GameOverScene::Render() {
-	// 콘솔 화면을 깨끗히 지우기
-	system("cls");
-
 	std::string Gameover = R"(
 
  _____                           _____                    

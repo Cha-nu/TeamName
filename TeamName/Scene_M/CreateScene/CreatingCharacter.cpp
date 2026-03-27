@@ -14,13 +14,13 @@
 // 초기화 함수(1회 실행)
 void CharacterChoice::Init() {
 	// 씬 진입 시 변수 초기화 및 추가할 변수 작성
+
+	// 콘솔 깨끗히 지우기
+	system("cls");
 }
 
 // 화면 출력
 void CharacterChoice::Render() {
-	// 콘솔 깨끗히 지우기
-	system("cls");
-
 	// 아스키 아트
 	std::string CharacterCreate = R"(
            << 캐릭터 생성 >>
@@ -97,7 +97,7 @@ void CharacterChoice::Update() {
 	std::cout << "============================================================\n";
 	std::cout << "                  캐릭터 생성이 완료되었습니다.                 \n";
 	std::cout << "============================================================\n";
-	std::cout << " [ 닉네임 ] : " << GameManager::getInstance().GetPlayer().Getstat().name << "\n"; // GameManager용 출력
+	std::cout << " [ 닉네임 ] : " << GameManager::getInstance().GetPlayer()->Getstat().name << "\n"; // GameManager용 출력
 	std::cout << " [ Lv ] : " << newPlayer.Getstat().Level << "\n";
 	std::cout << " [ 체력 ] : " << newPlayer.Getstat().HP << "\n";
 	std::cout << " [ 스테미나 ] : " << newPlayer.Getstat().Stamina << "\n";

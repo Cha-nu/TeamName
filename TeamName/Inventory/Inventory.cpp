@@ -12,7 +12,7 @@ Inventory::~Inventory()
 	
 }
 
-void Inventory::AddItem(ItemID id, int amount)
+void Inventory::AddItem(const std::string& id , int amount)
 {
 	int index = IsExist(id);
 	if (index != -1)
@@ -38,12 +38,25 @@ void Inventory::AddItem(ItemID id, int amount)
 	}
 }
 
+void Inventory::RemoveItem(const std::string& id , int amount)
+{
+	int index = IsExist(id);
+	if ( index != -1 )
+	{
+		m_itemSlots[index].RemoveCount(amount);
+		if ( m_itemSlots[index].GetCount() <= 0 )
+		{
+			m_itemSlots.erase(m_itemSlots.begin() + index);
+		}
+	}
+}
+
 void Inventory::PrintItemList()
 {
 
 }
 
-int Inventory::IsExist(ItemID id) const
+int Inventory::IsExist(const std::string& id) const
 {
 	for (int i = 0; i < static_cast<int>(m_itemSlots.size()); i++)
 	{

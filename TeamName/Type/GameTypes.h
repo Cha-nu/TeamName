@@ -11,10 +11,8 @@
 enum class TargetStat
 {
 	HP,
-	MP,
-	Attack,
-	Defense,
-	Intelligence
+	Stamina,
+	Attack
 	// 추가적인 스탯이 필요한 경우 여기에 추가
 };
 
@@ -27,16 +25,4 @@ enum class ItemRank
 	Epic,
 	Legendary
 	// 추가적인 등급이 필요한 경우 여기에 추가
-};
-
-// 아이템의 고유 ID를 정의하는 열거형입니다.
-// 사실 데이터 시트(csv, json 등)를 사용하는 것이 더 좋지만, 추후 시간 되면 변경 예정
-enum class ItemID
-{
-	HealthPotion_Common = 1,
-	HealthPotion_Uncommon = 2,
-
-	None = 0
-
-	// 추가적인 아이템 ID가 필요한 경우 여기에 추가
 };

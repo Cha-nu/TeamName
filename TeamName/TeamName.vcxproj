@@ -131,6 +131,7 @@
     <ClCompile Include="Inventory\Item\ConsumableItem.cpp" />
     <ClCompile Include="Inventory\Item\ItemBase.cpp" />
     <ClCompile Include="Manager\GameManager\GameManager.cpp" />
+    <ClCompile Include="Manager\ItemManager\ItemManager.cpp" />
     <ClCompile Include="Player\Player.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -221,6 +222,7 @@
     <ClCompile Include="TestScene\Test_MainScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Data\ItemKey.h" />
     <ClInclude Include="Inventory\Inventory.h" />
     <ClInclude Include="Inventory\Item\ConsumableItem.h" />
     <ClInclude Include="Inventory\Item\ItemBase.h" />

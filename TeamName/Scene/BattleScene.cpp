@@ -1,13 +1,23 @@
 ﻿#include "MainScene.h"
 #include"BattleScene.h"
+#include"Player/Player.h"
+#include"Monster/Monster.h"
+#include"../Manager/GameManager/GameManager.h"
 #include "../Manager/SceneManager/SceneManager.h"
+#include"Scene_M/EndScene/EndScene.h"
 #include<iostream>
+#include<iomanip>
 #include<Windows.h>
+
+#include "Manager/GameManager/GameManager.h"
+
 void BattleScene::Init()
 {
 	system("cls");
-	//player = 게임 매니저에서 받아온다
-	//몬스터 여기서 동적 할당으로 생성
+	player = GameManager::getInstance().GetPlayer();
+	monster = GameManager::getInstance().ManageMonster();//몬스터 동적할당
+	//몬스터 호출 수정
+	
 }
 
 void BattleScene::Render()
@@ -18,7 +28,13 @@ void BattleScene::Render()
               O                              O
              /|\                            /|\
              / \                            / \
-             
+           HP: )"
+		// ★ 왼쪽 정렬(left)로 무조건 4칸(setw)을 차지하게 만듭니다!
+		<< std::left << std::setw(4) << player->Getstat().HP
+		<< R"(                  HP: )"
+		// 적 체력도 똑같이 4칸 고정!
+		<< std::left << std::setw(4) << monster->getHealth()
+		<< R"(
     ==================================================
     )";
 
@@ -42,8 +58,33 @@ void BattleScene::Update()
 	{
 		//플레이어 공격
 		std::cout << " 플레이어 공격" << std::endl;
+		player->Attack(monster);
+
 		//몬스터 공격
 		std::cout << " 몬스터 공격" << std::endl;
+		monster->attackPlayer(player);
+
+		if ( player->Getstat().HP <= 0 ) //몬스터가 죽을 경우
+		{
+			std::cout << "전투에서 패배하였습니다..." << std::endl;
+			std::cout << "사망하였습니다.." << std::endl;
+			std::cout << "\n계속하려면 아무 키나 누르세요...\n";
+			system("pause > nul");
+			SceneManager::getInstance().Replace_Scene(new GameOverScene());
+		}
+		else if ( monster->isDead() ) //몬스터가 죽을 경우
+		{
+			std::cout << "전투에서 승리하였습니다." << std::endl;
+			std::cout << "마을로 돌아갑니다!" << std::endl;
+			std::cout << "\n계속하려면 아무 키나 누르세요...\n";
+			system("pause > nul");
+			SceneManager::getInstance().Return_Scene();
+		}
+		else 
+		{
+			std::cout << "\n계속하려면 아무 키나 누르세요...\n";
+			system("pause > nul"); // (> nul을 붙이면 지저분한 기본 시스템 메시지가 안 뜹니다)
+		}
 	}
 	else if ( input == 2 )
 	{
@@ -52,11 +93,11 @@ void BattleScene::Update()
 	}
 	else if ( input == 3 )
 	{
-		SceneManager::getInstance().Replace_Scene(new MainScene());
+		SceneManager::getInstance().Return_Scene();
 	}
 	else if ( input == 99 )
 	{
-		//게임 매니저 종료 함수 호출
+		GameManager::getInstance().SetRunning(false);
 	}
 	else
 	{
@@ -67,3 +108,10 @@ void BattleScene::Update()
 void BattleScene::Exit()
 {
 }
+
+BattleScene::~BattleScene()
+{
+	//동적할당 받은 몬스터 메모리 해제
+	delete monster;
+}
+

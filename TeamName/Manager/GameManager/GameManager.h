@@ -1,17 +1,24 @@
 ﻿#pragma once
 
 #include <string>
+#include <vector>
 
-// 전방 선언 (순환 참조 방지 및 컴파일 속도 향상)
+// 전방 선언
 class SceneManager;
 class Player;
+class Monster;
 
 class GameManager
 {
 private:
-    bool DebugKey = false; // 디버그용 
+    bool DebugKey = true; // 디버그용 
     bool IsRunning;      // 게임 실행 루프 제어 플래그
 	Player* Character;
+
+	// 0. 수능(튜토리얼보스) / 1. c언어(normal) / 2. c++(normal) / 3. graphics(normal) / 4. unreal(normal) / 5. 취업(최종보스)
+	std::vector<std::string> MonsterName = {"c언어", "c++", "graphics", "unreal"}; // 몬스터 이름 리스트
+
+	Monster* CurrentMonster; // 현재 스테이지의 몬스터를 가리키는 포인터
 
     // 싱글톤
     GameManager();
@@ -48,7 +55,13 @@ public:
 
     // 플레이어
 	void SetPlayer(std::string& name);
-	Player& GetPlayer(); // 읽기 전용 이여야 하는데, 일단 참조 반환으로 수정했습니다. (const Player& GetPlayer() const;)
+	Player* GetPlayer();
+
+	// 몬스터 
+	Monster* ManageMonster() const;
+
+	// 매 스테이지마다 몬스터 생성 및 큐에 추가
+	void CreateMonster();
 
     // 게임 종료 플래그 설정
     void SetRunning(bool isRunning) { IsRunning = isRunning; }

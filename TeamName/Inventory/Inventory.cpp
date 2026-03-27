@@ -2,6 +2,7 @@
 #include <iomanip>
 #include "Inventory.h"
 #include "Item/ItemBase.h"
+#include "Manager/ItemManager/ItemManager.h"
 
 Inventory::Inventory()
 {

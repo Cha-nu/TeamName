@@ -74,7 +74,7 @@ void GameOverScene::Update() {
 
 		if ( currentIndex == 0 ) {
 			End_gotoxy(30 , 10); std::cout << "============================================================";
-			End_gotoxy(30 , 11); std::cout << "                    깨어나세요 용사여!!...                    ";
+			End_gotoxy(30 , 11); std::cout << "                    시작화면으로 이동합니다..                   ";
 			End_gotoxy(30 , 12); std::cout << "============================================================";
 			Sleep(1500); // 1.5초 대기 후 진행
 
@@ -93,7 +93,7 @@ void GameOverScene::Update() {
 	}
 
 	// 너무 빠른 중복 입력 방지 및 CPU 점유율 안정화를 위한 딜레이
-	Sleep(100);
+	Sleep(20);
 }
 
 // 종료 함수

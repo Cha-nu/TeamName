@@ -14,8 +14,10 @@
 void BattleScene::Init()
 {
 	system("cls");
+	std::cin.clear(); // 입력 버퍼 초기화
 	player = GameManager::getInstance().GetPlayer();
-	monster = GameManager::getInstance().ManageMonster();//몬스터 동적할당
+	GameManager::getInstance().CreateMonster(); // IsTutorial = GameManager::getInstance().CreateMonster();로 변경하시면 튜토리얼 보스 여부를 BattleScene에서 알 수 있습니다.
+	monster = GameManager::getInstance().GetMonster();//몬스터 동적할당
 	//몬스터 호출 수정
 	while ( (GetAsyncKeyState(VK_RETURN) & 0x8000) || (GetAsyncKeyState(VK_SPACE) & 0x8000) )
 	{
@@ -78,6 +80,7 @@ void BattleScene::Update()
 		}
 		else if ( monster->isDead() ) //몬스터가 죽을 경우
 		{
+			player->AcquireEXP(monster->getExp()); 
 			std::cout << "전투에서 승리하였습니다." << std::endl;
 			std::cout << "마을로 돌아갑니다!" << std::endl;
 			std::cout << "\n계속하려면 아무 키나 누르세요...\n";

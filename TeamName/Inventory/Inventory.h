@@ -8,12 +8,11 @@
 #pragma once
 #include <vector>
 #include <map>
+#include <algorithm>
 #include "Type/GameTypes.h"
-#include "Manager/ItemManager/ItemManager.h"
 
 #define MAX_INVENTORY_SIZE 10
 class ItemBase;
-
 
 struct ItemSlot
 {
@@ -22,11 +21,12 @@ public:
 	ItemSlot(const ItemBase* item, int count) : m_item(item), m_count(count) {}
 
 	void AddCount(int amount) { m_count += amount; }
-	void RemoveCount(int amount = 1) { m_count = (std::max)(0 , m_count - amount); }
+	void RemoveCount(int amount = 1) { m_count = (std::max)(0, m_count - amount); }
 
 	const ItemBase* GetItem() const { return m_item; }
 	int GetCount() const { return m_count; }
 	bool IsEmpty() const { return m_item == nullptr; }
+
 private:
 	const ItemBase* m_item;
 	int m_count;
@@ -44,6 +44,7 @@ public:
 
 	void PrintItemList();
 	const std::vector<ItemSlot>& GetItemSlots() const { return m_itemSlots; }
+	const ItemSlot& GetItemSlot(int index) const { return m_itemSlots.at(index); }
 
 private:
 	std::vector<ItemSlot> m_itemSlots;

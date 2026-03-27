@@ -57,9 +57,7 @@ public:
 	//드랍테이블(Inventory) 출력
 	virtual void printDropTable() {
 		std::cout << "드랍 테이블 " << std::endl;
-		for ( ItemSlot item : this->droptable->GetItemSlots() ) {
-			std::cout << "아이템 이름: " << item.GetItem()->GetID() << " 개수: " << item.GetCount();
-		}
+		this->droptable->PrintItemList();
 	}
 
 	//몬스터 사망 플래그

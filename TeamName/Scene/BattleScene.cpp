@@ -15,7 +15,7 @@ void BattleScene::Init()
 {
 	system("cls");
 	player = GameManager::getInstance().GetPlayer();
-	monster = new NormalMonster({ "Test Normal Mob", 100, 50, 10 });//몬스터 동적할당
+	monster = GameManager::getInstance().ManageMonster();//몬스터 동적할당
 	//몬스터 호출 수정
 	
 }

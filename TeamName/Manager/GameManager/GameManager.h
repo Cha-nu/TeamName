@@ -11,7 +11,7 @@ class Monster;
 class GameManager
 {
 private:
-    bool DebugKey = true; // 디버그용 
+    bool DebugKey = false; // 디버그용 
     bool IsRunning;      // 게임 실행 루프 제어 플래그
 	Player* Character;
 

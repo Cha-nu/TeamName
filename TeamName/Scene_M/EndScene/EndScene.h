@@ -5,6 +5,8 @@
 
 // 실제 종료 화면 (자식 클래스)
 class GameOverScene : public Scene {
+private:
+	int currentIndex = 0; // [0327 추가] 게임 시작용 화살표
 public:
 	GameOverScene(){} // 생성자
 	~GameOverScene() override{} // 부모 클래스의 가상 소멸자를 override

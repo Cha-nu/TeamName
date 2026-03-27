@@ -34,5 +34,5 @@
 	//delete player;
  //   delete monster2;
 	//delete monster3;
-    return 0;
-}
+//    return 0;
+//}

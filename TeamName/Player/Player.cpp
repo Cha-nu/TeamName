@@ -2,6 +2,7 @@
 #include "../Monster/Monster.h"
 #include "Inventory/Inventory.h"
 #include "Inventory/Item/ItemBase.h"
+#include "../Manager/ItemManager/ItemManager.h"
 #include <iostream>
 
 
@@ -76,11 +77,31 @@ void Player::ApplyDamage(int _damage){
 }
 
 void Player::P_UseItem(int _index){
-	ItemSlot CurrentSlot = PlayerInventory->getItem(_index);
 	
-	if (!CurrentSlot.IsEmpty() && CurrentSlot.GetCount() > 0){
-		CurrentSlot.GetItem()->Use(CurrentSlot.GetItem()->GetName());
-		PlayerInventory->RemoveItem(CurrentSlot.GetItem()->GetID());
+	ItemManager im = ItemManager::GetInstance();
+	
+	switch (_index)
+	{
+	case 1:
+		im.GetItem("Health_Potion_Common")->Use(*this);
+		PlayerInventory->RemoveItem("Health_Potion_Common");
+		delete im.GetItem("Health_Potion_Common");
+		break;
+	case 2:
+		im.GetItem("Health_Potion_Rare")->Use(*this);
+		PlayerInventory->RemoveItem("Health_Potion_Rare");
+		delete im.GetItem("Health_Potion_Rare");
+		break;
+	case 3:
+		im.GetItem("Stamina_Potion_Common")->Use(*this);
+		PlayerInventory->RemoveItem("Stamina_Potion_Common");
+		delete im.GetItem("Stamina_Potion_Common");
+		break;
+	case 4:
+		im.GetItem("Stamina_Potion_Rare")->Use(*this);
+		PlayerInventory->RemoveItem("Stamina_Potion_Rare");
+		delete im.GetItem("Stamina_Potion_Rare");
+		break;
 	}
 }
 

@@ -43,7 +43,6 @@ void ItemManager::LoadItemsFromFile(const std::string& filename)
 	}
 
 	std::string line;
-	std::getline(file , line); // 헤더 라인 건너뛰기
 	while ( std::getline(file , line) )
 	{
 		if ( line.empty() || line[0] == '#' )
@@ -79,21 +78,13 @@ TargetStat ItemManager::StringToTargetStat(const std::string& str)
 	{
 		return TargetStat::HP;
 	}
-	else if ( str == "MP" )
+	else if ( str == "Stamina" )
 	{
-		return TargetStat::MP;
+		return TargetStat::Stamina;
 	}
 	else if ( str == "Attack" )
 	{
 		return TargetStat::Attack;
-	}
-	else if ( str == "Defense" )
-	{
-		return TargetStat::Defense;
-	}
-	else if ( str == "Intelligence" )
-	{
-		return TargetStat::Intelligence;
 	}
 	else
 	{
@@ -107,10 +98,6 @@ ItemRank ItemManager::StringToItemRank(const std::string& str)
 	if ( str == "Common" )
 	{
 		return ItemRank::Common;
-	}
-	else if ( str == "Uncommon" )
-	{
-		return ItemRank::Uncommon;
 	}
 	else if ( str == "Rare" )
 	{

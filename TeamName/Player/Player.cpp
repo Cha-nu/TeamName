@@ -81,8 +81,6 @@ void Player::ApplyDamage(int _damage){
 
 void Player::P_UseItem(int _index){
 	
-	ItemManager& im = ItemManager::GetInstance();
-	
 	ItemSlot CurrentItem = PlayerInventory->GetItemSlot(_index - 1);
 	CurrentItem.GetItem()->Use(*this);
 	PlayerInventory->RemoveItem(CurrentItem.GetItem()->GetID());

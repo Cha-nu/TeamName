@@ -8,7 +8,7 @@
 
 ItemManager::ItemManager()
 {
-	//LoadItemsFromFile("Data/ItemData.csv");
+	LoadItemsFromFile("Data/ItemData.csv");
 }
 
 ItemManager::~ItemManager()

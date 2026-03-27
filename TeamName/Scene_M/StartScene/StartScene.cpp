@@ -93,7 +93,7 @@ void StartScene::Update() {
 	}
 
 	// 너무 빠른 중복 입력 방지 및 CPU 점유율 안정화를 위한 딜레이
-	Sleep(100);
+	Sleep(30);
 }
 
 // 종료 함수

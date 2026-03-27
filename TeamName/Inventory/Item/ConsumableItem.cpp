@@ -6,10 +6,8 @@ ConsumableItem::ConsumableItem(std::string id, const std::string& name, ItemRank
 {
 	static const std::unordered_map<TargetStat, std::string> StatNames = {
 		{ TargetStat::HP, "체력" },
-		{ TargetStat::MP, "마나" },
-		{ TargetStat::Attack, "공격력" },
-		{ TargetStat::Defense, "방어력" },
-		{ TargetStat::Intelligence, "지능" }
+		{ TargetStat::Stamina, "스테미나" },
+		{ TargetStat::Attack, "공격력" }
 	};
 
 	if (m_isDamage)

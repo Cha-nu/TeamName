@@ -1,7 +1,7 @@
 ﻿// 시작 화면.cpp
 
 #include "StartScene.h"
-#include "../../Manager/SceneManager/SceneManager.h" // Scene 매니저
+#include "Manager/SceneManager/SceneManager.h" // Scene 매니저
 #include "Scene_M/CreateScene/CreatingCharacter.h" // 씬 전환을 위해 추가
 
 #include <iostream>
@@ -94,7 +94,7 @@ void StartScene::Update() {
 	}
 
 	// 너무 빠른 중복 입력 방지 및 CPU 점유율 안정화를 위한 딜레이
-	Sleep(30);
+	Sleep(20);
 }
 
 // 종료 함수

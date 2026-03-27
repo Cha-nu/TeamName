@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleHelper.cpp" />
+    <ClCompile Include="Scene_M\EndingScene\EndingScene.cpp" />
     <ClCompile Include="Inventory\Inventory.cpp" />
     <ClCompile Include="Inventory\Item\ConsumableItem.cpp" />
     <ClCompile Include="Inventory\Item\ItemBase.cpp" />
@@ -227,6 +228,7 @@
   <ItemGroup>
     <ClInclude Include="ConsoleHelper.h" />
     <ClInclude Include="Data\ItemKey.h" />
+    <ClInclude Include="Scene_M\EndingScene\EndingScene.h" />
     <ClInclude Include="Inventory\Inventory.h" />
     <ClInclude Include="Inventory\Item\ConsumableItem.h" />
     <ClInclude Include="Inventory\Item\ItemBase.h" />

@@ -8,7 +8,7 @@
 # 6. Is_Damage : 적에게 데미지를 주면 1, 내가 회복/버프를 받으면 0
 # =====================================================================
 
-key,name,rank,target_stat,basic_amount,is_damage
+# key,name,rank,target_stat,basic_amount,is_damage
 Health_Potion_Common,일반 체력 포션,Common,HP,10,0
 Health_Potion_Rare,희귀 체력 포션,Rare,HP,10,0
 Stamina_Potion_Common,일반 스태미나 포션,Common,Stamina,10,0

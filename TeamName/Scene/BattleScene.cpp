@@ -17,6 +17,10 @@ void BattleScene::Init()
 	player = GameManager::getInstance().GetPlayer();
 	monster = GameManager::getInstance().ManageMonster();//몬스터 동적할당
 	//몬스터 호출 수정
+	while ( (GetAsyncKeyState(VK_RETURN) & 0x8000) || (GetAsyncKeyState(VK_SPACE) & 0x8000) )
+	{
+		Sleep(10);
+	}
 	
 }
 

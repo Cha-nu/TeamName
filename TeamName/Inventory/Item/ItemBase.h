@@ -9,6 +9,9 @@
 #include <string>
 #include "Type/GameTypes.h"
 
+class Player;
+class Monster;
+
 class ItemBase
 {
 public:
@@ -22,10 +25,10 @@ public:
 
 	// 이 부분은 Player와 Monster가 상위 클래스를 상속하지 않으면 각각의 Use 함수를 만들어야 하는 경우 존재.
 	// 플레이어 인자 전달 필요
-	// virtual void Use(Player& player) = 0;
+	 virtual void Use(Player& player) = 0;
 
 	// 몬스터에게 사용하는 아이템
-	// virtual void Use(Monster& target) = 0; 
+	 virtual void Use(Monster& target) = 0; 
 protected:
 	std::string m_id;
 	std::string m_name;

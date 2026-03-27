@@ -1,16 +1,22 @@
 ﻿#include "Monster.h"
 #include <iostream>
 
+
 //생성자
+NormalMonster::NormalMonster() {
+	MonsterStat stat;
+	InitializeStat({ "Test Normal Mob", 100, 10, 10 }); // 이름 / 체력 / 공격력 / 잡았을 시 주는 경험치
+}
+
 NormalMonster::NormalMonster(MonsterStat stat){
 	InitializeStat(stat);
 }
 
-void NormalMonster::InitializeStat(MonsterStat stat) {
+void NormalMonster::InitializeStat(MonsterStat stat) {	
 	this->stat = stat;
 }
 
-//name, hp, atk getter
+//name, hp, atk, exp getter
 std::string NormalMonster::getName() const{
 	return this->stat.name;
 }
@@ -25,6 +31,23 @@ int NormalMonster::getHealth() const {
 
 int NormalMonster::getExp() const {
 	return this->stat.give_exp;
+}
+
+//name, hp, atk, exp setter
+void NormalMonster::setName(std::string name) {
+	this->stat.name = name;
+}
+
+void NormalMonster::setAttack(int atk) {
+	this->stat.atk = atk;
+}
+
+void NormalMonster::setHealth(int hp) {
+	this->stat.hp = hp;
+}
+
+void NormalMonster::setExp(int exp) {
+	this->stat.give_exp = exp;
 }
 
 bool NormalMonster::attackPlayer(Player* player) {	

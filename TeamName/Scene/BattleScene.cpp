@@ -9,6 +9,8 @@
 #include<iomanip>
 #include<Windows.h>
 
+#include "Manager/GameManager/GameManager.h"
+
 void BattleScene::Init()
 {
 	system("cls");

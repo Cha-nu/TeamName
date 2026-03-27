@@ -9,13 +9,13 @@
 int main()
 {
 	// 전체화면 설정
-	HWND consoleWindow = GetConsoleWindow();
-	ShowWindow(consoleWindow, SW_MAXIMIZE);
+	/*HWND consoleWindow = GetConsoleWindow();
+	ShowWindow(consoleWindow, SW_MAXIMIZE);*/
 
 	std::ios::sync_with_stdio(false);
 	std::cin.tie(nullptr);
 
-	std::cout << "[INFO] 한글 출력 확인" << '\n';
+	/*std::cout << "[INFO] 한글 출력 확인" << '\n';*/
 
 	// 게임 시작
 	GameManager::getInstance().Run();

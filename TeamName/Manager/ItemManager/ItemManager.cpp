@@ -79,21 +79,13 @@ TargetStat ItemManager::StringToTargetStat(const std::string& str)
 	{
 		return TargetStat::HP;
 	}
-	else if ( str == "MP" )
+	else if ( str == "Stamina" )
 	{
-		return TargetStat::MP;
+		return TargetStat::Stamina;
 	}
 	else if ( str == "Attack" )
 	{
 		return TargetStat::Attack;
-	}
-	else if ( str == "Defense" )
-	{
-		return TargetStat::Defense;
-	}
-	else if ( str == "Intelligence" )
-	{
-		return TargetStat::Intelligence;
 	}
 	else
 	{

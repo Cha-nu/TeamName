@@ -2,7 +2,8 @@
 
 #include "EndScene.h"
 #include "Manager/SceneManager/SceneManager.h" // Scene 매니저
-#include "Scene_M/CreateScene/CreatingCharacter.h" // 씬 전환을 위해 추가
+#include "Scene_M/StartScene/StartScene.h" // 씬 전환을 위해 추가
+//#include "Scene_M/CreateScene/CreatingCharacter.h" // 씬 전환을 위해 추가
 
 #include <iostream>
 #include <string>
@@ -77,15 +78,15 @@ void GameOverScene::Update() {
 			End_gotoxy(30 , 12); std::cout << "============================================================";
 			Sleep(1500); // 1.5초 대기 후 진행
 
-			// 생성 화면(CreateScene)으로 이동
-			SceneManager::getInstance().Replace_Scene(new CharacterChoice());
+			// 처음 시작 화면(StartScene)으로 이동
+			SceneManager::getInstance().Replace_Scene(new StartScene());
 			return; // 씬이 교체되었으므로 Update 종료
 		}
 		else if ( currentIndex == 1 ) {
 			End_gotoxy(40 , 10); std::cout << "=========================================";
 			End_gotoxy(40 , 11); std::cout << "            현실로 돌아갑니다...           ";
 			End_gotoxy(40 , 12); std::cout << "=========================================";
-			Sleep(1000); // 1초 대기 후 진행
+			Sleep(300); // 1초 대기 후 진행
 
 			exit(0);
 		}

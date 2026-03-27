@@ -89,6 +89,7 @@ void CharacterChoice::Update() {
 
 	// SceneManager를 통해 다음 씬으로 전환
 	SceneManager::getInstance().Replace_Scene(new MainScene());
+	return; // 씬이 교체되었으므로 Update 종료
 }
 
 // 종료 함수

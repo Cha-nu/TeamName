@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include <iostream>
 #include <string>
 
 // 전방 선언 (순환 참조 방지 및 컴파일 속도 향상)
@@ -12,7 +11,7 @@ class GameManager
 private:
     bool DebugKey = false; // 디버그용 
     bool IsRunning;      // 게임 실행 루프 제어 플래그
-	Player* m_pPlayer;
+	Player* Character;
 
     // 싱글톤
     GameManager();
@@ -47,8 +46,9 @@ public:
     // 메모리 해제 및 종료 처리
     void Release();
 
-    // 플레이어 생성
-    void CreatePlayer();
+    // 플레이어
+	void SetPlayer(std::string& name);
+	Player& GetPlayer(); // 읽기 전용 이여야 하는데, 일단 참조 반환으로 수정했습니다. (const Player& GetPlayer() const;)
 
     // 게임 종료 플래그 설정
     void SetRunning(bool isRunning) { IsRunning = isRunning; }

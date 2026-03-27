@@ -50,13 +50,16 @@ void Player::AcquireEXP(int _exp)
 	Playerstat.EXP += _exp;
 	if (Playerstat.EXP >= 100){
 		Playerstat.EXP -= MAX_EXP;
-		if (Playerstat.Level <= MAX_LEVEL){
-			Playerstat.Level++;
+		if (Playerstat.Level < MAX_LEVEL){
+			for (int i = 0; i < Playerstat.EXP / 100; i++){
+				Playerstat.Level++;
+			}
 		}
 		else{
 			std::cout<< "Player already maxLevel" << std::endl;
 		}
 	}
+	Playerstat.EXP = 0;
 }
 
 void Player::Attack(Monster* _monster){
@@ -78,29 +81,25 @@ void Player::ApplyDamage(int _damage){
 
 void Player::P_UseItem(int _index){
 	
-	ItemManager im = ItemManager::GetInstance();
+	ItemManager& im = ItemManager::GetInstance();
 	
 	switch (_index)
 	{
 	case 1:
 		im.GetItem("Health_Potion_Common")->Use(*this);
 		PlayerInventory->RemoveItem("Health_Potion_Common");
-		delete im.GetItem("Health_Potion_Common");
 		break;
 	case 2:
 		im.GetItem("Health_Potion_Rare")->Use(*this);
 		PlayerInventory->RemoveItem("Health_Potion_Rare");
-		delete im.GetItem("Health_Potion_Rare");
 		break;
 	case 3:
 		im.GetItem("Stamina_Potion_Common")->Use(*this);
 		PlayerInventory->RemoveItem("Stamina_Potion_Common");
-		delete im.GetItem("Stamina_Potion_Common");
 		break;
 	case 4:
 		im.GetItem("Stamina_Potion_Rare")->Use(*this);
 		PlayerInventory->RemoveItem("Stamina_Potion_Rare");
-		delete im.GetItem("Stamina_Potion_Rare");
 		break;
 	}
 }

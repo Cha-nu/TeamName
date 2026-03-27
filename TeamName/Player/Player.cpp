@@ -83,25 +83,9 @@ void Player::P_UseItem(int _index){
 	
 	ItemManager& im = ItemManager::GetInstance();
 	
-	switch (_index)
-	{
-	case 1:
-		im.GetItem("Health_Potion_Common")->Use(*this);
-		PlayerInventory->RemoveItem("Health_Potion_Common");
-		break;
-	case 2:
-		im.GetItem("Health_Potion_Rare")->Use(*this);
-		PlayerInventory->RemoveItem("Health_Potion_Rare");
-		break;
-	case 3:
-		im.GetItem("Stamina_Potion_Common")->Use(*this);
-		PlayerInventory->RemoveItem("Stamina_Potion_Common");
-		break;
-	case 4:
-		im.GetItem("Stamina_Potion_Rare")->Use(*this);
-		PlayerInventory->RemoveItem("Stamina_Potion_Rare");
-		break;
-	}
+	ItemSlot CurrentItem = PlayerInventory->GetItemSlot(_index - 1);
+	CurrentItem.GetItem()->Use(*this);
+	PlayerInventory->RemoveItem(CurrentItem.GetItem()->GetID());
 }
 
 // Player의 스탯확인용 디버깅 함수

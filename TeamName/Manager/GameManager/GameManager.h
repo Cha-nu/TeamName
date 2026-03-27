@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include <string>
-#include <queue>
+#include <vector>
 
 // 전방 선언
 class SceneManager;
@@ -15,8 +15,10 @@ private:
     bool IsRunning;      // 게임 실행 루프 제어 플래그
 	Player* Character;
 
-    // 단계별 몬스터 큐
-	std::queue<Monster*> MonsterQueue; 
+	// 0. 수능(튜토리얼보스) / 1. c언어(normal) / 2. c++(normal) / 3. graphics(normal) / 4. unreal(normal) / 5. 취업(최종보스)
+	std::vector<std::string> MonsterName = {"c언어", "c++", "graphics", "unreal"}; // 몬스터 이름 리스트
+
+	Monster* CurrentMonster; // 현재 스테이지의 몬스터를 가리키는 포인터
 
     // 싱글톤
     GameManager();
@@ -57,6 +59,9 @@ public:
 
 	// 몬스터 
 	Monster* ManageMonster();
+
+	// 매 스테이지마다 몬스터 생성 및 큐에 추가
+	void CreateMonster();
 
     // 게임 종료 플래그 설정
     void SetRunning(bool isRunning) { IsRunning = isRunning; }

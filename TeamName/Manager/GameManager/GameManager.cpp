@@ -24,14 +24,7 @@ bool GameManager::Init()
 	// 씬 매니저 초기화면
 	SceneManager::getInstance().Add_Scene(new StartScene()); 
 
-	// 스테이지별 몬스터 세팅
-	// 0. 수능(튜토리얼보스) / 1. c언어(normal) / 2. c++(normal) / 3. graphics(normal) / 4. unreal(normal) / 5. 취업(최종보스)
-	MonsterQueue.push(new BossMonster({ "수능", 10, 1, 200 }));       
-	MonsterQueue.push(new NormalMonster({ "C언어", 10, 1, 200 }));      
-	MonsterQueue.push(new NormalMonster({ "C++", 10, 1, 200 }));        
-	MonsterQueue.push(new NormalMonster({ "Graphics", 10, 1, 200 }));   
-	MonsterQueue.push(new NormalMonster({ "Unreal", 10, 1, 200 }));    
-	MonsterQueue.push(new BossMonster({ "취업", 10, 1, 1000 }));    
+	CurrentMonster = new BossMonster({ "수능", 10, 1, 120 });       
 
 	if ( DebugKey ) std::cout << "[GameManager] Init 완료" << '\n';
 	return true;
@@ -75,12 +68,18 @@ void GameManager::Release()
 {
 	SceneManager::getInstance().SceneStack_Clear();
 
-    // 큐 메모리 해제
-	while (!MonsterQueue.empty())
+	// 플레이어 메모리 해제
+	if (Character)
 	{
-		delete MonsterQueue.front();
-		MonsterQueue.pop();
+		delete Character;
+		Character = nullptr;
 	}
+	if (CurrentMonster)
+	{
+		delete CurrentMonster;
+		CurrentMonster = nullptr;
+	}
+
     
 	if ( DebugKey ) std::cout << "[GameManager] 시스템이 안전하게 종료되었습니다." << '\n';
 }
@@ -101,14 +100,24 @@ Player* GameManager::GetPlayer()
 
 Monster* GameManager::ManageMonster()
 {
-	// 큐가 비어있지 않다면 가장 앞의 몬스터를 반환하고, 큐에서 pop
-	if (!MonsterQueue.empty())
-	{
-		Monster* currentMonster = MonsterQueue.front();
-		MonsterQueue.pop();
-		return currentMonster;
-	}
-
-	// 몬스터가 더 이상 없으면 nullptr 반환 **예외처리 해주세요.**
-	return nullptr;
+	return CurrentMonster;
 }
+
+void GameManager::CreateMonster()
+{
+	int level = Character->Getstat().Level;
+	if (Character->Getstat().Level < 10)
+	{
+		int randomMonsterNum = rand() % static_cast<int>(MonsterName.size()); // 몬스터 수에 맞춰 랜덤 번호 생성
+		delete CurrentMonster; // 기존 몬스터 메모리 해제
+		if (DebugKey) CurrentMonster = new NormalMonster({ MonsterName[randomMonsterNum], 1, 1, 100 });
+		else CurrentMonster = new NormalMonster({ MonsterName[randomMonsterNum], level*20, level*5, level * 10 });
+	}
+	else if ( Character->Getstat().Level >= 10 )
+	{
+		delete CurrentMonster; // 기존 몬스터 메모리 해제
+		if (DebugKey) CurrentMonster = new BossMonster({ "취업", 1, 1, 0 });
+		else CurrentMonster = new BossMonster({ "취업",level * 30 , level * 10, 0 });
+	}
+}
+

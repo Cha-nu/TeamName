@@ -1,4 +1,4 @@
-/*
+﻿/*
 * 아이템의 기본 클래스입니다.
  * 아이템의 이름, 설명, 등급 등의 공통 속성을 정의합니다.
  * 현재 Use 함수는 Player와 Monster 클래스가 상위 클래스를 상속하지 않는 경우 각각의 Use 함수를 만들어야 하는 상황을 고려하여 주석 처리되어 있습니다.
@@ -7,7 +7,7 @@
 
 #pragma once
 #include <string>
-#include "../../Type/GameTypes.h"
+#include "Type/GameTypes.h"
 
 class ItemBase
 {

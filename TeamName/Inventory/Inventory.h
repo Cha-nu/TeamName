@@ -1,4 +1,4 @@
-/*
+﻿/*
 인벤토리 구조체를 정의한 클래스입니다.
 최대한 Player에게 Inventory 인스턴스를 하나만 가지도록 설계하였습니다.
 
@@ -8,8 +8,8 @@
 #pragma once
 #include <vector>
 #include <map>
-#include "../Type/GameTypes.h"
-#include "../Manager/ItemManager/ItemManager.h"
+#include "Type/GameTypes.h"
+#include "Manager/ItemManager/ItemManager.h"
 
 #define MAX_INVENTORY_SIZE 10
 class ItemBase;

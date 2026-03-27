@@ -11,7 +11,7 @@ class Monster;
 class GameManager
 {
 private:
-    bool DebugKey = false; // 디버그용 
+    bool DebugKey = true; // 디버그용 
     bool IsRunning;      // 게임 실행 루프 제어 플래그
 	Player* Character;
 
@@ -58,7 +58,7 @@ public:
 	Player* GetPlayer();
 
 	// 몬스터 
-	Monster* ManageMonster();
+	Monster* ManageMonster() const;
 
 	// 매 스테이지마다 몬스터 생성 및 큐에 추가
 	void CreateMonster();

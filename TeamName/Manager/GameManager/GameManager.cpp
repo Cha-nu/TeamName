@@ -30,7 +30,7 @@ bool GameManager::Init()
 
 	void DisableQuickEdit();//마우스 클릭해도 화면이 안멈추게 하는 함수
 
-	if ( DebugKey ) std::cout << "[GameManager] Init 완료" << '\n';
+	//if ( DebugKey ) std::cout << "[GameManager] Init 완료" << '\n';
 	return true;
 
 }
@@ -42,7 +42,7 @@ void GameManager::Run()
 	// 메인 게임 루프: 종료 조건이 만족될 때까지 반복
 	while (IsRunning)
 	{
-		if ( DebugKey ) std::cout << "[GameManager] Update 진입" << '\n';
+		//if ( DebugKey ) std::cout << "[GameManager] Update 진입" << '\n';
 		Render();
 		Update();
 	}
@@ -53,19 +53,19 @@ void GameManager::Run()
 void GameManager::Update()
 {
 	SceneManager::getInstance().Update();
-	if ( DebugKey ) std::cout << "[GameManager] Update 완료" << '\n';
+	//if ( DebugKey ) std::cout << "[GameManager] Update 완료" << '\n';
 }
 
 void GameManager::Render()
 {
 	system("cls");
 	SceneManager::getInstance().Render();
-	if ( DebugKey ) std::cout << "[GameManager] Render 완료" << '\n';
+	//if ( DebugKey ) std::cout << "[GameManager] Render 완료" << '\n';
 }
 
 void GameManager::Exit()
 {
-	if ( DebugKey ) std::cout << "[GameManager] Exit 완료" << '\n';
+	//if ( DebugKey ) std::cout << "[GameManager] Exit 완료" << '\n';
 }
 
 void GameManager::Release()
@@ -85,7 +85,7 @@ void GameManager::Release()
 	}
 
     
-	if ( DebugKey ) std::cout << "[GameManager] 시스템이 안전하게 종료되었습니다." << '\n';
+	//if ( DebugKey ) std::cout << "[GameManager] 시스템이 안전하게 종료되었습니다." << '\n';
 }
 
 void GameManager::SetPlayer(std::string& Name)
@@ -102,7 +102,7 @@ Player* GameManager::GetPlayer()
 	return Character;
 }
 
-Monster* GameManager::ManageMonster()
+Monster* GameManager::ManageMonster() const
 {
 	return CurrentMonster;
 }

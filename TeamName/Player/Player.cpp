@@ -1,6 +1,8 @@
 ﻿#include "Player.h"
 #include "../Monster/Monster.h"
 #include "Inventory/Inventory.h"
+#include "Inventory/Item/ItemBase.h"
+#include "../Manager/ItemManager/ItemManager.h"
 #include <iostream>
 
 
@@ -48,13 +50,16 @@ void Player::AcquireEXP(int _exp)
 	Playerstat.EXP += _exp;
 	if (Playerstat.EXP >= 100){
 		Playerstat.EXP -= MAX_EXP;
-		if (Playerstat.Level <= MAX_LEVEL){
-			Playerstat.Level++;
+		if (Playerstat.Level < MAX_LEVEL){
+			for (int i = 0; i < Playerstat.EXP / 100; i++){
+				Playerstat.Level++;
+			}
 		}
 		else{
 			std::cout<< "Player already maxLevel" << std::endl;
 		}
 	}
+	Playerstat.EXP = 0;
 }
 
 void Player::Attack(Monster* _monster){
@@ -72,6 +77,13 @@ void Player::ApplyDamage(int _damage){
 	//	// 파라미터로 Player& player를 받고 람다나 std::bind로 실행할 함수주소를 넘겨주시면 될것같습니다.
 	//	OnDead();
 	//}
+}
+
+void Player::P_UseItem(int _index){
+	
+	ItemSlot CurrentItem = PlayerInventory->GetItemSlot(_index - 1);
+	CurrentItem.GetItem()->Use(*this);
+	PlayerInventory->RemoveItem(CurrentItem.GetItem()->GetID());
 }
 
 // Player의 스탯확인용 디버깅 함수

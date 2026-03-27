@@ -105,7 +105,7 @@ void CharacterChoice::Update() {
 	system("pause"); // 잠시 멈추기(사용자에게 메시지 보여주기 위해 작성)
 
 	// SceneManager를 통해 다음 씬으로 전환
-	SceneManger::getInstance().Replace_Scene(new MainScene());
+	SceneManager::getInstance().Replace_Scene(new MainScene());
 }
 
 // 종료 함수

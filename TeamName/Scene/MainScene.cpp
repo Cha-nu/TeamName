@@ -1,12 +1,14 @@
 ﻿#include "MainScene.h"
 #include"BattleScene.h"
 #include "../Manager/SceneManager/SceneManager.h"
+#include"Manager/GameManager/GameManager.h"
+#include"Player/Player.h"
 #include<iostream>
 #include<Windows.h>
 void MainScene::Init()
 {
 	system("cls");
-	// player = 게임 매니저한테 받기
+	// player = GameManager::getInstance().getPlayer();
 }
 
 void MainScene::Render()
@@ -51,9 +53,16 @@ void MainScene::Update()
 	else if ( input == 2 ) 
 	{
 		//받아온 플레이어의 get함수로 스탯 접근
+		std::cout << " 플레이어 이름: " << std::endl;
 		std::cout << " 플레이어 HP: " << std::endl;
 		std::cout << " 플레이어 공격력: " << std::endl;
+		std::cout << " 플레이어 레벨: " << std::endl;
 		std::cout << " 플레이어 경험치: " << std::endl;
+		//player->Getstate().name
+		//player->Getstate().HP
+		//player->Getstate().Atk_Damage
+		//player->Getstate().Level
+		//player->Getstate().EXP
 	}
 	else if ( input == 3 ) 
 	{
@@ -63,6 +72,7 @@ void MainScene::Update()
 	else if ( input == 99 ) 
 	{
 		//게임 매니저 종료 함수 호출
+		GameManager::getInstance().SetRunning(false);
 	}
 	else 
 	{

@@ -1,13 +1,19 @@
 ﻿#include "MainScene.h"
 #include"BattleScene.h"
+#include"Player/Player.h"
+#include"Monster/Monster.h"
+#include"../Manager/GameManager/GameManager.h"
 #include "../Manager/SceneManager/SceneManager.h"
 #include<iostream>
+#include<iomanip>
 #include<Windows.h>
+
 void BattleScene::Init()
 {
 	system("cls");
-	//player = 게임 매니저에서 받아온다
-	//몬스터 여기서 동적 할당으로 생성
+	// player = GameManager::getInstance().getPlayer();
+	monster = new NormalMonster();//몬스터 동적할당
+	
 }
 
 void BattleScene::Render()
@@ -18,9 +24,25 @@ void BattleScene::Render()
               O                              O
              /|\                            /|\
              / \                            / \
-             
+          HP(       )                    HP(       )
     ==================================================
     )";
+
+	//std::cout << R"(
+    //     [ 플레이어 ]                      [ 적 ]
+    //         
+    //          O                              O
+    //         /|\                            /|\
+    //         / \                            / \
+    //       HP: )"
+	//	// ★ 왼쪽 정렬(left)로 무조건 4칸(setw)을 차지하게 만듭니다!
+	//	<< std::left << std::setw(4) << player.Getstate().Hp
+	//	<< R"(                  HP: )"
+	//	// 적 체력도 똑같이 4칸 고정!
+	//	<< std::left << std::setw(4) << monster.getHelth()
+	//	<< R"(
+    //==================================================
+    //)";
 
 	std::cout << R"(
   +------------------------------------------+
@@ -42,8 +64,11 @@ void BattleScene::Update()
 	{
 		//플레이어 공격
 		std::cout << " 플레이어 공격" << std::endl;
+		//player->Attack(monster);
+
 		//몬스터 공격
 		std::cout << " 몬스터 공격" << std::endl;
+		//monster->attackPlayer(player);
 	}
 	else if ( input == 2 )
 	{
@@ -52,7 +77,7 @@ void BattleScene::Update()
 	}
 	else if ( input == 3 )
 	{
-		SceneManager::getInstance().Replace_Scene(new MainScene());
+		SceneManager::getInstance().Return_Scene();
 	}
 	else if ( input == 99 )
 	{
@@ -67,3 +92,10 @@ void BattleScene::Update()
 void BattleScene::Exit()
 {
 }
+
+BattleScene::~BattleScene()
+{
+	//동적할당 받은 몬스터 메모리 해제
+	delete monster;
+}
+

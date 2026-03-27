@@ -67,11 +67,11 @@ void Player::Attack(Monster* _monster){
 void Player::ApplyDamage(int _damage){
     Playerstat.HP -= _damage;
 	
-	if (Playerstat.HP <= 0){
-		// 게임매니저 클래스에서 초기화나 캐릭터 생성 함수에서
-		// 파라미터로 Player& player를 받고 람다나 std::bind로 실행할 함수주소를 넘겨주시면 될것같습니다.
-		OnDead();
-	}
+	//if (Playerstat.HP <= 0){
+	//	// 게임매니저 클래스에서 초기화나 캐릭터 생성 함수에서
+	//	// 파라미터로 Player& player를 받고 람다나 std::bind로 실행할 함수주소를 넘겨주시면 될것같습니다.
+	//	OnDead();
+	//}
 }
 
 // Player의 스탯확인용 디버깅 함수

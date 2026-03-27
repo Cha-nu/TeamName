@@ -12,7 +12,8 @@ void BattleScene::Init()
 {
 	system("cls");
 	// player = GameManager::getInstance().getPlayer();
-	monster = new NormalMonster();//몬스터 동적할당
+	monster = new NormalMonster({});//몬스터 동적할당
+	//몬스터 호출 수정
 	
 }
 

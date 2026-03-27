@@ -11,8 +11,8 @@
 void BattleScene::Init()
 {
 	system("cls");
-	// player = GameManager::getInstance().getPlayer();
-	monster = new NormalMonster({});//몬스터 동적할당
+	player = GameManager::getInstance().GetPlayer();
+	monster = new NormalMonster({ "Test Normal Mob", 100, 10, 10 });//몬스터 동적할당
 	//몬스터 호출 수정
 	
 }
@@ -25,25 +25,15 @@ void BattleScene::Render()
               O                              O
              /|\                            /|\
              / \                            / \
-          HP(       )                    HP(       )
+           HP: )"
+		// ★ 왼쪽 정렬(left)로 무조건 4칸(setw)을 차지하게 만듭니다!
+		<< std::left << std::setw(4) << player->Getstat().HP
+		<< R"(                  HP: )"
+		// 적 체력도 똑같이 4칸 고정!
+		<< std::left << std::setw(4) << monster->getHealth()
+		<< R"(
     ==================================================
     )";
-
-	//std::cout << R"(
-    //     [ 플레이어 ]                      [ 적 ]
-    //         
-    //          O                              O
-    //         /|\                            /|\
-    //         / \                            / \
-    //       HP: )"
-	//	// ★ 왼쪽 정렬(left)로 무조건 4칸(setw)을 차지하게 만듭니다!
-	//	<< std::left << std::setw(4) << player.Getstate().Hp
-	//	<< R"(                  HP: )"
-	//	// 적 체력도 똑같이 4칸 고정!
-	//	<< std::left << std::setw(4) << monster.getHelth()
-	//	<< R"(
-    //==================================================
-    //)";
 
 	std::cout << R"(
   +------------------------------------------+
@@ -65,11 +55,14 @@ void BattleScene::Update()
 	{
 		//플레이어 공격
 		std::cout << " 플레이어 공격" << std::endl;
-		//player->Attack(monster);
+		player->Attack(monster);
 
 		//몬스터 공격
 		std::cout << " 몬스터 공격" << std::endl;
-		//monster->attackPlayer(player);
+		monster->attackPlayer(player);
+
+		std::cout << "\n계속하려면 아무 키나 누르세요...\n";
+		system("pause > nul"); // (> nul을 붙이면 지저분한 기본 시스템 메시지가 안 뜹니다)
 	}
 	else if ( input == 2 )
 	{
@@ -82,7 +75,7 @@ void BattleScene::Update()
 	}
 	else if ( input == 99 )
 	{
-		//게임 매니저 종료 함수 호출
+		GameManager::getInstance().SetRunning(false);
 	}
 	else
 	{

@@ -48,7 +48,7 @@ public:
 
     // 플레이어
 	void SetPlayer(std::string& name);
-	Player& GetPlayer(); // 읽기 전용 이여야 하는데, 일단 참조 반환으로 수정했습니다. (const Player& GetPlayer() const;)
+	Player* GetPlayer(); // 읽기 전용 이여야 하는데, 일단 참조 반환으로 수정했습니다. (const Player& GetPlayer() const;)
 
     // 게임 종료 플래그 설정
     void SetRunning(bool isRunning) { IsRunning = isRunning; }

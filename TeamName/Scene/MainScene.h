@@ -5,7 +5,7 @@ class Player;
 class MainScene :public Scene
 {
 private:
-	Player* player;//
+	Player* player = nullptr;
 public:
 	void Init() override;
 	void Render() override;

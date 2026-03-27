@@ -8,7 +8,7 @@
 void MainScene::Init()
 {
 	system("cls");
-	// player = GameManager::getInstance().getPlayer();
+	player = GameManager::getInstance().GetPlayer();
 }
 
 void MainScene::Render()
@@ -48,16 +48,18 @@ void MainScene::Update()
 
 	if ( input == 1 ) 
 	{
-		SceneManager::getInstance().Replace_Scene(new BattleScene());
+		SceneManager::getInstance().Add_Scene(new BattleScene());
 	}
 	else if ( input == 2 ) 
 	{
 		//받아온 플레이어의 get함수로 스탯 접근
-		std::cout << " 플레이어 이름: " << std::endl;
-		std::cout << " 플레이어 HP: " << std::endl;
-		std::cout << " 플레이어 공격력: " << std::endl;
-		std::cout << " 플레이어 레벨: " << std::endl;
-		std::cout << " 플레이어 경험치: " << std::endl;
+		std::cout << " 플레이어 이름: " << player->Getstat().name << std::endl;
+		std::cout << " 플레이어 HP: " << player->Getstat().HP << std::endl;
+		std::cout << " 플레이어 공격력: " << player->Getstat().Atk_Damage << std::endl;
+		std::cout << " 플레이어 레벨: " << player->Getstat().Level << std::endl;
+		std::cout << " 플레이어 경험치: " << player->Getstat().EXP << std::endl;
+		std::cout << "\n계속하려면 아무 키나 누르세요...\n";
+		system("pause > nul"); // (> nul을 붙이면 지저분한 기본 시스템 메시지가 안 뜹니다)
 		//player->Getstate().name
 		//player->Getstate().HP
 		//player->Getstate().Atk_Damage
@@ -67,7 +69,9 @@ void MainScene::Update()
 	else if ( input == 3 ) 
 	{
 		//여기 고민 부분 인벤토리 Scene을 만들지
-		std::cout << "플레이어 아이템 목록: " << std::endl;
+		std::cout << "플레이어 인벤토리 씬 아직 준비중" << std::endl;
+		std::cout << "\n계속하려면 아무 키나 누르세요...\n";
+		system("pause > nul"); // (> nul을 붙이면 지저분한 기본 시스템 메시지가 안 뜹니다)
 	}
 	else if ( input == 99 ) 
 	{
@@ -76,6 +80,7 @@ void MainScene::Update()
 	}
 	else 
 	{
+		std::cout << "잘못된 입력입니다." << std::endl;
 		//잘못된 입력
 	}
 }

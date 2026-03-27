@@ -9,8 +9,8 @@
 int main()
 {
 	// 전체화면 설정
-	/*HWND consoleWindow = GetConsoleWindow();
-	ShowWindow(consoleWindow, SW_MAXIMIZE);*/
+	//keybd_event(VK_F11 , 0 , 0 , 0);               // F11 누름
+	//keybd_event(VK_F11 , 0 , KEYEVENTF_KEYUP , 0);
 
 	std::ios::sync_with_stdio(false);
 	std::cin.tie(nullptr);

@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "../Player/Player.h"
+#include "../Inventory/Inventory.h"
 
 struct MonsterStat {
 	std::string name = "Test Monster";
@@ -15,7 +16,8 @@ struct MonsterStat {
 class Monster{
 protected:
 	Monster() {}
-	MonsterStat stat;
+	Inventory* droptable;
+	MonsterStat stat;	
 
 public:
     virtual ~Monster() {}
@@ -30,6 +32,8 @@ public:
 		std::cout << "몬스터 " << this->stat.name << "(이)가 나타났다!";
 	}
 
+
+
 	//name, hp, atk, exp getter setter
 	virtual std::string getName() const { return this->stat.name; }
 	virtual int getHealth() const { return this->stat.hp; }
@@ -39,6 +43,24 @@ public:
 	virtual void setHealth(int hp) { this->stat.hp = hp; }
 	virtual void setAttack(int atk) { this->stat.atk = atk; }
 	virtual void setExp(int exp) { this->stat.give_exp = exp; }
+
+	//드랍테이블(Inventory)에 아이템 추가
+	virtual void addToDroptable(const std::string& id, int amount) {
+		this->droptable->AddItem(id , amount);
+	}
+
+	//드랍테이블(Inventory)에 아이템 삭제
+	virtual void removeToDroptable(const std::string& id , int amount) {
+		this->droptable->RemoveItem(id , amount);
+	}
+
+	//드랍테이블(Inventory) 출력
+	virtual void printDropTable() {
+		std::cout << "드랍 테이블 " << std::endl;
+		for ( ItemSlot item : this->droptable->GetItemSlots() ) {
+			std::cout << "아이템 이름: " << item.GetItem()->GetID() << " 개수: " << item.GetCount();
+		}
+	}
 
 	//몬스터 사망 플래그
 	virtual bool isDead() const { 
@@ -56,6 +78,7 @@ public:
 			else {
 				this->stat.hp = 0;
 				std::cout << "몬스터 " << this->stat.name << "가 " << "사망했습니다!" << std::endl;				
+
 			}
 		}
 

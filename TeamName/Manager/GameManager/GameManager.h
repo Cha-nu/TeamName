@@ -58,10 +58,10 @@ public:
 	Player* GetPlayer();
 
 	// 몬스터 
-	Monster* ManageMonster() const;
+	Monster* GetMonster() const;
 
 	// 매 스테이지마다 몬스터 생성 및 큐에 추가
-	void CreateMonster();
+	bool CreateMonster();
 
     // 게임 종료 플래그 설정
     void SetRunning(bool isRunning) { IsRunning = isRunning; }

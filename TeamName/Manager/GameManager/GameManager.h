@@ -1,10 +1,12 @@
 ﻿#pragma once
 
 #include <string>
+#include <queue>
 
-// 전방 선언 (순환 참조 방지 및 컴파일 속도 향상)
+// 전방 선언
 class SceneManager;
 class Player;
+class Monster;
 
 class GameManager
 {
@@ -12,6 +14,9 @@ private:
     bool DebugKey = false; // 디버그용 
     bool IsRunning;      // 게임 실행 루프 제어 플래그
 	Player* Character;
+
+    // 단계별 몬스터 큐
+	std::queue<Monster*> MonsterQueue; 
 
     // 싱글톤
     GameManager();
@@ -48,7 +53,10 @@ public:
 
     // 플레이어
 	void SetPlayer(std::string& name);
-	Player* GetPlayer(); // 읽기 전용 이여야 하는데, 일단 참조 반환으로 수정했습니다. (const Player& GetPlayer() const;)
+	Player* GetPlayer();
+
+	// 몬스터 
+	Monster* ManageMonster();
 
     // 게임 종료 플래그 설정
     void SetRunning(bool isRunning) { IsRunning = isRunning; }

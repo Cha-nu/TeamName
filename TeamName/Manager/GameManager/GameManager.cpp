@@ -7,9 +7,12 @@
 #include "../../Scene/Scene.h"
 #include "../../Scene_M/StartScene/StartScene.h"
 
+// 몬스터 헤더 추가
+#include "../../Monster/Monster.h"
+#include "../../Monster/BossMonster.h"
+
 GameManager::GameManager() : IsRunning(true) , Character(nullptr)
-{
-}
+{}
 
 GameManager::~GameManager()
 {
@@ -18,9 +21,19 @@ GameManager::~GameManager()
 
 bool GameManager::Init()
 {
-	SceneManager::getInstance().Add_Scene(new StartScene()); // 초기화면
+	// 씬 매니저 초기화면
+	SceneManager::getInstance().Add_Scene(new StartScene()); 
 
-	if ( DebugKey ) std::cout << "GameManager: Init 완료" << '\n';
+	// 스테이지별 몬스터 세팅
+	// 0. 수능(튜토리얼보스) / 1. c언어(normal) / 2. c++(normal) / 3. graphics(normal) / 4. unreal(normal) / 5. 취업(최종보스)
+	MonsterQueue.push(new BossMonster({ "수능", 10, 1, 200 }));       
+	MonsterQueue.push(new NormalMonster({ "C언어", 10, 1, 200 }));      
+	MonsterQueue.push(new NormalMonster({ "C++", 10, 1, 200 }));        
+	MonsterQueue.push(new NormalMonster({ "Graphics", 10, 1, 200 }));   
+	MonsterQueue.push(new NormalMonster({ "Unreal", 10, 1, 200 }));    
+	MonsterQueue.push(new BossMonster({ "취업", 10, 1, 1000 }));    
+
+	if ( DebugKey ) std::cout << "[GameManager] Init 완료" << '\n';
 	return true;
 
 }
@@ -32,12 +45,9 @@ void GameManager::Run()
 	// 메인 게임 루프: 종료 조건이 만족될 때까지 반복
 	while (IsRunning)
 	{
-		if ( DebugKey ) std::cout << "GameManager: Update 진입" << '\n';
+		if ( DebugKey ) std::cout << "[GameManager] Update 진입" << '\n';
 		Render();
 		Update();
-
-		// 임시 루프 종료 조건 (테스트용)
-		// 실제로는 종료 화면이나 ESC 입력 시 IsRunning = false; 처리
 	}
 
 	Release();
@@ -45,35 +55,35 @@ void GameManager::Run()
 
 void GameManager::Update()
 {
-	// 1. SceneManager를 통해 현재 씬의 로직 업데이트
 	SceneManager::getInstance().Update();
-	if ( DebugKey ) std::cout << "GameManager: Update 완료" << '\n';
-	// 2. 특정 조건(예: HP <= 0) 시 게임 오버 처리 등 공통 로직
+	if ( DebugKey ) std::cout << "[GameManager] Update 완료" << '\n';
 }
 
 void GameManager::Render()
 {
-	// 콘솔 화면 클리어 및 현재 씬 그리기
 	system("cls");
 	SceneManager::getInstance().Render();
-	if ( DebugKey ) std::cout << "GameManager: Render 완료" << '\n';
+	if ( DebugKey ) std::cout << "[GameManager] Render 완료" << '\n';
 }
 
 void GameManager::Exit()
 {
-	// ESC 누르면 호출
-	// 현재 씬 일시정지
-	//SceneManager::getInstance().Replace_Scene()
-	if ( DebugKey ) std::cout << "GameManager: Exit 완료" << '\n';
+	if ( DebugKey ) std::cout << "[GameManager] Exit 완료" << '\n';
 }
 
 void GameManager::Release()
 {
 	SceneManager::getInstance().SceneStack_Clear();
-    
-	if ( DebugKey ) std::cout << "[INFO] 시스템이 안전하게 종료되었습니다." << '\n';
-}
 
+    // 큐 메모리 해제
+	while (!MonsterQueue.empty())
+	{
+		delete MonsterQueue.front();
+		MonsterQueue.pop();
+	}
+    
+	if ( DebugKey ) std::cout << "[GameManager] 시스템이 안전하게 종료되었습니다." << '\n';
+}
 
 void GameManager::SetPlayer(std::string& Name)
 {
@@ -87,4 +97,18 @@ void GameManager::SetPlayer(std::string& Name)
 Player* GameManager::GetPlayer()
 {
 	return Character;
+}
+
+Monster* GameManager::ManageMonster()
+{
+	// 큐가 비어있지 않다면 가장 앞의 몬스터를 반환하고, 큐에서 pop
+	if (!MonsterQueue.empty())
+	{
+		Monster* currentMonster = MonsterQueue.front();
+		MonsterQueue.pop();
+		return currentMonster;
+	}
+
+	// 몬스터가 더 이상 없으면 nullptr 반환 **예외처리 해주세요.**
+	return nullptr;
 }

@@ -84,7 +84,7 @@ void GameManager::SetPlayer(std::string& Name)
 	Character = new Player(Name);
 }
 
-Player& GameManager::GetPlayer()
+Player* GameManager::GetPlayer()
 {
-	return *Character;
+	return Character;
 }

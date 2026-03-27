@@ -1,7 +1,7 @@
 ﻿// 캐릭터 생성 화면.h
 
 #pragma once
-#include "Scene.h"
+#include "../../Scene/Scene.h"
 
 // 실제 시작 화면 (자식 클래스)
 class CharacterChoice : public Scene {

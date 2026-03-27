@@ -1,0 +1,15 @@
+﻿# =====================================================================
+# [ 아이템 데이터 추가 가이드 ]
+# 1. Key : C++ 코드에서 호출할 고유 영어 이름 (띄어쓰기 대신 '_' 사용, ItemKeys.h와 동일해야 합니다.)
+# 2. Name : 인게임 화면에 출력될 한국어 이름
+# 3. Rank : Common, Rare, Epic, Legendary 중 택 1(임시로 한 등급 리스트로, 변경될 수 있습니다.), 등급에 따라 효과가 달라집니다.
+# 4. Target_Stat : HP, Stamina, Attack 중 택 1 (임시로 한 스탯 리스트로, 변경될 수 있습니다.), 회복/피해를 줄 스을 지정합니다.
+# 5. Basic_Amount : 회복/피해 수치 (정수만 입력, 등급에 따른 수치 증가는 고려하지 않습니다.)
+# 6. Is_Damage : 적에게 데미지를 주면 1, 내가 회복/버프를 받으면 0
+# =====================================================================
+
+# key,name,rank,target_stat,basic_amount,is_damage
+Health_Potion_Common,Health_Potion_Common,Common,HP,10,0
+Health_Potion_Rare,Health_Potion_Rare,Rare,HP,10,0
+Stamina_Potion_Common,Stamina_Potion_Common,Common,Stamina,10,0
+Stamina_Potion_Rare,Stamina_Potion_Rare,Rare,Stamina,10,0

@@ -9,6 +9,8 @@
 #include <string>
 #include <cstdlib> // system의 cls, pause 사용하기 위해 추가
 
+#include "Manager/GameManager/GameManager.h"
+
 // 초기화 함수(1회 실행)
 void CharacterChoice::Init() {
 	// 씬 진입 시 변수 초기화 및 추가할 변수 작성
@@ -89,12 +91,13 @@ void CharacterChoice::Update() {
 
 	// 입력받은 이름 전달
 	Player newPlayer(name);
+	GameManager::getInstance().SetPlayer(name); // GameManager용 플레이어 정보 설정
 
 	// 입력 받은 정보 출력
 	std::cout << "============================================================\n";
 	std::cout << "                  캐릭터 생성이 완료되었습니다.                 \n";
 	std::cout << "============================================================\n";
-	std::cout << " [ 닉네임 ] : " << newPlayer.Getstat().name << "\n";
+	std::cout << " [ 닉네임 ] : " << GameManager::getInstance().GetPlayer().Getstat().name << "\n"; // GameManager용 출력
 	std::cout << " [ Lv ] : " << newPlayer.Getstat().Level << "\n";
 	std::cout << " [ 체력 ] : " << newPlayer.Getstat().HP << "\n";
 	std::cout << " [ 스테미나 ] : " << newPlayer.Getstat().Stamina << "\n";

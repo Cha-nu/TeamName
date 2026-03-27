@@ -1,12 +1,14 @@
 ﻿#include "GameManager.h"
+
+#include <iostream>
+
 #include "../../Player/Player.h"
 #include "../SceneManager/SceneManager.h"
 #include "../../Scene/Scene.h"
 #include "../../Scene_M/StartScene/StartScene.h"
 
-GameManager::GameManager() : IsRunning(true), m_pPlayer(nullptr)
+GameManager::GameManager() : IsRunning(true) , Character(nullptr)
 {
-
 }
 
 GameManager::~GameManager()
@@ -36,7 +38,6 @@ void GameManager::Run()
 
 		// 임시 루프 종료 조건 (테스트용)
 		// 실제로는 종료 화면이나 ESC 입력 시 IsRunning = false; 처리
-		IsRunning = false;
 	}
 
 	Release();
@@ -60,15 +61,30 @@ void GameManager::Render()
 
 void GameManager::Exit()
 {
+	// ESC 누르면 호출
+	// 현재 씬 일시정지
+	//SceneManager::getInstance().Replace_Scene()
+	if ( DebugKey ) std::cout << "GameManager: Exit 완료" << '\n';
 }
 
 void GameManager::Release()
 {
 	SceneManager::getInstance().SceneStack_Clear();
     
-	std::cout << "[INFO] 시스템이 안전하게 종료되었습니다." << '\n';
+	if ( DebugKey ) std::cout << "[INFO] 시스템이 안전하게 종료되었습니다." << '\n';
 }
 
-void GameManager::CreatePlayer()
+
+void GameManager::SetPlayer(std::string& Name)
 {
+	if (Character)
+	{
+		delete Character; // 기존 플레이어 메모리 해제
+	}
+	Character = new Player(Name);
+}
+
+Player& GameManager::GetPlayer()
+{
+	return *Character;
 }

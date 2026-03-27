@@ -2,11 +2,15 @@
 #include <string>
 #include <functional>
 #include "PlayerTypes.h"
+//Define
 #define MAX_EXP 100
+#define MAX_LEVEL 10
 
+//전방선언
 class Inventory;
 class Monster;
 
+// 플레이어 스탯 구조체
 struct FPlayerStat{
     float HP = 200.f; // PlayerHP
     unsigned int Stamina = 0; // PlayerStamina
@@ -16,6 +20,8 @@ struct FPlayerStat{
     std::string name = "None"; // PlayerName
     std::string Gender = "Male"; // PlayerGender
 };
+
+// 플레이어 인터페이스
 class IPlayer{
 public:
     virtual void InitializeStat(float _hp, std::string _name, float _atkdamage,int _level,int _stamina = 0) = 0;
@@ -42,6 +48,9 @@ public:
     void ApplyDamage(int _damage) override;
 	/*****Utility*****/
 	_forceinline Inventory* GetInventory() const {return PlayerInventory;}
+	// DebugFunc
+	// 플레이어 모든 스탯 출력용 디버그 함수입니다.
+	void ShowPlayerStat();
     
 private:
     FPlayerStat Playerstat;

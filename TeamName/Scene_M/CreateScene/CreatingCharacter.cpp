@@ -12,13 +12,13 @@
 // 초기화 함수(1회 실행)
 void CharacterChoice::Init() {
 	// 씬 진입 시 변수 초기화 및 추가할 변수 작성
+
+	// 콘솔 깨끗히 지우기
+	system("cls");
 }
 
 // 화면 출력
 void CharacterChoice::Render() {
-	// 콘솔 깨끗히 지우기
-	system("cls");
-
 	// 아스키 아트
 	std::string CharacterCreate = R"(
            << 캐릭터 생성 >>

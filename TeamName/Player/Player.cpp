@@ -30,6 +30,7 @@ Player::Player(std::string name, EPlayerStatus _playerstatus){
 }
 
 Player::~Player(){
+	delete PlayerInventory();
 	PlayerInventory = nullptr;
 }
 

@@ -1,7 +1,7 @@
 ﻿// 시작 화면.cpp
 
 #include "StartScene.h"
-#include "../../Manager/SceneManager/SceneManager.h" // Scene 매니저
+#include "Manager/SceneManager/SceneManager.h" // Scene 매니저
 #include "Scene_M/CreateScene/CreatingCharacter.h" // 씬 전환을 위해 추가
 
 #include <iostream>
@@ -42,6 +42,7 @@ void StartScene::Render() {
 	Start_gotoxy(40 , 14); std::cout << "=========================================";
 
 	// 2. 선택지 고정 출력
+	Start_gotoxy(39 , 16); std::cout << "[이동: 방향키 | 상호작용: SPACE바, Enter키]";
 	Start_gotoxy(53 , 18); std::cout << "* 게임 시작";
 	Start_gotoxy(53 , 20); std::cout << "* 게임 나가기";
 
@@ -70,7 +71,7 @@ void StartScene::Update() {
 	}
 
 	// 스페이스바(VK_SPACE) 또는 엔터(VK_RETURN) 누름
-	if ((GetAsyncKeyState(VK_SPACE) & 0x8000) || (GetAsyncKeyState(VK_RETURN) & 0x8000)) {
+	if ((GetAsyncKeyState(VK_SPACE) & 0x8000) || GetAsyncKeyState(VK_RETURN) & 0x8000) {
 		system("cls");
 
 		if (currentIndex == 0) {
@@ -93,7 +94,7 @@ void StartScene::Update() {
 	}
 
 	// 너무 빠른 중복 입력 방지 및 CPU 점유율 안정화를 위한 딜레이
-	Sleep(30);
+	Sleep(20);
 }
 
 // 종료 함수

@@ -1,6 +1,7 @@
 ﻿#include "GameManager.h"
 
 #include <iostream>
+#include"ConsoleHelper.h"//여기에 windows.h 이미 선언되어있습니다.
 
 #include "../../Player/Player.h"
 #include "../SceneManager/SceneManager.h"
@@ -25,6 +26,9 @@ bool GameManager::Init()
 	SceneManager::getInstance().Add_Scene(new StartScene()); 
 
 	CurrentMonster = new BossMonster({ "수능", 10, 1, 120 });       
+
+
+	void DisableQuickEdit();//마우스 클릭해도 화면이 안멈추게 하는 함수
 
 	if ( DebugKey ) std::cout << "[GameManager] Init 완료" << '\n';
 	return true;

@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ConsoleHelper.cpp" />
     <ClCompile Include="Inventory\Inventory.cpp" />
     <ClCompile Include="Inventory\Item\ConsumableItem.cpp" />
     <ClCompile Include="Inventory\Item\ItemBase.cpp" />
@@ -224,6 +225,7 @@
     <ClCompile Include="TestScene\Test_MainScene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ConsoleHelper.h" />
     <ClInclude Include="Data\ItemKey.h" />
     <ClInclude Include="Inventory\Inventory.h" />
     <ClInclude Include="Inventory\Item\ConsumableItem.h" />

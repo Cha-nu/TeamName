@@ -3,6 +3,9 @@
 #include "../Manager/SceneManager/SceneManager.h"
 #include<iostream>
 #include<Windows.h>
+
+#include "Manager/GameManager/GameManager.h"
+
 void BattleScene::Init()
 {
 	system("cls");

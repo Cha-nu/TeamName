@@ -15,10 +15,19 @@ struct FPlayerStat{
     float HP = 200.f; // PlayerHP
     unsigned int Stamina = 0; // PlayerStamina
 	float Atk_Damage = 30; // Player Attack Damage
+	const float MaxAtk_Damage = 30.f;
 	unsigned int Level = 1; // PlayerLevel
 	unsigned short EXP = 0; // PlayerEXP
     std::string name = "None"; // PlayerName
     std::string Gender = "Male"; // PlayerGender
+};
+
+struct FPlayerMaxStat
+{
+	friend class Player;
+private:
+	float MaxHP = 200.f;
+	float MaxAtk_Damage = 30.f;
 };
 
 // 플레이어 인터페이스
@@ -59,7 +68,9 @@ public:
 	void ShowPlayerStat();
     
 private:
+	void LevelUp();
     FPlayerStat Playerstat;
+	FPlayerMaxStat PlayerMaxstat;
 	Inventory* PlayerInventory;
 	bool bIsDead = false;
 };

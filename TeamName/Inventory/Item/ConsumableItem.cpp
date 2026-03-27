@@ -1,24 +1,24 @@
-#include <unordered_map>
+ï»¿#include <unordered_map>
 #include "ConsumableItem.h"
 
 ConsumableItem::ConsumableItem(const std::string& name, ItemRank rank, ItemID id, TargetStat stat, int amount, bool isDamage)
 	: ItemBase(name, rank, id), m_targetStat(stat), m_amount(amount), m_isDamage(isDamage)
 {
 	static const std::unordered_map<TargetStat, std::string> StatNames = {
-		{ TargetStat::HP, "Ã¼·Â" },
-		{ TargetStat::MP, "¸¶³ª" },
-		{ TargetStat::Attack, "°ø°İ·Â" },
-		{ TargetStat::Defense, "¹æ¾î·Â" },
-		{ TargetStat::Intelligence, "Áö´É" }
+		{ TargetStat::HP, "ì²´ë ¥" },
+		{ TargetStat::MP, "ë§ˆë‚˜" },
+		{ TargetStat::Attack, "ê³µê²©ë ¥" },
+		{ TargetStat::Defense, "ë°©ì–´ë ¥" },
+		{ TargetStat::Intelligence, "ì§€ëŠ¥" }
 	};
 
 	if (m_isDamage)
 	{
-		m_description = "ÀÌ ¾ÆÀÌÅÛÀº ¸ó½ºÅÍ¿¡°Ô" + std::to_string(m_amount * static_cast<int>(m_rank)) + "ÀÇ ÇÇÇØ¸¦ ÀÔÈü´Ï´Ù.";
+		m_description = "ì´ ì•„ì´í…œì€ ëª¬ìŠ¤í„°ì—ê²Œ" + std::to_string(m_amount * static_cast<int>(m_rank)) + "ì˜ í”¼í•´ë¥¼ ì…í™ë‹ˆë‹¤.";
 	}
 	else
 	{
-		m_description = "ÀÌ ¾ÆÀÌÅÛÀº " + StatNames.at(m_targetStat) + "À» " + std::to_string(m_amount * static_cast<int>(m_rank)) + "¸¸Å­ È¸º¹ÇÕ´Ï´Ù.";
+		m_description = "ì´ ì•„ì´í…œì€ " + StatNames.at(m_targetStat) + "ì„ " + std::to_string(m_amount * static_cast<int>(m_rank)) + "ë§Œí¼ íšŒë³µí•©ë‹ˆë‹¤.";
 	}
 }
 
@@ -31,6 +31,6 @@ ConsumableItem::~ConsumableItem()
 /*
 ConsumableItem::Use()
 {
-	// Ä³¸¯ÅÍÀÇ Á¤º¸¸¦ °¡Á®¿Í¼­ m_targetStat¿¡ µû¶ó Ã¼·Â, ¸¶³ª µîÀ» È¸º¹ÇÏ´Â ·ÎÁ÷À» ±¸Çö ÇÊ¿ä
+// ìºë¦­í„°ì˜ ì •ë³´ë¥¼ ê°€ì ¸ì™€ì„œ m_targetStatì— ë”°ë¼ ì²´ë ¥, ë§ˆë‚˜ ë“±ì„ íšŒë³µí•˜ëŠ” ë¡œì§ì„ êµ¬í˜„ í•„ìš”
 }
 */

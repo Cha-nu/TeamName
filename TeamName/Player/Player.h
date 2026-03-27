@@ -48,6 +48,7 @@ public:
     void ApplyDamage(int _damage) override;
 	/*****Utility*****/
 	_forceinline Inventory* GetInventory() const {return PlayerInventory;}
+	void P_UseItem(int _index);
 	// DebugFunc
 	// 플레이어 모든 스탯 출력용 디버그 함수입니다.
 	void ShowPlayerStat();

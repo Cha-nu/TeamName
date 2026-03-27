@@ -1,6 +1,7 @@
 ﻿#include "Player.h"
 #include "../Monster/Monster.h"
 #include "Inventory/Inventory.h"
+#include "Inventory/Item/ItemBase.h"
 #include <iostream>
 
 
@@ -72,6 +73,15 @@ void Player::ApplyDamage(int _damage){
 	//	// 파라미터로 Player& player를 받고 람다나 std::bind로 실행할 함수주소를 넘겨주시면 될것같습니다.
 	//	OnDead();
 	//}
+}
+
+void Player::P_UseItem(int _index){
+	ItemSlot CurrentSlot = PlayerInventory->getItem(_index);
+	
+	if (!CurrentSlot.IsEmpty() && CurrentSlot.GetCount() > 0){
+		CurrentSlot.GetItem()->Use(CurrentSlot.GetItem()->GetName());
+		PlayerInventory->RemoveItem(CurrentSlot.GetItem()->GetID());
+	}
 }
 
 // Player의 스탯확인용 디버깅 함수

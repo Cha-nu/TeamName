@@ -1,7 +1,7 @@
 ﻿// 게임 실행 파일입니다.
 
 #include <iostream>
-#include <windows.h> // 콘솔 창 제어를 위한 헤더 추가
+#include <windows.h>
 #include "Manager/GameManager/GameManager.h"
 #include "Manager/SceneManager/SceneManager.h"
 #include "TestScene\Test_Lobby.h"

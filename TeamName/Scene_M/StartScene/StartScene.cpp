@@ -1,7 +1,7 @@
 ﻿// 시작 화면.cpp
 
 #include "StartScene.h"
-#include "Manager/SceneManager/SceneManager.h" // Scene 매니저
+#include "../../Manager/SceneManager/SceneManager.h" // Scene 매니저
 #include "Scene_M/CreateScene/CreatingCharacter.h" // 씬 전환을 위해 추가
 
 #include <iostream>
@@ -11,13 +11,13 @@
 // 초기화 함수(1회 실행)
 void StartScene::Init() {
 	// 씬 진입 시 변수 초기화 및 추가할 변수 작성
+
+	// 콘솔 화면을 깨끗히 지우기
+	system("cls");
 }
 
 // 화면 출력
 void StartScene::Render() {
-	// 콘솔 화면을 깨끗히 지우기
-	system("cls");
-
 	// 게임 타이틀 (아스키 아트)
 	std::string title = R"(
 ,,-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

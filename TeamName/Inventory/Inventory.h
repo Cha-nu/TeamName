@@ -21,7 +21,7 @@ public:
 	ItemSlot(const ItemBase* item, int count) : m_item(item), m_count(count) {}
 
 	void AddCount(int amount) { m_count += amount; }
-	void RemoveCount(int amount = 1) { m_count = (std::max(0, m_count - amount)); }
+	void RemoveCount(int amount = 1) { m_count = (std::max)(0, m_count - amount); }
 
 	const ItemBase* GetItem() const { return m_item; }
 	int GetCount() const { return m_count; }

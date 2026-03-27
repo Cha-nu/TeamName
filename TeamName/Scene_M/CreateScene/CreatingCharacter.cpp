@@ -69,7 +69,7 @@ void CharacterChoice::Update() {
 	std::cin.ignore(INT_MAX , '\n');
 	// 플레이어 이름 입력 받기 (위치는 중앙으로 설정)
 	Create_gotoxy(40, 29);  std::cout << ">> 닉네임을 입력하세요: ";
-	std::cin >> name;
+	Create_gotoxy(64 , 29); std::cin >> name;
 
 	// 입력받은 이름 전달
 	// Player newPlayer(name);

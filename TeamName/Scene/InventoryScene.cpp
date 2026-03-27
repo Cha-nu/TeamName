@@ -2,7 +2,7 @@
 #include"BattleScene.h"
 #include "../Manager/SceneManager/SceneManager.h"
 #include"Manager/GameManager/GameManager.h"
-#include"Inventory\Inventory.h"
+#include"Inventory/Inventory.h"
 #include"Player/Player.h"
 #include<iostream>
 #include<iomanip>

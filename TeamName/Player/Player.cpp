@@ -24,12 +24,12 @@ Player::Player(std::string name, EPlayerStatus _playerstatus){
 		Playerstat.Atk_Damage =Playerstat.Atk_Damage * divisionvalue;
 		break;
 	}
-	
 	Playerstat.name = name;
 	PlayerInventory = new Inventory();
 }
 
 Player::~Player(){
+	delete PlayerInventory;
 	PlayerInventory = nullptr;
 }
 
@@ -41,25 +41,13 @@ void Player::InitializeStat(float _hp, std::string _name, float _atkdamage, int 
 	Playerstat.Stamina = _stamina;
 }
 
-
 void Player::AcquireEXP(int _exp)
 {
 	// if EXP amount over 100
 	// EXP set zero
 	// Level Plus 1
 	Playerstat.EXP += _exp;
-	if (Playerstat.EXP >= 100){
-		Playerstat.EXP -= MAX_EXP;
-		if (Playerstat.Level < MAX_LEVEL){
-			for (int i = 0; i < Playerstat.EXP / 100; i++){
-				Playerstat.Level++;
-			}
-		}
-		else{
-			std::cout<< "Player already maxLevel" << std::endl;
-		}
-	}
-	Playerstat.EXP = 0;
+	LevelUp();
 }
 
 void Player::Attack(Monster* _monster){
@@ -71,6 +59,12 @@ void Player::Attack(Monster* _monster){
 
 void Player::ApplyDamage(int _damage){
     Playerstat.HP -= _damage;
+	
+	// 임시로 bool값으로 캐릭터의 사망여부를 판단
+	if (Playerstat.HP <= 0)
+	{
+		bIsDead = true;
+	}
 	
 	//if (Playerstat.HP <= 0){
 	//	// 게임매니저 클래스에서 초기화나 캐릭터 생성 함수에서
@@ -94,4 +88,28 @@ void Player::ShowPlayerStat(){
 	std::cout << "Player Atk_damage: " << Playerstat.Atk_Damage << "\n";
 	std::cout << "Player Level: " << Playerstat.Level << "\n";
 	std::cout << "Player Stamina: " << Playerstat.Stamina << "\n";
+}
+
+void Player::LevelUp()
+{
+	int count = Playerstat.EXP / MAX_EXP;
+	int reamin = Playerstat.EXP % MAX_EXP;
+	
+	if (reamin == 0)
+	{
+		Playerstat.Level += count;
+		Playerstat.EXP = 0;
+	}
+	else
+	{
+		Playerstat.Level += count;
+		Playerstat.EXP = reamin;
+	}
+	
+	PlayerMaxstat.MaxHP += Playerstat.Level * 20;
+	PlayerMaxstat.MaxAtk_Damage += Playerstat.Level * 5;
+	
+	Playerstat.HP = PlayerMaxstat.MaxHP;
+	Playerstat.Atk_Damage = PlayerMaxstat.MaxAtk_Damage;
+
 }

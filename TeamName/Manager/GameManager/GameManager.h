@@ -14,6 +14,7 @@ private:
     bool DebugKey = false; // 디버그용 
     bool IsRunning;      // 게임 실행 루프 제어 플래그
 	Player* Character;
+	std::string Character_UseItem_Name = "";
 
 	// 0. 수능(튜토리얼보스) / 1. c언어(normal) / 2. c++(normal) / 3. graphics(normal) / 4. unreal(normal) / 5. 취업(최종보스)
 	std::vector<std::string> MonsterName = {"c언어", "c++", "graphics", "unreal"}; // 몬스터 이름 리스트
@@ -56,6 +57,8 @@ public:
     // 플레이어
 	void SetPlayer(std::string& name);
 	Player* GetPlayer();
+	void Set_UseItem_Name(std::string UseItemName);
+	std::string Get_UseItem_Name();
 
 	// 몬스터 
 	Monster* GetMonster() const;

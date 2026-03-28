@@ -99,6 +99,16 @@ Player* GameManager::GetPlayer()
 	return Character;
 }
 
+void GameManager::Set_UseItem_Name(std::string UseItemName)
+{
+	this->Character_UseItem_Name = UseItemName;
+}
+
+std::string GameManager::Get_UseItem_Name()
+{
+	return this->Character_UseItem_Name;
+}
+
 Monster* GameManager::GetMonster() const
 {
 	return CurrentMonster;

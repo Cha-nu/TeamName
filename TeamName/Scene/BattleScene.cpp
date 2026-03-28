@@ -15,6 +15,7 @@
 void BattleScene::Init()
 {
 	system("cls");
+	SetCursorVisible(true);
 	std::cin.clear(); // 입력 버퍼 초기화
 	player = GameManager::getInstance().GetPlayer();
 
@@ -24,10 +25,7 @@ void BattleScene::Init()
 	
 
 	// 이전 씬에서 누른 엔터/스페이스바를 뗄 때까지 무한 대기 (잔상 방지)
-	while ( (GetAsyncKeyState(VK_RETURN) & 0x8000) || (GetAsyncKeyState(VK_SPACE) & 0x8000) )
-	{
-		Sleep(10);
-	}
+	WaitUntilKeyUp_Enter_Space();
 	
 }
 
@@ -148,19 +146,28 @@ void BattleScene::Render()
 		Console_gotoxy(textX , 16); std::cout << "의지가 나약한 자여...";
 		Console_gotoxy(textX , 17); std::cout << "도망치다 몬스터에게 당했습니다.  ▶ (Enter)";
 	}
+	else if ( battleState == 7 ) //아이템 사용 텍스트 출력 
+	{
+		Console_gotoxy(textX , 16); std::cout << "플레이어는 [" << GameManager::getInstance().Get_UseItem_Name() << "] 을(를) 사용했다";
+		Console_gotoxy(textX , 17); std::cout << "  ▶ (Enter)";
+	}
 }
 
 void BattleScene::Update()
 {
-	isEnterPressed = false;
+	isKeyPressed = false;
 	if ( (GetAsyncKeyState(VK_SPACE) & 0x8000) || (GetAsyncKeyState(VK_RETURN) & 0x8000) )
 	{
-		isEnterPressed = true;
-		while ( (GetAsyncKeyState(VK_RETURN) & 0x8000) || (GetAsyncKeyState(VK_SPACE) & 0x8000) ) { Sleep(10); }
+		isKeyPressed = true;
+		WaitUntilKeyUp_Enter_Space();
 	}
 
+	if ( battleState == 0 && GameManager::getInstance().Get_UseItem_Name() != "" )//만약 아이템을 사용하고 왔다면
+	{
+		battleState = 7;
+	}
 
-	if ( battleState == 0 )
+	if ( battleState == 0 )//Battle Scene에서 무슨 행동을 할 지 처리하는 부분 (선택지)
 	{
 		// 방향키 이동 (메뉴에서만 작동)
 		if ( GetAsyncKeyState(VK_UP) & 0x8000 ) 
@@ -209,14 +216,11 @@ void BattleScene::Update()
 		}
 
 		// 선택지 결정
-		if ( isEnterPressed )
+		if ( isKeyPressed )
 		{
 			if ( currentIndex == 0 ) 
 			{
-				// 공격 
-				int beforeHp = monster->getHealth();
 				player->Attack(monster);
-				//lastDamage = beforeHp - monster->getHealth(); // 입힌 데미지 저장
 				battleState = 1; // 내 공격 텍스트 출력 상태로!
 			}
 			else if ( currentIndex == 1 ) {
@@ -233,9 +237,9 @@ void BattleScene::Update()
 			}
 		}
 	}
-	else if ( battleState == 1 ) 
-	{ // 내 공격 후 대기
-		if ( isEnterPressed ) 
+	else if ( battleState == 1 ) //몬스터 공격 텍스트 출력
+	{
+		if ( isKeyPressed )
 		{
 			if ( monster->isDead() ) 
 			{
@@ -244,22 +248,21 @@ void BattleScene::Update()
 			else 
 			{
 				// 몬스터 살아있으면 반격
-				int beforeHp = player->Getstat().HP;
 				monster->attackPlayer(player);
 				battleState = 3; // 몬스터 공격 텍스트 출력 상태로!
 			}
 		}
 	}
-	else if ( battleState == 2 ) 
-	{ // 승리 텍스트 후
-		if ( isEnterPressed ) 
+	else if ( battleState == 2 ) // 승리 텍스트 후
+	{ 
+		if ( isKeyPressed )
 		{
 			SceneManager::getInstance().Return_Scene(); // 메인으로
 		} 
 	}
-	else if ( battleState == 3 ) 
-	{ // 몬스터 공격 후 대기
-		if ( isEnterPressed ) 
+	else if ( battleState == 3 ) // 몬스터 공격 후 처리
+	{ 
+		if ( isKeyPressed )
 		{
 			if ( player->Getstat().HP <= 0 ) 
 			{
@@ -267,28 +270,44 @@ void BattleScene::Update()
 			}
 			else 
 			{
-				battleState = 0; // 살았으니 다시 내 턴 메뉴로!
+				battleState = 0; // 살았으니 다시 내 턴 (선택지로 돌아가기)
 			}
 		}
 	}
-	else if ( battleState == 4 ) 
-	{ // 패배 텍스트 후
-		if ( isEnterPressed ) 
+	else if ( battleState == 4 ) // 플레이어가 죽으면 처리하는 로직 
+	{ 
+		if ( isKeyPressed )
 		{
 			SceneManager::getInstance().Replace_Scene(new GameOverScene());
 		} 
 	}
 	else if ( battleState == 5 ) // 스탯창 열려있을 때
 	{ 
-		if ( isEnterPressed ) 
+		if ( isKeyPressed )
 		{
-			ClearStatBox(); // 스탯창 없앰
+			ClearStatBox(); // 스탯창 삭제
 			battleState = 0; // 다시 메뉴 상태로 돌아감
 		}
 	}
-	else if ( battleState == 6 ) // 도망 텍스트 후
+	else if ( battleState == 6 ) // 도망간다 선택하면 처리하는 롲기 
 	{ 
-		if ( isEnterPressed ) SceneManager::getInstance().Replace_Scene(new GameOverScene());
+		if ( isKeyPressed ) SceneManager::getInstance().Replace_Scene(new GameOverScene());
+	}
+	else if ( battleState == 7 ) //아이템 사용 후 몬스터한테 턴 넘어가는 로직=
+	{
+		if ( isKeyPressed ) 
+		{
+			if ( monster->isDead() )
+			{
+				battleState = 2; // 승리!
+			}
+			else
+			{
+				// 몬스터 살아있으면 반격
+				monster->attackPlayer(player);
+				battleState = 3; // 몬스터 공격 텍스트 출력 상태로!
+			}
+		}
 	}
 
 	Sleep(50);

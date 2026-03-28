@@ -14,7 +14,7 @@ private:
 	int battleState = 0;
 	int textX = 14;//텍스트 위치
 	int statX = 85;//스택창 위치
-	bool isEnterPressed = false;//
+	bool isKeyPressed = false;//
 	void ClearTextBox();//텍스트 삭제하는 부분
 	void ClearMenuArrows();//텍스트 나올 때 화살표 사라지게 해서 선택이 안되게
 	void ClearStatBox();//능력치 팝업창 삭제

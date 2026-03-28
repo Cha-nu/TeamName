@@ -29,33 +29,33 @@ void StartScene::Init() {
 // 화면 출력
 void StartScene::Render() {
 	// 1. 타이틀 고정 출력 (콘솔 중앙쯤 위치하도록 좌표 설정)
-	Start_gotoxy(30 , 5); std::cout << " _   __                                   ______ ______  _____ ";
-	Start_gotoxy(30 , 6); std::cout << "| | / /                                   | ___ \\| ___ \\|  __ \\";
-	Start_gotoxy(30 , 7); std::cout << "| |/ /   ______   _ __ ___    ___  _ __   | |_/ /| |_/ /| |  \\/";
-	Start_gotoxy(30 , 8); std::cout << "|    \\  |______| | '_ ` _ \\  / _ \\| '_ \\  |    / |  __/ | | __ ";
-	Start_gotoxy(30 , 9); std::cout << "| |\\  \\          | | | | | ||  __/| | | | | |\\ \\ | |    | |_\\ \\";
-	Start_gotoxy(30 , 10); std::cout << "\\_| \\_/          |_| |_| |_| \\___||_| |_| \\_| \\_|\\_|    \\_____/";
+	Start_gotoxy(30, 5); std::cout << " _   __                                   ______ ______  _____ ";
+	Start_gotoxy(30, 6); std::cout << "| | / /                                   | ___ \\| ___ \\|  __ \\";
+	Start_gotoxy(30, 7); std::cout << "| |/ /   ______   _ __ ___    ___  _ __   | |_/ /| |_/ /| |  \\/";
+	Start_gotoxy(30, 8); std::cout << "|    \\  |______| | '_ ` _ \\  / _ \\| '_ \\  |    / |  __/ | | __ ";
+	Start_gotoxy(30, 9); std::cout << "| |\\  \\          | | | | | ||  __/| | | | | |\\ \\ | |    | |_\\ \\";
+	Start_gotoxy(30, 10); std::cout << "\\_| \\_/          |_| |_| |_| \\___||_| |_| \\_| \\_|\\_|    \\_____/";
 
 
-	Start_gotoxy(40 , 12); std::cout << "=========================================";
-	Start_gotoxy(40 , 13); std::cout << "             [ 한국 남자 RPG ]            ";
-	Start_gotoxy(40 , 14); std::cout << "=========================================";
+	Start_gotoxy(40, 12); std::cout << "=========================================";
+	Start_gotoxy(40, 13); std::cout << "             [ 한국 남자 RPG ]            ";
+	Start_gotoxy(40, 14); std::cout << "=========================================";
 
 	// 2. 선택지 고정 출력
-	Start_gotoxy(39 , 16); std::cout << "[이동: 방향키 | 상호작용: SPACE바, Enter키]";
-	Start_gotoxy(53 , 18); std::cout << "* 게임 시작";
-	Start_gotoxy(53 , 20); std::cout << "* 게임 나가기";
+	Start_gotoxy(39, 16); std::cout << "[이동: 방향키 | 상호작용: SPACE바, Enter키]";
+	Start_gotoxy(53, 18); std::cout << "* 게임 시작";
+	Start_gotoxy(53, 20); std::cout << "* 게임 나가기";
 
 	// 3. 화살표 그리기 (기존 위치는 지우고 새 위치에 그리기)
-	Start_gotoxy(48 , 18); std::cout << "   "; // 1번 앞 공백으로 지우기
-	Start_gotoxy(48 , 20); std::cout << "   "; // 2번 앞 공백으로 지우기
+	Start_gotoxy(50, 18); std::cout << " "; // 1번 앞 공백으로 지우기
+	Start_gotoxy(50, 20); std::cout << " "; // 2번 앞 공백으로 지우기
 
 	// 3-1. 화살표 그리기 (공백으로 지운 위치에 화살표 출력)
 	if ( currentIndex == 0 ) {
-		Start_gotoxy(48 , 18); std::cout << "->"; // 1번 위치에 화살표
+		Start_gotoxy(50, 18); std::cout << "▶"; // 1번 위치에 화살표
 	}
 	else {
-		Start_gotoxy(48 , 20); std::cout << "->"; // 2번 위치에 화살표
+		Start_gotoxy(50, 20); std::cout << "▶"; // 2번 위치에 화살표
 	}
 }
 
@@ -75,9 +75,9 @@ void StartScene::Update() {
 		system("cls");
 
 		if (currentIndex == 0) {
-			Start_gotoxy(40 , 10); std::cout << "=========================================";
-			Start_gotoxy(40 , 11); std::cout << "       한국 남자의 세계로 들어갑니다...      ";
-			Start_gotoxy(40 , 12); std::cout << "=========================================";
+			Start_gotoxy(40, 10); std::cout << "=========================================";
+			Start_gotoxy(40, 11); std::cout << "       한국 남자의 세계로 들어갑니다...      ";
+			Start_gotoxy(40, 12); std::cout << "=========================================";
 			Sleep(1500); // 1.5초 대기 후 진행
 
 			// 생성 화면(CreateScene)으로 이동
@@ -85,9 +85,9 @@ void StartScene::Update() {
 			return; // 씬이 교체되었으므로 Update 종료
 		}
 		else if (currentIndex == 1) {
-			Start_gotoxy(40 , 10); std::cout << "=========================================";
-			Start_gotoxy(40 , 11); std::cout << "            현실로 돌아갑니다...           ";
-			Start_gotoxy(40 , 12); std::cout << "=========================================";
+			Start_gotoxy(40, 10); std::cout << "=========================================";
+			Start_gotoxy(40, 11); std::cout << "            현실로 돌아갑니다...           ";
+			Start_gotoxy(40, 12); std::cout << "=========================================";
 			Sleep(1000); // 1초 대기 후 진행
 			exit(0);
 		}

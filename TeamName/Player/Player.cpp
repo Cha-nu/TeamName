@@ -24,6 +24,9 @@ Player::Player(std::string name, EPlayerStatus _playerstatus){
 		Playerstat.Atk_Damage =Playerstat.Atk_Damage * divisionvalue;
 		break;
 	}
+	PlayerMaxstat.MaxHP = Playerstat.HP;
+	PlayerMaxstat.MaxAtk_Damage = Playerstat.Atk_Damage;
+	
 	Playerstat.name = name;
 	PlayerInventory = new Inventory();
 }

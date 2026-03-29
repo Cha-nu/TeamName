@@ -117,6 +117,7 @@ void Player::ShowPlayerStat(){
 	std::cout << "Player Atk_damage: " << Playerstat.Atk_Damage << "\n";
 	std::cout << "Player Level: " << Playerstat.Level << "\n";
 	std::cout << "Player Stamina: " << Playerstat.Stamina << "\n";
+	std::cout << "Player GoldAmount: " << Gold << "\n";
 }
 
 void Player::LevelUp()

@@ -63,8 +63,13 @@ public:
 	void bOffPlayerBattle();
 	
 	/*****Utility*****/
+	// Inventory,Item
 	_forceinline Inventory* GetInventory() const {return PlayerInventory;}
 	void P_UseItem(int _index);
+	
+	// Gold
+	_forceinline int GetGoldAmount() const {return Gold;}
+	_forceinline void AcquireGold(const int _goldamount) {Gold += _goldamount;}
 	
 	// DebugFunc
 	// 플레이어 모든 스탯 출력용 디버그 함수입니다.
@@ -78,4 +83,7 @@ private:
 	bool bIsDead = false;
 	// 플레이어가 배틀씬에 진입시(전투 상태)
 	bool bIsBattle = false;
+	
+	// 플레이어의 골드 보유량
+	int Gold = 0;
 };

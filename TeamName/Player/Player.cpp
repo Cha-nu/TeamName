@@ -24,6 +24,9 @@ Player::Player(std::string name, EPlayerStatus _playerstatus){
 		Playerstat.Atk_Damage =Playerstat.Atk_Damage * divisionvalue;
 		break;
 	}
+	PlayerMaxstat.MaxHP = Playerstat.HP;
+	PlayerMaxstat.MaxAtk_Damage = Playerstat.Atk_Damage;
+	
 	Playerstat.name = name;
 	PlayerInventory = new Inventory();
 }
@@ -93,23 +96,18 @@ void Player::ShowPlayerStat(){
 void Player::LevelUp()
 {
 	int count = Playerstat.EXP / MAX_EXP;
-	int reamin = Playerstat.EXP % MAX_EXP;
+	Playerstat.EXP = Playerstat.EXP % MAX_EXP;
 	
-	if (reamin == 0)
-	{
-		Playerstat.Level += count;
-		Playerstat.EXP = 0;
-	}
-	else
-	{
-		Playerstat.Level += count;
-		Playerstat.EXP = reamin;
-	}
+	if (Playerstat.Level >= MAX_LEVEL || count <= 0) return;
 	
-	PlayerMaxstat.MaxHP += Playerstat.Level * 20;//레벌업을 안했는데 여기 구문이 작동되서 Max체력이 올라감
-	PlayerMaxstat.MaxAtk_Damage += Playerstat.Level * 5;//공격력도 같음 
+	for (int i = 0; i < count; i++)
+	{
+		if (Playerstat.Level >= MAX_LEVEL) break;
+		Playerstat.Level++;
+		PlayerMaxstat.MaxHP = PlayerMaxstat.MaxHP + (20 * Playerstat.Level);
+		PlayerMaxstat.MaxAtk_Damage = PlayerMaxstat.MaxAtk_Damage + (5 * Playerstat.Level);
+	}
 	
 	Playerstat.HP = PlayerMaxstat.MaxHP;//레벨업을 안했는데 위에서 Max값이 변경되어서 현재 체력에 덮어씌워서 이길 때 마다 체력이 늘어가는 버그 발생
 	Playerstat.Atk_Damage = PlayerMaxstat.MaxAtk_Damage;
-
 }

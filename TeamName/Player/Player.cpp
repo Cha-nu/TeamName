@@ -92,6 +92,9 @@ void Player::ShowPlayerStat(){
 
 void Player::LevelUp()
 {
+	if (Playerstat.Level >= MAX_LEVEL) return;
+	
+	
 	int count = Playerstat.EXP / MAX_EXP;
 	int reamin = Playerstat.EXP % MAX_EXP;
 	

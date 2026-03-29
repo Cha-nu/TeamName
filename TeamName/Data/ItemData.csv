@@ -13,3 +13,5 @@ Health_Potion_Common,Health_Potion_Common,Common,HP,10,0
 Health_Potion_Rare,Health_Potion_Rare,Rare,HP,10,0
 Stamina_Potion_Common,Stamina_Potion_Common,Common,Stamina,10,0
 Stamina_Potion_Rare,Stamina_Potion_Rare,Rare,Stamina,10,0
+Power_Potion_Common,Power_Potion_Common,Common,Attack,5,0
+Power_Potion_Rare,Power_Potion_Rare,Rare,Attack,5,0

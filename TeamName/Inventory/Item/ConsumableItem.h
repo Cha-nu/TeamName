@@ -16,8 +16,8 @@ public:
 	
 	virtual void Use(Player& player) const override;
 	virtual void Use(Monster& target) const override;
+
 private:
-	TargetStat m_targetStat;
 	int m_amount;
 	bool m_isDamage;
 };

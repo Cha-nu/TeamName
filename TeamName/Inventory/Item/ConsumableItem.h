@@ -20,4 +20,6 @@ public:
 private:
 	int m_amount;
 	bool m_isDamage;
+
+	float StatClamp(float stat , float maxStat) const;
 };

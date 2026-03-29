@@ -55,7 +55,6 @@ void GameManager::Update()
 
 void GameManager::Render()
 {
-	system("cls");
 	SceneManager::getInstance().Render();
 	//if ( DebugKey ) std::cout << "[GameManager] Render 완료" << '\n';
 }
@@ -87,10 +86,6 @@ void GameManager::Release()
 
 void GameManager::SetPlayer(std::string& Name)
 {
-	if (Character)
-	{
-		delete Character; // 기존 플레이어 메모리 해제
-	}
 	Character = new Player(Name);
 }
 
@@ -114,6 +109,7 @@ bool GameManager::CreateMonster()
 	}
 	else if (level < 10)
 	{
+		delete CurrentMonster;
 		int randomMonsterNum = rand() % static_cast<int>(MonsterName.size()); // 몬스터 수에 맞춰 랜덤 번호 생성
 		std::cout << "랜덤 몬스터 번호: " << randomMonsterNum << '\n'; // 디버그용 랜덤 번호 출력	
 		if (DebugKey) CurrentMonster = new NormalMonster({ MonsterName[randomMonsterNum], 1, 1, 100 });
@@ -121,6 +117,7 @@ bool GameManager::CreateMonster()
 	}
 	else if ( level >= 10 )
 	{
+		delete CurrentMonster;
 		if (DebugKey) CurrentMonster = new BossMonster({ "취업", 1, 1, 0 });
 		else CurrentMonster = new BossMonster({ "취업",level * 30 , level * 10, 0 });
 	}

@@ -11,7 +11,14 @@ int main()
 	// 전체화면 설정
 	//keybd_event(VK_F11 , 0 , 0 , 0);               // F11 누름
 	//keybd_event(VK_F11 , 0 , KEYEVENTF_KEYUP , 0);
-	system("mode con cols=120 lines=30");
+	system("mode con cols=120 lines=30"); // 화면 크기 설정
+
+	//커서 표시 여부
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO cursorInfo;
+	GetConsoleCursorInfo(consoleHandle , &cursorInfo);
+	cursorInfo.bVisible = FALSE; // 커서 표시 여부를 FALSE로 설정
+	SetConsoleCursorInfo(consoleHandle , &cursorInfo);
 
 	std::ios::sync_with_stdio(false);
 	std::cin.tie(nullptr);

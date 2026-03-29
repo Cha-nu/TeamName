@@ -16,6 +16,7 @@ void BattleScene::Init()
 {
 	system("cls");
 	std::cin.clear(); // 입력 버퍼 초기화
+	SetNeedsRender(true); // 렌더링
 	player = GameManager::getInstance().GetPlayer();
 
 	//몬스터 호출 수정
@@ -33,7 +34,7 @@ void BattleScene::Init()
 
 void BattleScene::Render()
 {
-
+	if ( !bNeedsRender ) return;
 	//플레이어 UI
 	Console_gotoxy(Player_X , Player_Y);     std::cout << "[" << player->Getstat().name << "]";
 	Console_gotoxy(Player_X , Player_Y + 2); std::cout << "      O     ";
@@ -148,6 +149,7 @@ void BattleScene::Render()
 		Console_gotoxy(textX , 16); std::cout << "의지가 나약한 자여...";
 		Console_gotoxy(textX , 17); std::cout << "도망치다 몬스터에게 당했습니다.  ▶ (Enter)";
 	}
+	SetNeedsRender(false); // 렌더링 잠금
 }
 
 void BattleScene::Update()
@@ -157,6 +159,7 @@ void BattleScene::Update()
 	{
 		isEnterPressed = true;
 		while ( (GetAsyncKeyState(VK_RETURN) & 0x8000) || (GetAsyncKeyState(VK_SPACE) & 0x8000) ) { Sleep(10); }
+		SetNeedsRender(true); // 렌더링
 	}
 
 
@@ -173,6 +176,7 @@ void BattleScene::Update()
 			{
 				currentIndex = 1;
 			}
+			SetNeedsRender(true); // 렌더링
 		}
 		else if ( GetAsyncKeyState(VK_DOWN) & 0x8000 ) 
 		{
@@ -184,6 +188,7 @@ void BattleScene::Update()
 			{
 				currentIndex = 3;
 			}
+			SetNeedsRender(true); // 렌더링
 		}
 		else if ( GetAsyncKeyState(VK_LEFT) & 0x8000 ) 
 		{
@@ -195,6 +200,7 @@ void BattleScene::Update()
 			{
 				currentIndex = 2;
 			} 
+			SetNeedsRender(true); // 렌더링
 		}
 		else if ( GetAsyncKeyState(VK_RIGHT) & 0x8000 ) 
 		{
@@ -206,6 +212,7 @@ void BattleScene::Update()
 			{
 				currentIndex = 3;
 			} 
+			SetNeedsRender(true); // 렌더링
 		}
 
 		// 선택지 결정
@@ -231,6 +238,7 @@ void BattleScene::Update()
 				// 4. 포기
 				battleState = 6;
 			}
+			SetNeedsRender(true); // 렌더링
 		}
 	}
 	else if ( battleState == 1 ) 
@@ -244,7 +252,7 @@ void BattleScene::Update()
 			else 
 			{
 				// 몬스터 살아있으면 반격
-				int beforeHp = player->Getstat().HP;
+				int beforeHp = static_cast<int>(player->Getstat().HP);
 				monster->attackPlayer(player);
 				battleState = 3; // 몬스터 공격 텍스트 출력 상태로!
 			}
@@ -252,6 +260,7 @@ void BattleScene::Update()
 	}
 	else if ( battleState == 2 ) 
 	{ // 승리 텍스트 후
+		player->AcquireEXP(monster->getExp()); // 경험치 획득
 		if ( isEnterPressed ) 
 		{
 			SceneManager::getInstance().Return_Scene(); // 메인으로

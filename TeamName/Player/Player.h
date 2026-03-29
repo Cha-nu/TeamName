@@ -24,8 +24,7 @@ struct FPlayerStat{
 
 struct FPlayerMaxStat
 {
-	friend class Player;
-private:
+public:
 	float MaxHP = 200.f;
 	float MaxAtk_Damage = 30.f;
 };
@@ -51,6 +50,7 @@ public:
     /*****Stat*****/
     void InitializeStat(float _hp,std::string _name,float _atkdamage, int _level,int _stamina = 0) override;
     _forceinline const FPlayerStat& Getstat() override{return Playerstat;}
+	_forceinline const FPlayerMaxStat& GetMaxStat() {return PlayerMaxstat;}
     _forceinline FPlayerStat& SetStat() override {return Playerstat;}
 	void AcquireEXP(int _exp);
 	
@@ -58,6 +58,10 @@ public:
     void Attack(Monster* _monster) override;
     void ApplyDamage(int _damage) override;
 	_forceinline bool bIsPlayerDead() const {return bIsDead;}
+	// 플레이어가 BattleScene에 진입시
+	_forceinline void bOnPlayerBattle() {bIsBattle = true;}
+	// 플레이어가 BattleScene에서 나갈시
+	void bOffPlayerBattle();
 	
 	/*****Utility*****/
 	_forceinline Inventory* GetInventory() const {return PlayerInventory;}
@@ -73,4 +77,6 @@ private:
 	FPlayerMaxStat PlayerMaxstat;
 	Inventory* PlayerInventory;
 	bool bIsDead = false;
+	// 플레이어가 배틀씬에 진입시(전투 상태)
+	bool bIsBattle = false;
 };

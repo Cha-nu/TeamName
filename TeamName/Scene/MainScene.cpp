@@ -12,7 +12,7 @@ void MainScene::Init()
 	system("cls");
 	SetCursorVisible(true);
 	player = GameManager::getInstance().GetPlayer();
-	GameManager::getInstance().Set_UseItem_Name(""); //메인으로 오면 전에 사용했던 아이템 사용 기록 초기화 
+	SceneManager::getInstance().Set_UseItem_Name(""); //메인에서 아이템 저장한 이름 초기화 부분 고민해보기
 	// 이전 씬에서 누른 엔터/스페이스바를 뗄 때까지 무한 대기 (잔상 방지)
 	WaitUntilKeyUp_Enter_Space();
 }

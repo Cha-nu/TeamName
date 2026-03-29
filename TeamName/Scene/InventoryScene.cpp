@@ -15,7 +15,6 @@ void InventoryScene::Init()
 	SetCursorVisible(false);//인벤토리 print 함수를 빌려와서 일단 가시성을 위해 사용하지만 나중에 한번 고민해봐야 할듯 
 	player = GameManager::getInstance().GetPlayer();
 	totalItems = player->GetInventory()->GetItemSlots().size();
-	GameManager::getInstance().Set_UseItem_Name("");//인벤토리에 일단 들어오면 전에 사용했던 아이템 기록은 삭제 시킴
 	WaitUntilKeyUp_Enter_Space();
 }
 
@@ -117,7 +116,7 @@ void InventoryScene::Update()
 
 			if ( confirmIndex == 0 )//'예'를 누를시 아이템 사용 로직
 			{
-				GameManager::getInstance().Set_UseItem_Name(player->GetInventory()->GetItemSlots()[currentIndex].GetItem()->GetName());
+				SceneManager::getInstance().Set_UseItem_Name(player->GetInventory()->GetItemSlots()[currentIndex].GetItem()->GetName());
 				//선택된 인덱스 번호의 아이템 이름을 게임 매니저한테 넘겨줘서 저장 시켜서 배틀씬에 사용함
 
 				player->P_UseItem(currentIndex + 1);

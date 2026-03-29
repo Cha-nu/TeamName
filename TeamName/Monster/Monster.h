@@ -54,6 +54,8 @@ public:
 		this->droptable->RemoveItem(id , amount);
 	}
 
+	//몬스터가 가지고 있는 아이템을 반환하는 Get함수 하나 만들어주시면 감사하겠습니다.
+
 	//드랍테이블(Inventory) 출력
 	virtual void printDropTable() {
 		std::cout << "드랍 테이블 " << std::endl;
@@ -84,7 +86,7 @@ public:
 
 	//몬스터 공격
 	virtual bool attackPlayer(Player* player) {
-		std::cout << "몬스터 " << this->stat.name << "가 플레이어를 " << this->stat.atk << " 데미지로 공격합니다!" << std::endl;
+		//std::cout << "몬스터 " << this->stat.name << "가 플레이어를 " << this->stat.atk << " 데미지로 공격합니다!" << std::endl; 문구 출력 오류때문에 삭제 
 		player->ApplyDamage(this->stat.atk);
 		return true; // 공격 성공
 		

@@ -2,15 +2,16 @@
 #include"BattleScene.h"
 #include"Player/Player.h"
 #include"Monster/Monster.h"
-#include"../Manager/GameManager/GameManager.h"
-#include "../Manager/SceneManager/SceneManager.h"
+#include "Manager/GameManager/GameManager.h"
+#include "Manager/SceneManager/SceneManager.h"
 #include"Scene_M/EndScene/EndScene.h"
 #include"Scene\InventoryScene.h"
 #include<iostream>
 #include<iomanip>
 #include"ConsoleHelper.h"
 
-#include "Manager/GameManager/GameManager.h"
+#include"Data/ItemKey.h"
+
 
 void BattleScene::Init()
 {
@@ -108,10 +109,11 @@ void BattleScene::Render()
 		Console_gotoxy(textX , 16); std::cout << "플레이어의 공격!";
 		Console_gotoxy(textX , 17); std::cout << "몬스터에게 " << player->Getstat().Atk_Damage << "의 데미지를 주었다!  ▶ (Enter)";
 	}
-	else if ( battleState == 2 ) {
+	else if ( battleState == 2 ) 
+	{
 		// [상단 박스] 승리 결과
-		Console_gotoxy(textX , 16); std::cout << "전투에서 승리하였다!!";
-		Console_gotoxy(textX , 17); std::cout << "전리품을 획득하고 마을로 돌아갑니다.  ▶ (Enter)";
+		Console_gotoxy(textX , 16); std::cout << "전투에서 승리하였다!! " << monster->getExp() << " 경험치를 획득했다!";
+		Console_gotoxy(textX , 17); std::cout << "아이템을 획득하고 마을로 돌아갑니다.  ▶ (Enter)";//몬스터 인벤토리의 아이템을 get으로 받아와서 여기에 name을 받아오게 수정 예정
 	}
 	else if ( battleState == 3 ) {
 		// [상단 박스] 몬스터 공격 결과
@@ -148,7 +150,7 @@ void BattleScene::Render()
 	}
 	else if ( battleState == 7 ) //아이템 사용 텍스트 출력 
 	{
-		Console_gotoxy(textX , 16); std::cout << "플레이어는 [" << GameManager::getInstance().Get_UseItem_Name() << "] 을(를) 사용했다";
+		Console_gotoxy(textX , 16); std::cout << "플레이어는 [" << SceneManager::getInstance().Get_UseItem_Name() << "] 을(를) 사용했다";//인벤토리에서 받아온 아이템을 사용
 		Console_gotoxy(textX , 17); std::cout << "  ▶ (Enter)";
 	}
 }
@@ -162,8 +164,9 @@ void BattleScene::Update()
 		WaitUntilKeyUp_Enter_Space();
 	}
 
-	if ( battleState == 0 && GameManager::getInstance().Get_UseItem_Name() != "" )//만약 아이템을 사용하고 왔다면
+	if ( battleState == 0 && SceneManager::getInstance().Get_UseItem_Name() != "" )//만약 아이템을 사용하고 왔다면
 	{
+		system("cls");//인벤토리를 사용하고왔는데 순간 전에 썻던 화면내용이 잠시 보여서 다 지우고 이 부분을 렌더링하게 구현
 		battleState = 7;
 	}
 
@@ -243,6 +246,13 @@ void BattleScene::Update()
 		{
 			if ( monster->isDead() ) 
 			{
+				player->AcquireEXP(monster->getExp());//플레이어한테 경험치를 주는 부분
+
+				//몬스터한테 드랍될 아이템을 문자열에 저장
+				//플레이어 AddItem 추가 (몬스터가 무슨 아이템을 주는지 get으로 받아와야함)
+				//Test용 몬스터한테 받아와야함
+				player->GetInventory()->AddItem(ItemKey::Health_Potion_Common , 1);  //get함수가 없어서 테스트 용으로 생성
+
 				battleState = 2; // 승리!
 			}
 			else 
@@ -295,8 +305,9 @@ void BattleScene::Update()
 	}
 	else if ( battleState == 7 ) //아이템 사용 후 몬스터한테 턴 넘어가는 로직=
 	{
-		if ( isKeyPressed ) 
+		if ( isKeyPressed ) //텍스트를 다 누르고 나야 실행되는 로직
 		{
+			SceneManager::getInstance().Set_UseItem_Name("");
 			if ( monster->isDead() )
 			{
 				battleState = 2; // 승리!

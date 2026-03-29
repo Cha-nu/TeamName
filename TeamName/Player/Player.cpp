@@ -47,7 +47,7 @@ void Player::AcquireEXP(int _exp)
 	// EXP set zero
 	// Level Plus 1
 	Playerstat.EXP += _exp;
-	LevelUp();
+	LevelUp();//레벨업을 안했는데 여기 함수가 호출되어서 플레이어 체력,공격력이 오르는거 같습니다.
 }
 
 void Player::Attack(Monster* _monster){
@@ -106,10 +106,10 @@ void Player::LevelUp()
 		Playerstat.EXP = reamin;
 	}
 	
-	PlayerMaxstat.MaxHP += Playerstat.Level * 20;
-	PlayerMaxstat.MaxAtk_Damage += Playerstat.Level * 5;
+	PlayerMaxstat.MaxHP += Playerstat.Level * 20;//레벌업을 안했는데 여기 구문이 작동되서 Max체력이 올라감
+	PlayerMaxstat.MaxAtk_Damage += Playerstat.Level * 5;//공격력도 같음 
 	
-	Playerstat.HP = PlayerMaxstat.MaxHP;
+	Playerstat.HP = PlayerMaxstat.MaxHP;//레벨업을 안했는데 위에서 Max값이 변경되어서 현재 체력에 덮어씌워서 이길 때 마다 체력이 늘어가는 버그 발생
 	Playerstat.Atk_Damage = PlayerMaxstat.MaxAtk_Damage;
 
 }

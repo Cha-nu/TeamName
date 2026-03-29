@@ -78,21 +78,21 @@ void Player::ApplyDamage(int _damage){
 
 void Player::P_UseItem(int _index){
 	
-	// ItemSlot CurrentItem = PlayerInventory->GetItemSlot(_index - 1);
-	// if (CurrentItem.GetItem()->GetID() == "Health_Potion_Common")
-	// {
-	// 	if (Playerstat.HP >= PlayerMaxstat.MaxHP)
-	// 	{
-	// 		return;
-	// 	}
-	// 	CurrentItem.GetItem()->Use(*this);
-	// 	PlayerInventory->RemoveItem(CurrentItem.GetItem()->GetID());
-	// }
-	// else
-	// {
-	// 	CurrentItem.GetItem()->Use(*this);
-	// 	PlayerInventory->RemoveItem(CurrentItem.GetItem()->GetID());
-	// }
+	ItemSlot CurrentItem = PlayerInventory->GetItemSlot(_index - 1);
+	if (CurrentItem.GetItem()->GetTargetStat() == TargetStat::HP)
+	{
+		if (Playerstat.HP >= PlayerMaxstat.MaxHP)
+		{
+			return;
+		}
+		CurrentItem.GetItem()->Use(*this);
+		PlayerInventory->RemoveItem(CurrentItem.GetItem()->GetID());
+	}
+	else
+	{
+		CurrentItem.GetItem()->Use(*this);
+		PlayerInventory->RemoveItem(CurrentItem.GetItem()->GetID());
+	}
 	
 	
 }

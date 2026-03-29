@@ -15,7 +15,6 @@ struct FPlayerStat{
     float HP = 200.f; // PlayerHP
     unsigned int Stamina = 0; // PlayerStamina
 	float Atk_Damage = 30; // Player Attack Damage
-	const float MaxAtk_Damage = 30.f;
 	unsigned int Level = 1; // PlayerLevel
 	unsigned short EXP = 0; // PlayerEXP
     std::string name = "None"; // PlayerName

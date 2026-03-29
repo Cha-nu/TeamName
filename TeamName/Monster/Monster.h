@@ -29,7 +29,7 @@ public:
 
 	//등장 대사
 	virtual void introMonster() {
-		std::cout << "몬스터 " << this->stat.name << "(이)가 나타났다!";
+		//std::cout << "몬스터 " << this->stat.name << "(이)가 나타났다!";
 	}
 
 
@@ -58,7 +58,7 @@ public:
 
 	//드랍테이블(Inventory) 출력
 	virtual void printDropTable() {
-		std::cout << "드랍 테이블 " << std::endl;
+		//std::cout << "드랍 테이블 " << std::endl;
 		this->droptable->PrintItemList();
 	}
 
@@ -72,12 +72,12 @@ public:
 		if ( !this->isDead() ) {
 			if ( this->stat.hp - damage > 0 ) {
 				this->stat.hp -= damage;
-				std::cout << "몬스터 " << this->stat.name << "가 " << damage << " 데미지를 입었습니다!" << std::endl;
-				std::cout << this->stat.name << " 남은 체력: " << this->stat.hp << std::endl;
+				//std::cout << "몬스터 " << this->stat.name << "가 " << damage << " 데미지를 입었습니다!" << std::endl;
+				//std::cout << this->stat.name << " 남은 체력: " << this->stat.hp << std::endl;
 			}
 			else {
 				this->stat.hp = 0;
-				std::cout << "몬스터 " << this->stat.name << "가 " << "사망했습니다!" << std::endl;				
+				//std::cout << "몬스터 " << this->stat.name << "가 " << "사망했습니다!" << std::endl;				
 
 			}
 		}

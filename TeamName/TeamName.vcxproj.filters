@@ -81,6 +81,7 @@
     <ClCompile Include="Manager\ItemManager\ItemManager.cpp" />
     <ClCompile Include="Monster\BossMonster.cpp" />
     <ClCompile Include="ConsoleHelper.cpp" />
+    <ClCompile Include="Scene_M\EndingScene\EndingScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Manager\GameManager\GameManager.h">
@@ -142,6 +143,7 @@
     <ClInclude Include="Monster\BossMonster.h" />
     <ClInclude Include="Player\PlayerTypes.h" />
     <ClInclude Include="ConsoleHelper.h" />
+    <ClInclude Include="Scene_M\EndingScene\EndingScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\ItemData.csv" />

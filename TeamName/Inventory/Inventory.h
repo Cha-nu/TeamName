@@ -24,6 +24,7 @@ public:
 	void RemoveCount(int amount = 1) { m_count = (std::max)(0, m_count - amount); }
 
 	const ItemBase* GetItem() const { return m_item; }
+	const TargetStat GetTargetStat() const;
 	int GetCount() const { return m_count; }
 	bool IsEmpty() const { return m_item == nullptr; }
 

@@ -13,4 +13,6 @@ namespace ItemKey
 	const char* Health_Potion_Rare = "Health_Potion_Rare";
 	const char* Stamina_Potion_Common = "Stamina_Potion_Common";
 	const char* Stamina_Potion_Rare = "Stamina_Potion_Rare";
+	const char* Power_Potion_Common = "Power_Potion_Common";
+	const char* Power_Potion_Rare = "Power_Potion_Rare";
 }

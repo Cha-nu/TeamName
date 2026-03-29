@@ -92,27 +92,20 @@ void Player::ShowPlayerStat(){
 
 void Player::LevelUp()
 {
-	if (Playerstat.Level >= MAX_LEVEL) return;
-	
-	
 	int count = Playerstat.EXP / MAX_EXP;
-	int reamin = Playerstat.EXP % MAX_EXP;
+	Playerstat.EXP = Playerstat.EXP % MAX_EXP;
 	
-	if (reamin == 0)
-	{
-		Playerstat.Level += count;
-		Playerstat.EXP = 0;
-	}
-	else
-	{
-		Playerstat.Level += count;
-		Playerstat.EXP = reamin;
-	}
+	if (Playerstat.Level >= MAX_LEVEL || count <= 0) return;
 	
-	PlayerMaxstat.MaxHP += Playerstat.Level * 20;
-	PlayerMaxstat.MaxAtk_Damage += Playerstat.Level * 5;
+	
+	for (int i = 0; i < count; i++)
+	{
+		if (Playerstat.Level >= MAX_LEVEL) break;
+		Playerstat.Level++;
+		PlayerMaxstat.MaxHP = PlayerMaxstat.MaxHP + (20 * Playerstat.Level);
+		PlayerMaxstat.MaxAtk_Damage = PlayerMaxstat.MaxAtk_Damage + (5 * Playerstat.Level);
+	}
 	
 	Playerstat.HP = PlayerMaxstat.MaxHP;
 	Playerstat.Atk_Damage = PlayerMaxstat.MaxAtk_Damage;
-
 }

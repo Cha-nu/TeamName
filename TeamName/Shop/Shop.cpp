@@ -102,13 +102,13 @@ void Shop::BuyItem(Player& player , int itemIndex)
 void Shop::SellItem(Player& player , int itemIndex)
 {	
 	itemIndex--;
-	const ItemBase* item = player.GetInventory()->GetItemSlot(itemIndex).GetItem();
-
 	if (itemIndex < 0 || itemIndex >= player.GetInventory()->GetItemCount())
 	{
 		std::cout << "잘못된 번호입니다. 다시 선택해주세요.\n";
 		return;
 	}
+	const ItemBase* item = player.GetInventory()->GetItemSlot(itemIndex).GetItem();
+
 	std::cout << "[" << item->GetName() << "] 아이템을 판매하였습니다.\n";
 
 	// 판매 시에는 아이템 가격의 60%를 획득하나, 소수점은 버림 처리합니다.

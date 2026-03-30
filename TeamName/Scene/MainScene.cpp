@@ -17,6 +17,9 @@ void MainScene::Init()
 	std::cin.clear(); // 입력 버퍼 초기화
 	// 이전 씬에서 누른 엔터/스페이스바를 뗄 때까지 무한 대기 (잔상 방지)
 	WaitUntilKeyUp_Enter_Space();
+
+	//MainScene일단 전투 상태가 아니니까
+	player->bOffPlayerBattle();
 }
 
 void MainScene::Render()
@@ -47,6 +50,7 @@ void MainScene::Render()
 	Console_gotoxy(statX , 11); std::cout << " HP     : ";
 	Console_gotoxy(statX , 12); std::cout << " 공격력 : ";
 	Console_gotoxy(statX , 13); std::cout << " 경험치 : ";
+	Console_gotoxy(statX , 14); std::cout << " Gold : ";
 	Console_gotoxy(statX , 15); std::cout << "+-----------------------+";
 
 	// 실시간 스탯 알맹이 채우기
@@ -70,6 +74,9 @@ void MainScene::Render()
 	Console_gotoxy(statValX , 13); std::cout << "    ";
 	Console_gotoxy(statValX , 13); std::cout << player->Getstat().EXP;
 
+	// 6. 골드
+	Console_gotoxy(statValX , 14); std::cout << "    ";
+	Console_gotoxy(statValX , 14); std::cout << player->GetGoldAmount();
 
 	// 하단 메뉴 박스 및 고정 텍스트
 	Console_gotoxy(menuX , 18); std::cout << "+------------------------------------------------+";

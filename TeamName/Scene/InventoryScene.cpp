@@ -26,6 +26,8 @@ void InventoryScene::Render()
 	{ 
 		return;
 	}
+	
+	system("cls");
 
 	player->GetInventory()->PrintItemList(inventoryState , currentIndex);//아이템 리스트 뽑는 구문
 
@@ -61,6 +63,20 @@ void InventoryScene::Render()
 		{ 
 			Console_gotoxy(popup_X + 9 , popup_Y + 5); std::cout << "->"; // 아니오
 		} 
+	}
+	else if ( inventoryState == 2 ) //전투 상태가 아닐 때 아이템을 사용할시 나오는 텍스트 창
+	{
+		// 사용 불가 경고 팝업창
+		Console_gotoxy(popup_X , popup_Y);     std::cout << "+----------------------------------+";
+		Console_gotoxy(popup_X , popup_Y + 1); std::cout << "|                                  |";
+		Console_gotoxy(popup_X , popup_Y + 2); std::cout << "| 전투 중에만 사용할 수 있습니다!  |";
+		Console_gotoxy(popup_X , popup_Y + 3); std::cout << "|                                  |";
+		Console_gotoxy(popup_X , popup_Y + 4); std::cout << "|           [ 확 인 ]              |";
+		Console_gotoxy(popup_X , popup_Y + 5); std::cout << "|                                  |";
+		Console_gotoxy(popup_X , popup_Y + 6); std::cout << "|                                  |";
+		Console_gotoxy(popup_X , popup_Y + 7); std::cout << "+----------------------------------+";
+
+		Console_gotoxy(popup_X + 9 , popup_Y + 4); std::cout << "->"; // 확인 버튼 고정
 	}
 	Console_gotoxy(0 , 0);
 	SetNeedsRender(false);
@@ -102,8 +118,15 @@ void InventoryScene::Update()
 			}
 			else if ( totalItems > 0 )
 			{
-				inventoryState = 1;// 아이템을 선택한 경우 (팝업창 띄우기)
-				confirmIndex = 0; // 팝업창 '예','아니오'선택지 위치 '예'부터 시작하게 고정
+				if ( player->bIsPlayerBattle() == true ) //전투 상태일 때 나오는 창
+				{
+					inventoryState = 1;// 아이템을 선택한 경우 (팝업창 띄우기)
+					confirmIndex = 0; // 팝업창 '예','아니오'선택지 위치 '예'부터 시작하게 고정
+				}
+				else 
+				{
+					inventoryState = 2;
+				}
 			}
 			SetNeedsRender(true);
 		}
@@ -143,6 +166,14 @@ void InventoryScene::Update()
 			{
 				inventoryState = 0;
 			}
+			SetNeedsRender(true);
+		}
+	}
+	else if ( inventoryState == 2 ) 
+	{
+		if ( isKeyPressed )
+		{
+			inventoryState = 0;
 			SetNeedsRender(true);
 		}
 	}

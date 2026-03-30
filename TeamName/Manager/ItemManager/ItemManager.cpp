@@ -70,7 +70,7 @@ void ItemManager::LoadItemsFromFile(const std::string& filename)
 		}
 
 		std::istringstream ss(line);
-		std::string keyStr , name , rankStr , statStr , amountStr , isDamageStr;
+		std::string keyStr , name , rankStr , statStr , amountStr , isDamageStr, goldStr;
 
 
 		std::getline(ss , keyStr , ',');
@@ -79,16 +79,19 @@ void ItemManager::LoadItemsFromFile(const std::string& filename)
 		std::getline(ss , statStr , ',');
 		std::getline(ss , amountStr , ',');
 		std::getline(ss , isDamageStr , ',');
+		std::getline(ss , goldStr , ',');
 
-		TargetStat targetState = StringToTargetStat(statStr);
+		TargetStat targetStat = StringToTargetStat(statStr);
 		ItemRank itemRank = StringToItemRank(rankStr);
 		int amount = std::stoi(amountStr);
 		bool isDamage = (isDamageStr == "true" || isDamageStr == "1");
+		int gold = std::stoi(goldStr) * static_cast<int>(itemRank);
 
 		// std::cout << "아이템 로드: " << keyStr << ", " << name << ", " << rankStr << ", " << statStr << ", " << amountStr << ", " << isDamageStr << std::endl;
 		
 		// 현재는 ConsumableItem만 할당하도록 구현되어 있으나, 다른 아이템 타입이 추가될 경우 데이터 시트에서 이를 구분한 후 예외처리를 할 수 있습니다.
-		m_itemDataBase[keyStr] = new ConsumableItem(keyStr, name, itemRank, targetState, amount, isDamage);
+		m_itemDataBase[keyStr] = new ConsumableItem(keyStr, name, itemRank, targetStat, gold, amount, isDamage);
+		m_itemIDs.push_back(keyStr);
 	}
 	file.close();
 }

@@ -43,7 +43,7 @@ void StartScene::Render() {
 	Start_gotoxy(40, 14); std::cout << "=========================================";
 
 	// 2. 선택지 고정 출력
-	Start_gotoxy(39, 16); std::cout << "[이동: 방향키 | 상호작용: SPACE바, Enter키]";
+	Start_gotoxy(44, 16); std::cout << "[이동: 방향키 | 상호작용: Enter키]";
 	Start_gotoxy(53, 18); std::cout << "* 게임 시작";
 	Start_gotoxy(53, 20); std::cout << "* 게임 나가기";
 
@@ -74,8 +74,8 @@ void StartScene::Update() {
 		SetNeedsRender(true); // 렌더링
 	}
 
-	// 스페이스바(VK_SPACE) 또는 엔터(VK_RETURN) 누름
-	if ((GetAsyncKeyState(VK_SPACE) & 0x8000) || GetAsyncKeyState(VK_RETURN) & 0x8000) {
+	// 엔터(VK_RETURN) 누름
+	if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
 		SetNeedsRender(true); // 렌더링
 		system("cls");
 

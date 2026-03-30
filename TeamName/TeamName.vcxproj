@@ -221,6 +221,7 @@
     <ClCompile Include="Scene_M\StartScene\StartScene.cpp" />
     <ClCompile Include="Scene\BattleScene.cpp" />
     <ClCompile Include="Scene\MainScene.cpp" />
+    <ClCompile Include="Shop\Shop.cpp" />
     <ClCompile Include="TeamName.cpp" />
     <ClCompile Include="TestScene\Test_Battle.cpp" />
     <ClCompile Include="TestScene\Test_Lobby.cpp" />
@@ -241,6 +242,7 @@
     <ClInclude Include="Scene_M\CreateScene\CreatingCharacter.h" />
     <ClInclude Include="Scene_M\EndScene\EndScene.h" />
     <ClInclude Include="Scene_M\StartScene\StartScene.h" />
+    <ClInclude Include="Shop\Shop.h" />
     <ClInclude Include="Type\GameTypes.h" />
     <ClInclude Include="Manager\GameManager\GameManager.h" />
     <ClInclude Include="Player\Player.h" />

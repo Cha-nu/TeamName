@@ -42,8 +42,8 @@ void GameOverScene::Render() {
 	End_gotoxy(30, 14); std::cout << "============================================================";
 
 	// 2. 선택지 고정 출력
-	End_gotoxy(51, 18); std::cout << "* 다시 시도";
-	End_gotoxy(51, 20); std::cout << "* 게임 나가기";
+	End_gotoxy(53, 18); std::cout << "* 다시 시도";
+	End_gotoxy(53, 20); std::cout << "* 게임 나가기";
 
 	// 3. 화살표 그리기 (기존 위치는 지우고 새 위치에 그리기)
 	End_gotoxy(50, 18); std::cout << " "; // 1번 앞 공백으로 지우기

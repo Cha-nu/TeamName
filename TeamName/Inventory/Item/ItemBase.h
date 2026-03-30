@@ -15,14 +15,15 @@ class Monster;
 class ItemBase
 {
 public:
-	ItemBase(std::string id, const std::string& name, TargetStat stat, ItemRank rank);
+	ItemBase(std::string id, const std::string& name, TargetStat stat, ItemRank rank, int gold);
 	virtual ~ItemBase();
 
 	const std::string& GetName() const { return m_name; }
 	const std::string& GetDescription() const { return m_description; }
 	ItemRank GetRank() const { return m_rank; }
 	TargetStat GetTargetStat() const { return m_targetStat; }
-	std::string GetID() const { return m_id; }
+	const std::string& GetID() const { return m_id; }
+	int GetGold() const { return m_gold; }
 
 	// 이 부분은 Player와 Monster가 상위 클래스를 상속하지 않으면 각각의 Use 함수를 만들어야 하는 경우 존재.
 	// 플레이어 인자 전달 필요
@@ -36,4 +37,5 @@ protected:
 	std::string m_description;
 	TargetStat m_targetStat;
 	ItemRank m_rank;
+	int m_gold;
 };

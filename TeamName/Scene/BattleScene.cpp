@@ -25,6 +25,7 @@ void BattleScene::Init()
 	//몬스터 호출 수정
 	GameManager::getInstance().CreateMonster(); // IsTutorial = GameManager::getInstance().CreateMonster();로 변경하시면 튜토리얼 보스 여부를 BattleScene에서 알 수 있습니다.
 	monster = GameManager::getInstance().GetMonster();//몬스터 동적할당
+	monster->getDropTableFromFile();
 	//battleScene 들어갈 때 전투상태로 변경
 	player->bOnPlayerBattle();
 
@@ -378,7 +379,7 @@ void BattleScene::Update()
 			}
 		}
 	}
-	else if ( battleState == 8 ) 
+	else if ( battleState == 8 ) //보스잡고나서 처리하는 부분
 	{
 		if ( isKeyPressed )
 		{

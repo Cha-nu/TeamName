@@ -35,6 +35,11 @@ void CharacterChoice::Init() {
 
 	// 콘솔 깨끗히 지우기
 	system("cls");
+<<<<<<< HEAD
+>>>>>>> update
+=======
+	// 버퍼에 남은 문자 제거
+	std::cin.clear();
 >>>>>>> update
 }
 
@@ -178,12 +183,13 @@ void CharacterChoice::Update() {
 =======
 	std::string name; // 플레이어 닉네임 변수 선언
 
+	std::cin.ignore(INT_MAX , '\n');
 	// 플레이어 이름 입력 받기 (위치는 중앙으로 설정)
 	Create_gotoxy(40, 29);  std::cout << ">> 닉네임을 입력하세요: ";
 	std::cin >> name;
 
 	// 입력받은 이름 전달
-	Player newPlayer(name);
+	// Player newPlayer(name);
 	GameManager::getInstance().SetPlayer(name); // GameManager용 플레이어 정보 설정
 
 	// 입력 받은 정보 출력
@@ -192,17 +198,21 @@ void CharacterChoice::Update() {
 	Create_gotoxy(30 , 6); std::cout << "                  캐릭터 생성이 완료되었습니다.                 ";
 	Create_gotoxy(30 , 7); std::cout << "============================================================";
 	Create_gotoxy(50 , 9);  std::cout << " [ 닉네임 ]   : " << GameManager::getInstance().GetPlayer()->Getstat().name;  // GameManager용 출력
-	Create_gotoxy(50 , 10); std::cout << " [ Lv ]       : " << newPlayer.Getstat().Level;
-	Create_gotoxy(50 , 11); std::cout << " [ 체력 ]     : " << newPlayer.Getstat().HP;
-	Create_gotoxy(50 , 12); std::cout << " [ 스테미나 ] : " << newPlayer.Getstat().Stamina;
-	Create_gotoxy(50 , 13); std::cout << " [ 공격력 ]   : " << newPlayer.Getstat().Atk_Damage;
-	Create_gotoxy(50 , 14); std::cout << " [ EXP ]      : " << newPlayer.Getstat().EXP;
+	Create_gotoxy(50 , 10); std::cout << " [ Lv ]       : " << GameManager::getInstance().GetPlayer()->Getstat().Level;
+	Create_gotoxy(50 , 11); std::cout << " [ 체력 ]     : " << GameManager::getInstance().GetPlayer()->Getstat().HP;
+	Create_gotoxy(50 , 12); std::cout << " [ 스테미나 ] : " << GameManager::getInstance().GetPlayer()->Getstat().Stamina;
+	Create_gotoxy(50 , 13); std::cout << " [ 공격력 ]   : " << GameManager::getInstance().GetPlayer()->Getstat().Atk_Damage;
+	Create_gotoxy(50 , 14); std::cout << " [ EXP ]      : " << GameManager::getInstance().GetPlayer()->Getstat().EXP;
 	Create_gotoxy(30 , 16); std::cout << "============================================================";
 
 	Create_gotoxy(30 , 18); system("pause"); // 잠시 멈추기(사용자에게 메시지 보여주기 위해 작성)
 
 	// SceneManager를 통해 다음 씬으로 전환
 	SceneManager::getInstance().Replace_Scene(new MainScene());
+<<<<<<< HEAD
+>>>>>>> update
+=======
+	return; // 씬이 교체되었으므로 Update 종료
 >>>>>>> update
 }
 

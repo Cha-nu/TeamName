@@ -8,7 +8,8 @@
 #include <cstdlib> // system의 cls, pause 사용하기 위해 추가
 =======
 #include "Manager/SceneManager/SceneManager.h" // Scene 매니저
-#include "Scene_M/CreateScene/CreatingCharacter.h" // 씬 전환을 위해 추가
+#include "Scene_M/StartScene/StartScene.h" // 씬 전환을 위해 추가
+//#include "Scene_M/CreateScene/CreatingCharacter.h" // 씬 전환을 위해 추가
 
 #include <iostream>
 #include <string>
@@ -65,30 +66,30 @@ void GameOverScene::Render() {
 	std::cout << ">> 입력: ";
 =======
 	// 1. 타이틀 고정 출력 (콘솔 중앙쯤 위치하도록 좌표 설정)
-	End_gotoxy(30 , 5); std::cout << " _____                           _____                    ";
-	End_gotoxy(30 , 6); std::cout << "|  __ \\                         |  _  |                   ";
-	End_gotoxy(30 , 7); std::cout << "| |  \\/  __ _  _ __ ___    ___  | | | |__   __  ___  _ __ ";
-	End_gotoxy(30 , 8); std::cout << "| | __  / _` || '_ ` _ \\  / _ \\ | | | |\\ \\ / / / _ \\| '__|";
-	End_gotoxy(30 , 9); std::cout << "| |_\\ \\| (_| || | | | | ||  __/ \\ \\_/ / \\ V / |  __/| |   ";
-	End_gotoxy(30 , 10); std::cout << "\\_____/ \\__,_||_| |_| |_| \\___|  \\___/   \\_/   \\___||_|   ";
+	End_gotoxy(30, 5); std::cout << " _____                           _____                    ";
+	End_gotoxy(30, 6); std::cout << "|  __ \\                         |  _  |                   ";
+	End_gotoxy(30, 7); std::cout << "| |  \\/  __ _  _ __ ___    ___  | | | |__   __  ___  _ __ ";
+	End_gotoxy(30, 8); std::cout << "| | __  / _` || '_ ` _ \\  / _ \\ | | | |\\ \\ / / / _ \\| '__|";
+	End_gotoxy(30, 9); std::cout << "| |_\\ \\| (_| || | | | | ||  __/ \\ \\_/ / \\ V / |  __/| |   ";
+	End_gotoxy(30, 10); std::cout << "\\_____/ \\__,_||_| |_| |_| \\___|  \\___/   \\_/   \\___||_|   ";
 
-	End_gotoxy(30 , 12); std::cout << "============================================================";
-	End_gotoxy(30 , 13); std::cout << "                사회의 벽에 부딪혀 쓰러졌습니다..               ";
-	End_gotoxy(30 , 14); std::cout << "============================================================";
+	End_gotoxy(30, 12); std::cout << "============================================================";
+	End_gotoxy(30, 13); std::cout << "                사회의 벽에 부딪혀 쓰러졌습니다..               ";
+	End_gotoxy(30, 14); std::cout << "============================================================";
 
 	// 2. 선택지 고정 출력
-	End_gotoxy(51 , 18); std::cout << "* 다시 시도";
-	End_gotoxy(51 , 20); std::cout << "* 게임 나가기";
+	End_gotoxy(53, 18); std::cout << "* 다시 시도";
+	End_gotoxy(53, 20); std::cout << "* 게임 나가기";
 
 	// 3. 화살표 그리기 (기존 위치는 지우고 새 위치에 그리기)
-	End_gotoxy(48 , 18); std::cout << "   "; // 1번 앞 공백으로 지우기
-	End_gotoxy(48 , 20); std::cout << "   "; // 2번 앞 공백으로 지우기
+	End_gotoxy(50, 18); std::cout << " "; // 1번 앞 공백으로 지우기
+	End_gotoxy(50, 20); std::cout << " "; // 2번 앞 공백으로 지우기
 
 	if (currentIndex == 0) {
-		End_gotoxy(48 , 18); std::cout << "->"; // 1번 위치에 화살표
+		End_gotoxy(50, 18); std::cout << "▶"; // 1번 위치에 화살표
 	}
 	else {
-		End_gotoxy(48 , 20); std::cout << "->"; // 2번 위치에 화살표
+		End_gotoxy(50, 20); std::cout << "▶"; // 2번 위치에 화살표
 	}
 >>>>>>> update
 }
@@ -132,27 +133,31 @@ void GameOverScene::Update() {
 		system("cls");
 
 		if ( currentIndex == 0 ) {
-			End_gotoxy(30 , 10); std::cout << "============================================================";
-			End_gotoxy(30 , 11); std::cout << "                    깨어나세요 용사여!!...                    ";
-			End_gotoxy(30 , 12); std::cout << "============================================================";
+			End_gotoxy(30, 10); std::cout << "============================================================";
+			End_gotoxy(30, 11); std::cout << "                    시작화면으로 이동합니다..                   ";
+			End_gotoxy(30, 12); std::cout << "============================================================";
 			Sleep(1500); // 1.5초 대기 후 진행
 
-			// 생성 화면(CreateScene)으로 이동
-			SceneManager::getInstance().Replace_Scene(new CharacterChoice());
+			// 처음 시작 화면(StartScene)으로 이동
+			SceneManager::getInstance().Replace_Scene(new StartScene());
 			return; // 씬이 교체되었으므로 Update 종료
 		}
 		else if ( currentIndex == 1 ) {
-			End_gotoxy(40 , 10); std::cout << "=========================================";
-			End_gotoxy(40 , 11); std::cout << "            현실로 돌아갑니다...           ";
-			End_gotoxy(40 , 12); std::cout << "=========================================";
-			Sleep(1000); // 1초 대기 후 진행
+			End_gotoxy(40, 10); std::cout << "=========================================";
+			End_gotoxy(40, 11); std::cout << "            현실로 돌아갑니다...           ";
+			End_gotoxy(40, 12); std::cout << "=========================================";
+			Sleep(300); // 1초 대기 후 진행
 
 			exit(0);
 		}
 	}
 
 	// 너무 빠른 중복 입력 방지 및 CPU 점유율 안정화를 위한 딜레이
+<<<<<<< HEAD
 	Sleep(100);
+>>>>>>> update
+=======
+	Sleep(20);
 >>>>>>> update
 }
 

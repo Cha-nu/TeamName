@@ -6,10 +6,13 @@
 # 4. Target_Stat : HP, Stamina, Attack 중 택 1 (임시로 한 스탯 리스트로, 변경될 수 있습니다.), 회복/피해를 줄 스을 지정합니다.
 # 5. Basic_Amount : 회복/피해 수치 (정수만 입력, 등급에 따른 수치 증가는 고려하지 않습니다.)
 # 6. Is_Damage : 적에게 데미지를 주면 1, 내가 회복/버프를 받으면 0
+# 7. Basic_Gold : 아이템의 기본 가격 (정수만 입력, 현재는 등급에 따른 가격 증가는 고려하지 않습니다. 이는 의도에 따라 수정될 수 있습니다.)
 # =====================================================================
 
-# key,name,rank,target_stat,basic_amount,is_damage
-Health_Potion_Common,Health_Potion_Common,Common,HP,10,0
-Health_Potion_Rare,Health_Potion_Rare,Rare,HP,10,0
-Stamina_Potion_Common,Stamina_Potion_Common,Common,Stamina,10,0
-Stamina_Potion_Rare,Stamina_Potion_Rare,Rare,Stamina,10,0
+# key,name,rank,target_stat,basic_amount,is_damage,basic_gold
+Health_Potion_Common,Health_Potion_Common,Common,HP,10,0,10
+Health_Potion_Rare,Health_Potion_Rare,Rare,HP,10,0,10
+Stamina_Potion_Common,Stamina_Potion_Common,Common,Stamina,10,0,10
+Stamina_Potion_Rare,Stamina_Potion_Rare,Rare,Stamina,10,0,10
+Power_Potion_Common,Power_Potion_Common,Common,Attack,5,0,10
+Power_Potion_Rare,Power_Potion_Rare,Rare,Attack,5,0,10

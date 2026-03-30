@@ -78,6 +78,12 @@
     <ClCompile Include="Scene\InventoryScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Manager\ItemManager\ItemManager.cpp" />
+    <ClCompile Include="Monster\BossMonster.cpp" />
+    <ClCompile Include="ConsoleHelper.cpp" />
+    <ClCompile Include="Scene_M\EndingScene\EndingScene.cpp" />
+    <ClCompile Include="Manager\SoundManager\SoundManager.cpp" />
+    <ClCompile Include="Shop\Shop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Manager\GameManager\GameManager.h">
@@ -135,6 +141,13 @@
     <ClInclude Include="Scene\InventoryScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Data\ItemKey.h" />
+    <ClInclude Include="Monster\BossMonster.h" />
+    <ClInclude Include="Player\PlayerTypes.h" />
+    <ClInclude Include="ConsoleHelper.h" />
+    <ClInclude Include="Scene_M\EndingScene\EndingScene.h" />
+    <ClInclude Include="Manager\SoundManager\SoundManager.h" />
+    <ClInclude Include="Shop\Shop.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\ItemData.csv" />

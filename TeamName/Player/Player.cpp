@@ -1,6 +1,8 @@
 ﻿#include "Player.h"
 #include "../Monster/Monster.h"
 #include "Inventory/Inventory.h"
+#include "Inventory/Item/ItemBase.h"
+#include "../Manager/ItemManager/ItemManager.h"
 #include <iostream>
 
 
@@ -22,12 +24,15 @@ Player::Player(std::string name, EPlayerStatus _playerstatus){
 		Playerstat.Atk_Damage =Playerstat.Atk_Damage * divisionvalue;
 		break;
 	}
+	PlayerMaxstat.MaxHP = Playerstat.HP;
+	PlayerMaxstat.MaxAtk_Damage = Playerstat.Atk_Damage;
 	
 	Playerstat.name = name;
 	PlayerInventory = new Inventory();
 }
 
 Player::~Player(){
+	delete PlayerInventory;
 	PlayerInventory = nullptr;
 }
 
@@ -39,22 +44,13 @@ void Player::InitializeStat(float _hp, std::string _name, float _atkdamage, int 
 	Playerstat.Stamina = _stamina;
 }
 
-
 void Player::AcquireEXP(int _exp)
 {
 	// if EXP amount over 100
 	// EXP set zero
 	// Level Plus 1
 	Playerstat.EXP += _exp;
-	if (Playerstat.EXP >= 100){
-		Playerstat.EXP -= MAX_EXP;
-		if (Playerstat.Level <= MAX_LEVEL){
-			Playerstat.Level++;
-		}
-		else{
-			std::cout<< "Player already maxLevel" << std::endl;
-		}
-	}
+	LevelUp();
 }
 
 void Player::Attack(Monster* _monster){
@@ -67,11 +63,50 @@ void Player::Attack(Monster* _monster){
 void Player::ApplyDamage(int _damage){
     Playerstat.HP -= _damage;
 	
+	// 임시로 bool값으로 캐릭터의 사망여부를 판단
+	if (Playerstat.HP <= 0)
+	{
+		bIsDead = true;
+	}
+	
 	//if (Playerstat.HP <= 0){
 	//	// 게임매니저 클래스에서 초기화나 캐릭터 생성 함수에서
 	//	// 파라미터로 Player& player를 받고 람다나 std::bind로 실행할 함수주소를 넘겨주시면 될것같습니다.
 	//	OnDead();
 	//}
+}
+
+void Player::P_UseItem(int _index){
+	
+	ItemSlot CurrentItem = PlayerInventory->GetItemSlot(_index - 1);
+	if (CurrentItem.GetItem()->GetTargetStat() == TargetStat::HP)
+	{
+		if (Playerstat.HP >= PlayerMaxstat.MaxHP)
+		{
+			return;
+		}
+		CurrentItem.GetItem()->Use(*this);
+		PlayerInventory->RemoveItem(CurrentItem.GetItem()->GetID());
+	}
+	else
+	{
+		CurrentItem.GetItem()->Use(*this);
+		PlayerInventory->RemoveItem(CurrentItem.GetItem()->GetID());
+	}
+	
+	
+}
+
+void Player::bOffPlayerBattle()
+{
+	if (bIsBattle) bIsBattle = false;
+	
+	if (!bIsBattle)
+	{
+		// 플레이어가 전장을 벗어날시 아이템으로 인해 증가한 공격력을 원상태로 되돌리기
+		// 필수 기능에서는 일단 공격력만 고려가 되있어서 이렇게 간단하게 MaxAtk_Damage의 값으로 Clamping하게 두었습니다.
+		Playerstat.Atk_Damage = PlayerMaxstat.MaxAtk_Damage;
+	}
 }
 
 // Player의 스탯확인용 디버깅 함수
@@ -82,4 +117,24 @@ void Player::ShowPlayerStat(){
 	std::cout << "Player Atk_damage: " << Playerstat.Atk_Damage << "\n";
 	std::cout << "Player Level: " << Playerstat.Level << "\n";
 	std::cout << "Player Stamina: " << Playerstat.Stamina << "\n";
+	std::cout << "Player GoldAmount: " << Gold << "\n";
+}
+
+void Player::LevelUp()
+{
+	int count = Playerstat.EXP / MAX_EXP;
+	Playerstat.EXP = Playerstat.EXP % MAX_EXP;
+	
+	if (Playerstat.Level >= MAX_LEVEL || count <= 0) return;
+	
+	for (int i = 0; i < count; i++)
+	{
+		if (Playerstat.Level >= MAX_LEVEL) break;
+		Playerstat.Level++;
+		PlayerMaxstat.MaxHP = PlayerMaxstat.MaxHP + (20 * Playerstat.Level);
+		PlayerMaxstat.MaxAtk_Damage = PlayerMaxstat.MaxAtk_Damage + (5 * Playerstat.Level);
+	}
+	
+	Playerstat.HP = PlayerMaxstat.MaxHP;
+	Playerstat.Atk_Damage = PlayerMaxstat.MaxAtk_Damage;
 }

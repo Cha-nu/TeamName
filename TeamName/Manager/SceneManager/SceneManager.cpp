@@ -38,6 +38,12 @@ void SceneManager::Return_Scene()
 
 		SceneStack.pop();//꺼내야하니까 pop
 	}
+	//트러블 슈팅용
+	//if ( !SceneStack.empty() ) 
+	//{
+	//
+	//	SceneStack.top()->Init();
+	//}
 }
 
 void SceneManager::Replace_Scene(Scene* newScene)

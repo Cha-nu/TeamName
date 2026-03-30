@@ -73,8 +73,6 @@ void Shop::DisplayStock() const
 
 void Shop::BuyItem(Player& player , int itemIndex)
 {
-	itemIndex--;
-
 	if (itemIndex < 0 || itemIndex >= m_stockList.size())
 	{
 		std::cout << "잘못된 번호입니다. 다시 선택해주세요.\n";
@@ -101,7 +99,6 @@ void Shop::BuyItem(Player& player , int itemIndex)
 
 void Shop::SellItem(Player& player , int itemIndex)
 {	
-	itemIndex--;
 	const ItemBase* item = player.GetInventory()->GetItemSlot(itemIndex).GetItem();
 
 	if (itemIndex < 0 || itemIndex >= player.GetInventory()->GetItemCount())

@@ -46,8 +46,8 @@ void CharacterChoice::Render() {
 	int cx, cy;
 	GetCreateScreenCenterXY(cx, cy);
 
-	int artX = cx - 28; // 기존 중앙(60) 대비 32 위치였으므로 -28 
-	int artStartY = cy - 13; // 기존 세로(15) 대비 2 위치였으므로 -13
+	int artX = cx - 23; // 기존 중앙(60) 대비 32 위치였으므로 -28 
+	int artStartY = cy - 20; // 기존 세로(15) 대비 2 위치였으므로 -13
 
 	// 아스키 아트 중앙 배치
 	Create_gotoxy(artX , artStartY);      std::cout << "                   ,:$@@@@*~                      ";
@@ -74,8 +74,8 @@ void CharacterChoice::Render() {
 	Create_gotoxy(artX , artStartY + 21); std::cout << "                   ;#@@@@@@=~                     ";
 
 	// UI 텍스트 중앙 배치
-	int uiX = cx - 35; // 60 기준 25 위치
-	int uiY = cy + 10; // 15 기준 25 위치
+	int uiX = cx - 30; // 60 기준 25 위치
+	int uiY = cy + 5; // 15 기준 25 위치
 	Create_gotoxy(uiX , uiY);     std::cout << "============================================================";
 	Create_gotoxy(uiX , uiY + 1); std::cout << "                당신의 캐릭터를 생성하세요...                ";
 	Create_gotoxy(uiX , uiY + 2); std::cout << "============================================================";
@@ -93,7 +93,7 @@ void CharacterChoice::Update() {
 	std::cin.clear();
 
 	// 플레이어 이름 입력 받기 (위치는 중앙으로 설정)
-	Create_gotoxy(cx - 20, cy + 14);  std::cout << ">> 닉네임을 입력하세요: ";
+	Create_gotoxy(cx - 30, cy + 9);  std::cout << ">> 닉네임을 입력하세요: ";
 	std::cin >> name;
 
 	// 입력받은 이름 전달

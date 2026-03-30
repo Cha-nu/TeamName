@@ -10,10 +10,14 @@ void BossMonster::initializeIntro(std::string dialog) {
 	this->dialogue = dialog;
 }
 
-//등장 대사 출력
-void BossMonster::introMonster() {
-	std::cout << this->dialogue << std::endl;
-	std::cout << "보스 몬스터 " << this->stat.name << " 이 등장했습니다." << std::endl;
+//등장 대사 return
+std::string BossMonster::introMonster() {
+	std::string intro;
+	intro = this->dialogue;	
+	intro.append("\n보스 몬스터 ");
+	intro.append(this->stat.name);
+	intro.append(" (이)가 등장했습니다.");
+	return intro;
 }
 
 // 디버그용

@@ -15,30 +15,39 @@ struct MonsterStat {
 
 class Monster{
 protected:
-	Monster() {}
-	Inventory* droptable;
+	Inventory* droptable = nullptr;
 	MonsterStat stat;	
-
+	Monster() : droptable(new Inventory()) , stat() {}
 public:
-    virtual ~Monster() {}
+	virtual ~Monster() { 
+		if ( droptable ) {
+			delete droptable;
+		}
+		droptable = nullptr;
+	}
 
 	//스탯 초기화
 	virtual void InitializeStat(MonsterStat stat = {}) {
 		this->stat = stat;
 	}
 
-	//등장 대사
-	virtual void introMonster() {
-		//std::cout << "몬스터 " << this->stat.name << "(이)가 나타났다!";
+	//등장 대사 return
+	virtual std::string introMonster() {
+		std::string intro;
+		intro = "몬스터 ";
+		intro.append(this->stat.name);
+		intro.append("(이)가 나타났다!");
+		return intro;
 	}
 
 
 
-	//name, hp, atk, exp getter setter
+	//name, hp, atk, exp, droptable getter setter
 	virtual std::string getName() const { return this->stat.name; }
 	virtual int getHealth() const { return this->stat.hp; }
 	virtual int getAttack() const { return this->stat.atk; }
 	virtual int getExp() const { return this->stat.give_exp; }
+	virtual Inventory* getDroptable() const { return this->droptable; }
 	virtual void setName(std::string name) { this->stat.name = name; }
 	virtual void setHealth(int hp) { this->stat.hp = hp; }
 	virtual void setAttack(int atk) { this->stat.atk = atk; }
@@ -54,14 +63,6 @@ public:
 		this->droptable->RemoveItem(id , amount);
 	}
 
-	//몬스터가 가지고 있는 아이템을 반환하는 Get함수 하나 만들어주시면 감사하겠습니다.
-
-	//드랍테이블(Inventory) 출력
-	virtual void printDropTable() {
-		//std::cout << "드랍 테이블 " << std::endl;
-		this->droptable->PrintItemList();
-	}
-
 	//몬스터 사망 플래그
 	virtual bool isDead() const { 
 		return this->stat.hp <= 0;
@@ -72,12 +73,9 @@ public:
 		if ( !this->isDead() ) {
 			if ( this->stat.hp - damage > 0 ) {
 				this->stat.hp -= damage;
-				//std::cout << "몬스터 " << this->stat.name << "가 " << damage << " 데미지를 입었습니다!" << std::endl;
-				//std::cout << this->stat.name << " 남은 체력: " << this->stat.hp << std::endl;
 			}
 			else {
 				this->stat.hp = 0;
-				//std::cout << "몬스터 " << this->stat.name << "가 " << "사망했습니다!" << std::endl;				
 
 			}
 		}
@@ -86,12 +84,17 @@ public:
 
 	//몬스터 공격
 	virtual bool attackPlayer(Player* player) {
-		//std::cout << "몬스터 " << this->stat.name << "가 플레이어를 " << this->stat.atk << " 데미지로 공격합니다!" << std::endl; 문구 출력 오류때문에 삭제 
 		player->ApplyDamage(this->stat.atk);
 		return true; // 공격 성공
 		
 		//공격 실패(빗나감, 아이템 사용 등) 로직
 	}
+
+	//복사 생성자 삭제
+	//댕글링 포인터 원천차단
+	//shared_ptr로 변경...?
+	Monster(const Monster&) = delete;
+	Monster& operator=(const Monster&) = delete;
 
 
 };

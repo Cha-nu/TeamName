@@ -11,7 +11,7 @@ public:
 	virtual std::string introMonster() override;
 	virtual ~BossMonster() {}
 
-	virtual bool getDropTableFromFile();
+	virtual bool getDropTableFromFile(); // /Droptable 폴더 안에 있는 드롭테이블 파일 로드
 	//디버그용 연산자 오버라이딩
 	friend std::ostream& operator<<(std::ostream& os , const BossMonster& m);
 };

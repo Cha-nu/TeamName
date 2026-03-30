@@ -10,6 +10,7 @@ void BossMonster::initializeIntro(std::string dialog) {
 	this->dialogue = dialog;
 }
 
+// 보스몹 드랍테이블 로드
 bool BossMonster::getDropTableFromFile() {
 	std::string url = "Monster/Data/BossDroptable.ini";
 	std::string txt;
@@ -37,6 +38,7 @@ bool BossMonster::getDropTableFromFile() {
 			std::cout << count << std::endl;
 			droptable->AddItem(id , count);
 		}
+		open_file.close();
 		return true;
 	}
 	else {

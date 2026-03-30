@@ -155,7 +155,7 @@ class NormalMonster : public Monster {
 public:
 	NormalMonster(MonsterStat stat = {});
 	virtual ~NormalMonster() {}
-	bool getDropTableFromFile() override;
+	bool getDropTableFromFile() override; // /Droptable 폴더 안에 있는 드롭테이블 파일 로드
 	//디버그용 연산자 오버라이딩
 	friend std::ostream& operator<<(std::ostream& os , const NormalMonster& m);
 };

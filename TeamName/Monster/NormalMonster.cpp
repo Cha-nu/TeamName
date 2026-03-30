@@ -10,6 +10,8 @@ NormalMonster::NormalMonster(MonsterStat stat) {
 	//this->addToDroptable(ItemKey::Health_Potion_Common , 1);//테스트용
 }
 
+
+// 일반몹 드랍테이블 로드
 bool NormalMonster::getDropTableFromFile() {
 	std::string url = "Monster/Data/NormalDroptable.ini";
 	std::string txt;
@@ -37,6 +39,8 @@ bool NormalMonster::getDropTableFromFile() {
 			std::cout << count << std::endl;
 			droptable->AddItem(id , count);
 		}
+		open_file.close();
+		return true;
 	}
 	else {
 		return false;

@@ -24,9 +24,6 @@ public:
 	// 상점에 진열된 아이템을 출력하는 함수입니다.
 	void DisplayStock() const;
 
-
-	// 아래 두 함수는 인덱스를 사용자가 입력한 값만 넘겨주세요. 즉, 사용자가 1을 입력하면 itemIndex도 1이어야 합니다.
-
 	// 플레이어가 아이템을 구매하거나 판매하는 함수입니다. itemIndex는 상점에 진열된 아이템의 인덱스입니다.
 	// 호출되기 전, DisplayStock() 함수를 통해 사용자에게 아이템의 인덱스를 보여주고 사용자의 입력을 받아야 합니다.
 	void BuyItem(Player& player, int itemIndex);

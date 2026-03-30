@@ -2,19 +2,21 @@
 #include"BattleScene.h"
 #include"Player/Player.h"
 #include"Monster/Monster.h"
-#include"../Manager/GameManager/GameManager.h"
-#include "../Manager/SceneManager/SceneManager.h"
+#include "Manager/GameManager/GameManager.h"
+#include "Manager/SceneManager/SceneManager.h"
 #include"Scene_M/EndScene/EndScene.h"
 #include"Scene\InventoryScene.h"
 #include<iostream>
 #include<iomanip>
 #include"ConsoleHelper.h"
 
-#include "Manager/GameManager/GameManager.h"
+#include"Data/ItemKey.h"
+
 
 void BattleScene::Init()
 {
 	system("cls");
+	SetCursorVisible(false);
 	std::cin.clear(); // 입력 버퍼 초기화
 	SetNeedsRender(true); // 렌더링
 	player = GameManager::getInstance().GetPlayer();
@@ -25,10 +27,7 @@ void BattleScene::Init()
 	
 
 	// 이전 씬에서 누른 엔터/스페이스바를 뗄 때까지 무한 대기 (잔상 방지)
-	while ( (GetAsyncKeyState(VK_RETURN) & 0x8000) || (GetAsyncKeyState(VK_SPACE) & 0x8000) )
-	{
-		Sleep(10);
-	}
+	WaitUntilKeyUp_Enter_Space();
 	
 }
 
@@ -111,10 +110,11 @@ void BattleScene::Render()
 		Console_gotoxy(textX , 16); std::cout << "플레이어의 공격!";
 		Console_gotoxy(textX , 17); std::cout << "몬스터에게 " << player->Getstat().Atk_Damage << "의 데미지를 주었다!  ▶ (Enter)";
 	}
-	else if ( battleState == 2 ) {
+	else if ( battleState == 2 ) 
+	{
 		// [상단 박스] 승리 결과
-		Console_gotoxy(textX , 16); std::cout << "전투에서 승리하였다!!";
-		Console_gotoxy(textX , 17); std::cout << "전리품을 획득하고 마을로 돌아갑니다.  ▶ (Enter)";
+		Console_gotoxy(textX , 16); std::cout << "전투에서 승리하였다!! " << monster->getExp() << " 경험치를 획득했다!";
+		Console_gotoxy(textX , 17); std::cout << "아이템을 획득하고 마을로 돌아갑니다.  ▶ (Enter)";//몬스터 인벤토리의 아이템을 get으로 받아와서 여기에 name을 받아오게 수정 예정
 	}
 	else if ( battleState == 3 ) {
 		// [상단 박스] 몬스터 공격 결과
@@ -149,21 +149,35 @@ void BattleScene::Render()
 		Console_gotoxy(textX , 16); std::cout << "의지가 나약한 자여...";
 		Console_gotoxy(textX , 17); std::cout << "도망치다 몬스터에게 당했습니다.  ▶ (Enter)";
 	}
+	else if ( battleState == 7 ) //아이템 사용 텍스트 출력 
+	{
+		Console_gotoxy(textX , 16); std::cout << "플레이어는 [" << SceneManager::getInstance().Get_UseItem_Name() << "] 을(를) 사용했다";//인벤토리에서 받아온 아이템을 사용
+		Console_gotoxy(textX , 17); std::cout << "  ▶ (Enter)";
+	}
+	Console_gotoxy(0 , 0);
+
 	SetNeedsRender(false); // 렌더링 잠금
 }
 
 void BattleScene::Update()
 {
-	isEnterPressed = false;
+	isKeyPressed = false;
 	if ( (GetAsyncKeyState(VK_SPACE) & 0x8000) || (GetAsyncKeyState(VK_RETURN) & 0x8000) )
 	{
-		isEnterPressed = true;
-		while ( (GetAsyncKeyState(VK_RETURN) & 0x8000) || (GetAsyncKeyState(VK_SPACE) & 0x8000) ) { Sleep(10); }
+		isKeyPressed = true;
+		WaitUntilKeyUp_Enter_Space();
 		SetNeedsRender(true); // 렌더링
 	}
 
+	if ( battleState == 0 && SceneManager::getInstance().Get_UseItem_Name() != "" )//만약 아이템을 사용하고 왔다면
+	{
+		//system("cls");//인벤토리를 사용하고왔는데 순간 전에 썻던 화면내용이 잠시 보여서 다 지우고 이 부분을 렌더링하게 구현
+		//이제 씬 전화할때 마다 exit에서 해줌
+		battleState = 7;
+		SetNeedsRender(true);
+	}
 
-	if ( battleState == 0 )
+	if ( battleState == 0 )//Battle Scene에서 무슨 행동을 할 지 처리하는 부분 (선택지)
 	{
 		// 방향키 이동 (메뉴에서만 작동)
 		if ( GetAsyncKeyState(VK_UP) & 0x8000 ) 
@@ -216,14 +230,11 @@ void BattleScene::Update()
 		}
 
 		// 선택지 결정
-		if ( isEnterPressed )
+		if ( isKeyPressed )
 		{
 			if ( currentIndex == 0 ) 
 			{
-				// 공격 
-				int beforeHp = monster->getHealth();
 				player->Attack(monster);
-				//lastDamage = beforeHp - monster->getHealth(); // 입힌 데미지 저장
 				battleState = 1; // 내 공격 텍스트 출력 상태로!
 			}
 			else if ( currentIndex == 1 ) {
@@ -241,34 +252,39 @@ void BattleScene::Update()
 			SetNeedsRender(true); // 렌더링
 		}
 	}
-	else if ( battleState == 1 ) 
-	{ // 내 공격 후 대기
-		if ( isEnterPressed ) 
+	else if ( battleState == 1 ) //몬스터 공격 텍스트 출력
+	{
+		if ( isKeyPressed )
 		{
 			if ( monster->isDead() ) 
 			{
+				player->AcquireEXP(monster->getExp());//플레이어한테 경험치를 주는 부분
+
+				//몬스터한테 드랍될 아이템을 문자열에 저장
+				//플레이어 AddItem 추가 (몬스터가 무슨 아이템을 주는지 get으로 받아와야함)
+				//Test용 몬스터한테 받아와야함
+				player->GetInventory()->AddItem(ItemKey::Health_Potion_Common , 1);  //get함수가 없어서 테스트 용으로 생성
+
 				battleState = 2; // 승리!
 			}
 			else 
 			{
 				// 몬스터 살아있으면 반격
-				int beforeHp = static_cast<int>(player->Getstat().HP);
 				monster->attackPlayer(player);
 				battleState = 3; // 몬스터 공격 텍스트 출력 상태로!
 			}
 		}
 	}
-	else if ( battleState == 2 ) 
-	{ // 승리 텍스트 후
-		player->AcquireEXP(monster->getExp()); // 경험치 획득
-		if ( isEnterPressed ) 
+	else if ( battleState == 2 ) // 승리 텍스트 후
+	{ 
+		if ( isKeyPressed )
 		{
 			SceneManager::getInstance().Return_Scene(); // 메인으로
 		} 
 	}
-	else if ( battleState == 3 ) 
-	{ // 몬스터 공격 후 대기
-		if ( isEnterPressed ) 
+	else if ( battleState == 3 ) // 몬스터 공격 후 처리
+	{ 
+		if ( isKeyPressed )
 		{
 			if ( player->Getstat().HP <= 0 ) 
 			{
@@ -276,28 +292,45 @@ void BattleScene::Update()
 			}
 			else 
 			{
-				battleState = 0; // 살았으니 다시 내 턴 메뉴로!
+				battleState = 0; // 살았으니 다시 내 턴 (선택지로 돌아가기)
 			}
 		}
 	}
-	else if ( battleState == 4 ) 
-	{ // 패배 텍스트 후
-		if ( isEnterPressed ) 
+	else if ( battleState == 4 ) // 플레이어가 죽으면 처리하는 로직 
+	{ 
+		if ( isKeyPressed )
 		{
 			SceneManager::getInstance().Replace_Scene(new GameOverScene());
 		} 
 	}
 	else if ( battleState == 5 ) // 스탯창 열려있을 때
 	{ 
-		if ( isEnterPressed ) 
+		if ( isKeyPressed )
 		{
-			ClearStatBox(); // 스탯창 없앰
+			ClearStatBox(); // 스탯창 삭제
 			battleState = 0; // 다시 메뉴 상태로 돌아감
 		}
 	}
-	else if ( battleState == 6 ) // 도망 텍스트 후
+	else if ( battleState == 6 ) // 도망간다 선택하면 처리하는 롲기 
 	{ 
-		if ( isEnterPressed ) SceneManager::getInstance().Replace_Scene(new GameOverScene());
+		if ( isKeyPressed ) SceneManager::getInstance().Replace_Scene(new GameOverScene());
+	}
+	else if ( battleState == 7 ) //아이템 사용 후 몬스터한테 턴 넘어가는 로직=
+	{
+		if ( isKeyPressed ) //텍스트를 다 누르고 나야 실행되는 로직
+		{
+			SceneManager::getInstance().Set_UseItem_Name("");
+			if ( monster->isDead() )
+			{
+				battleState = 2; // 승리!
+			}
+			else
+			{
+				// 몬스터 살아있으면 반격
+				monster->attackPlayer(player);
+				battleState = 3; // 몬스터 공격 텍스트 출력 상태로!
+			}
+		}
 	}
 
 	Sleep(50);
@@ -335,6 +368,7 @@ void BattleScene::Update()
 
 void BattleScene::Exit()
 {
+	system("cls");
 }
 
 void BattleScene::ClearTextBox()
@@ -356,7 +390,7 @@ void BattleScene::ClearMenuArrows()
 
 void BattleScene::ClearStatBox()
 {
-	for ( int i = 3; i <= 14; i++ ) 
+	for ( int i = 0; i <= 14; i++ ) 
 	{
 		Console_gotoxy(85 , i);
 		std::cout << "                         "; // 공백 25칸으로 덮어서 지움

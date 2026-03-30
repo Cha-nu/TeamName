@@ -1,6 +1,20 @@
 ﻿#include "Monster.h"
 //#include"Data/ItemKey.h"
 
+ItemSlot Monster::getDropItem() {
+	if ( this->droptable->GetItemSlots().size() > 0 ) {
+		static std::random_device rd;
+		static std::mt19937 gen(rd());
+		static std::uniform_int_distribution<int> dis(1 , 100);
+		if ( dis(gen) <= this->stat.drop_percent ) {
+			dis.param(std::uniform_int_distribution<int>::param_type(0 , this->droptable->GetItemSlots().size() - 1));
+			return this->droptable->GetItemSlot(dis(gen));
+		}
+	}
+	return ItemSlot();
+
+}
+
 //생성자
 NormalMonster::NormalMonster(MonsterStat stat) {
 	InitializeStat(stat);

@@ -3,22 +3,24 @@
 #include <string>
 #include <vector>
 #include <random>
-#include <optional>
 #include "../Player/Player.h"
 #include "../Inventory/Inventory.h"
+#include "../Inventory/Item/ItemBase.h"
 
 struct MonsterStat {
 	std::string name = "Test Monster";
 	int hp = 100;
 	int atk = 10;
 	int give_exp = 20;	
-	int drop_percent = 20;
+	int drop_percent = 20; // 아이템 드롭 확률
 };
 
+//드롭 골드 최저/최대값
 struct GoldRange {
 	int min_gold = 10;
-	int max_gold = 10;
+	int max_gold = 20;
 };
+class ItemBase; 
 
 class Monster{
 protected:
@@ -91,18 +93,7 @@ public:
 	} 
 
 	//드롭할 아이템 get
-	virtual ItemSlot getDropItem() {
-		if ( this->droptable->GetItemSlots().size() > 0 ) {
-			static std::random_device rd;
-			static std::mt19937 gen(rd());
-			static std::uniform_int_distribution<int> dis(1 , 100);
-			if ( dis(gen) <= this->stat.drop_percent ) {
-				dis.param(std::uniform_int_distribution<int>::param_type(0 , this->droptable->GetItemSlots().size() - 1));				
-				return this->droptable->GetItemSlot(dis(gen));
-			}			
-		}
-		return ItemSlot();
-	}
+	virtual ItemSlot getDropItem();
 
 
 

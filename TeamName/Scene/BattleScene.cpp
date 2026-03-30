@@ -25,6 +25,8 @@ void BattleScene::Init()
 	GameManager::getInstance().CreateMonster(); // IsTutorial = GameManager::getInstance().CreateMonster();로 변경하시면 튜토리얼 보스 여부를 BattleScene에서 알 수 있습니다.
 	monster = GameManager::getInstance().GetMonster();//몬스터 동적할당
 	
+	//battleScene 들어갈 때 전투상태로 변경
+	player->bOnPlayerBattle();
 
 	// 이전 씬에서 누른 엔터/스페이스바를 뗄 때까지 무한 대기 (잔상 방지)
 	WaitUntilKeyUp_Enter_Space();
@@ -141,6 +143,7 @@ void BattleScene::Render()
 		Console_gotoxy(statX , 8); std::cout << " HP     : " << player->Getstat().HP;
 		Console_gotoxy(statX , 9); std::cout << " 공격력 : " << player->Getstat().Atk_Damage;
 		Console_gotoxy(statX , 10); std::cout << " 경험치 : " << player->Getstat().EXP;
+		Console_gotoxy(statX , 11); std::cout << " Gold   : " << player->GetGoldAmount();
 		Console_gotoxy(statX , 12); std::cout << "+-----------------------+";
 	}
 	else if ( battleState == 6 ) 
@@ -279,6 +282,8 @@ void BattleScene::Update()
 	{ 
 		if ( isKeyPressed )
 		{
+			//메인으로 들어가기전에 전투상태 off 처리
+			player->bOffPlayerBattle();
 			SceneManager::getInstance().Return_Scene(); // 메인으로
 		} 
 	}
@@ -300,6 +305,8 @@ void BattleScene::Update()
 	{ 
 		if ( isKeyPressed )
 		{
+			//전투가 끝났고 패배 했으니 일단 전투상태 off 처리
+			player->bOffPlayerBattle();
 			SceneManager::getInstance().Replace_Scene(new GameOverScene());
 		} 
 	}
@@ -313,9 +320,14 @@ void BattleScene::Update()
 	}
 	else if ( battleState == 6 ) // 도망간다 선택하면 처리하는 롲기 
 	{ 
-		if ( isKeyPressed ) SceneManager::getInstance().Replace_Scene(new GameOverScene());
+		if ( isKeyPressed ) 
+		{ 
+			//이것도 패배처리이기 때문에 off처리
+			player->bOffPlayerBattle();
+			SceneManager::getInstance().Replace_Scene(new GameOverScene()); 
+		}
 	}
-	else if ( battleState == 7 ) //아이템 사용 후 몬스터한테 턴 넘어가는 로직=
+	else if ( battleState == 7 ) //아이템 사용 후 몬스터한테 턴 넘어가는 로직
 	{
 		if ( isKeyPressed ) //텍스트를 다 누르고 나야 실행되는 로직
 		{
@@ -334,36 +346,6 @@ void BattleScene::Update()
 	}
 
 	Sleep(50);
-
-	//if ( (GetAsyncKeyState(VK_SPACE) & 0x8000) || (GetAsyncKeyState(VK_RETURN) & 0x8000) ) 
-	//{
-	//	//if currentIndex == 0 을 선택하면
-	//	// 선택할수 있는 화살표가 사라지고
-	//	//플레이어가 몬스터를 공격한다는걸 텍스트 문구 창에 나오고 데미지도 얼마주는지도 2줄로 깔끔하게 보여준다
-	//	//엔터를 누르면 텍스트가 사라지고
-	//	//이제 몬스터가 공격한다
-	//	    // if 만약 몬스터가 죽었다면 이겼다고 문구가 나오고 그 다음줄에 골드나 인벤토리 뭘 얻었다고 문구가 나온다.
-	//	    // 엔터를 누르면 Main Scene으로 넘어간다.
-	//	//몬스터가 플레이어를 공격한다는게 텍스트 문구 창에 나오고 데미지도 얼마주는지도 2줄로 깔끔하게 보여준다
-	//	//엔터를 누르면 텍스트가 사라진다
-	//	   // if 플레이어가 몬스터 공격에 죽었다면 죽었다 라는 문구가 나온다.
-	//	   // 엔터를 누르면 GameOverScene으로 넘어간다.
-	//	//다시 선택지로 돌아가고 화살표가 나온다
-	//	
-	//	//if currentIndex == 1을 선택하면
-	//	//인벤토리 씬으로 넘어간다.
-	//
-	//	//if currentIndex == 2을 선택하면
-	//	// 선택할 수 있는 화살표가 사라지고
-	//	// UI씬에 캐릭터 능력치가 어떤지 나온다 
-	//	// 엔터를 누르면
-	//	// UI씬이 사라지고 화살표가 다시 나오고 선택지로 간다
-	//
-	//	//if currentIndex == 3을 선택하면
-	//	//의지가 나약한자라고 문구가 나오고 
-	//	//엔터나 스페이스를 누르면 GameOver씬으로 넘어가게 해줘
-	//}
-
 }
 
 void BattleScene::Exit()

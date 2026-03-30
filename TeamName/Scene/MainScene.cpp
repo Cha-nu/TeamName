@@ -13,12 +13,15 @@ void MainScene::Init()
 	SetCursorVisible(false);
 	player = GameManager::getInstance().GetPlayer();
 	SceneManager::getInstance().Set_UseItem_Name(""); //메인에서 아이템 저장한 이름 초기화 부분 고민해보기
+	SetNeedsRender(true); // 렌더링
+	std::cin.clear(); // 입력 버퍼 초기화
 	// 이전 씬에서 누른 엔터/스페이스바를 뗄 때까지 무한 대기 (잔상 방지)
 	WaitUntilKeyUp_Enter_Space();
 }
 
 void MainScene::Render()
 {
+	if ( !bNeedsRender ) return;
 	// 방 아스키 아트 (가운데 배치)
 	Console_gotoxy(artX , 2);  std::cout << "         .---------------------------.";
 	Console_gotoxy(artX , 3);  std::cout << "         |  _______________________  |";
@@ -106,6 +109,7 @@ void MainScene::Render()
 	{
 		Console_gotoxy(62 , 24); std::cout << "->";
 	}
+	SetNeedsRender(false); // 렌더링 잠금
 }
 
 void MainScene::Update()
@@ -121,6 +125,7 @@ void MainScene::Update()
 		{
 			currentIndex = 1; 
 		}
+		SetNeedsRender(true); // 렌더링
 	}
 	else if ( GetAsyncKeyState(VK_DOWN) & 0x8000 ) //(방향키 아래): 위에 있는 애들(0, 1)만 아래(2, 3)로 갈 수 있음
 	{
@@ -132,6 +137,7 @@ void MainScene::Update()
 		{
 			currentIndex = 3;
 		}
+		SetNeedsRender(true); // 렌더링
 	}
 	else if ( GetAsyncKeyState(VK_LEFT) & 0x8000 )// (방향키 왼쪽) : 오른쪽에 있는 애들(1 , 3)만 왼쪽(0 , 2)으로 갈 수 있음
 	{
@@ -143,6 +149,7 @@ void MainScene::Update()
 		{ 
 			currentIndex = 2; 
 		}
+		SetNeedsRender(true); // 렌더링
 	}
 	else if ( GetAsyncKeyState(VK_RIGHT) & 0x8000 ) //(방향 키오른쪽): 왼쪽에 있는 애들(0, 2)만 오른쪽(1, 3)으로 갈 수 있음
 	{
@@ -154,6 +161,7 @@ void MainScene::Update()
 		{
 			currentIndex = 3;
 		}
+		SetNeedsRender(true); // 렌더링
 	}
 
 	if ( (GetAsyncKeyState(VK_SPACE) & 0x8000) || (GetAsyncKeyState(VK_RETURN) & 0x8000) ) //스페이스나 엔터 누르면
@@ -176,6 +184,7 @@ void MainScene::Update()
 			system("cls");
 			GameManager::getInstance().SetRunning(false);
 		}
+		SetNeedsRender(true); // 렌더링
 	}
 	Sleep(50); // 반응 속도 안정화
 }

@@ -18,6 +18,7 @@ void BattleScene::Init()
 	system("cls");
 	SetCursorVisible(false);
 	std::cin.clear(); // 입력 버퍼 초기화
+	SetNeedsRender(true); // 렌더링
 	player = GameManager::getInstance().GetPlayer();
 
 	//몬스터 호출 수정
@@ -32,7 +33,7 @@ void BattleScene::Init()
 
 void BattleScene::Render()
 {
-
+	if ( !bNeedsRender ) return;
 	//플레이어 UI
 	Console_gotoxy(Player_X , Player_Y);     std::cout << "[" << player->Getstat().name << "]";
 	Console_gotoxy(Player_X , Player_Y + 2); std::cout << "      O     ";
@@ -153,6 +154,9 @@ void BattleScene::Render()
 		Console_gotoxy(textX , 16); std::cout << "플레이어는 [" << SceneManager::getInstance().Get_UseItem_Name() << "] 을(를) 사용했다";//인벤토리에서 받아온 아이템을 사용
 		Console_gotoxy(textX , 17); std::cout << "  ▶ (Enter)";
 	}
+	Console_gotoxy(0 , 0);
+
+	SetNeedsRender(false); // 렌더링 잠금
 }
 
 void BattleScene::Update()
@@ -162,6 +166,7 @@ void BattleScene::Update()
 	{
 		isKeyPressed = true;
 		WaitUntilKeyUp_Enter_Space();
+		SetNeedsRender(true); // 렌더링
 	}
 
 	if ( battleState == 0 && SceneManager::getInstance().Get_UseItem_Name() != "" )//만약 아이템을 사용하고 왔다면
@@ -183,6 +188,7 @@ void BattleScene::Update()
 			{
 				currentIndex = 1;
 			}
+			SetNeedsRender(true); // 렌더링
 		}
 		else if ( GetAsyncKeyState(VK_DOWN) & 0x8000 ) 
 		{
@@ -194,6 +200,7 @@ void BattleScene::Update()
 			{
 				currentIndex = 3;
 			}
+			SetNeedsRender(true); // 렌더링
 		}
 		else if ( GetAsyncKeyState(VK_LEFT) & 0x8000 ) 
 		{
@@ -205,6 +212,7 @@ void BattleScene::Update()
 			{
 				currentIndex = 2;
 			} 
+			SetNeedsRender(true); // 렌더링
 		}
 		else if ( GetAsyncKeyState(VK_RIGHT) & 0x8000 ) 
 		{
@@ -216,6 +224,7 @@ void BattleScene::Update()
 			{
 				currentIndex = 3;
 			} 
+			SetNeedsRender(true); // 렌더링
 		}
 
 		// 선택지 결정
@@ -238,6 +247,7 @@ void BattleScene::Update()
 				// 4. 포기
 				battleState = 6;
 			}
+			SetNeedsRender(true); // 렌더링
 		}
 	}
 	else if ( battleState == 1 ) //몬스터 공격 텍스트 출력

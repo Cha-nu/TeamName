@@ -79,8 +79,34 @@ void Player::ApplyDamage(int _damage){
 void Player::P_UseItem(int _index){
 	
 	ItemSlot CurrentItem = PlayerInventory->GetItemSlot(_index - 1);
-	CurrentItem.GetItem()->Use(*this);
-	PlayerInventory->RemoveItem(CurrentItem.GetItem()->GetID());
+	if (CurrentItem.GetItem()->GetTargetStat() == TargetStat::HP)
+	{
+		if (Playerstat.HP >= PlayerMaxstat.MaxHP)
+		{
+			return;
+		}
+		CurrentItem.GetItem()->Use(*this);
+		PlayerInventory->RemoveItem(CurrentItem.GetItem()->GetID());
+	}
+	else
+	{
+		CurrentItem.GetItem()->Use(*this);
+		PlayerInventory->RemoveItem(CurrentItem.GetItem()->GetID());
+	}
+	
+	
+}
+
+void Player::bOffPlayerBattle()
+{
+	if (bIsBattle) bIsBattle = false;
+	
+	if (!bIsBattle)
+	{
+		// 플레이어가 전장을 벗어날시 아이템으로 인해 증가한 공격력을 원상태로 되돌리기
+		// 필수 기능에서는 일단 공격력만 고려가 되있어서 이렇게 간단하게 MaxAtk_Damage의 값으로 Clamping하게 두었습니다.
+		Playerstat.Atk_Damage = PlayerMaxstat.MaxAtk_Damage;
+	}
 }
 
 // Player의 스탯확인용 디버깅 함수
@@ -91,6 +117,7 @@ void Player::ShowPlayerStat(){
 	std::cout << "Player Atk_damage: " << Playerstat.Atk_Damage << "\n";
 	std::cout << "Player Level: " << Playerstat.Level << "\n";
 	std::cout << "Player Stamina: " << Playerstat.Stamina << "\n";
+	std::cout << "Player GoldAmount: " << Gold << "\n";
 }
 
 void Player::LevelUp()

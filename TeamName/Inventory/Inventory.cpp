@@ -14,6 +14,11 @@ Inventory::~Inventory()
 	
 }
 
+const TargetStat ItemSlot::GetTargetStat() const
+{
+	return m_item ? m_item->GetTargetStat() : TargetStat::None;
+}
+
 void Inventory::AddItem(const std::string& id , int amount)
 {
 	int index = IsExist(id);
@@ -149,3 +154,4 @@ int Inventory::IsExist(const std::string& id) const
 
 	return -1;
 }
+

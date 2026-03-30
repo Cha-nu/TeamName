@@ -21,13 +21,14 @@ void Start_gotoxy(int x , int y) {
 void StartScene::Init() {
 	// 씬 진입 시 변수 초기화 및 추가할 변수 작성
 	currentIndex = 0; // [0327 추가] 게임 시작에 화살표가 있도록 초기화
-
+	SetNeedsRender(true); // 렌더링
 	// 콘솔 화면을 깨끗히 지우기
 	system("cls");
 }
 
 // 화면 출력
 void StartScene::Render() {
+	if ( !bNeedsRender ) return;
 	// 1. 타이틀 고정 출력 (콘솔 중앙쯤 위치하도록 좌표 설정)
 	Start_gotoxy(30, 5); std::cout << " _   __                                   ______ ______  _____ ";
 	Start_gotoxy(30, 6); std::cout << "| | / /                                   | ___ \\| ___ \\|  __ \\";
@@ -57,6 +58,7 @@ void StartScene::Render() {
 	else {
 		Start_gotoxy(50, 20); std::cout << "▶"; // 2번 위치에 화살표
 	}
+	SetNeedsRender(false); // 렌더링 잠금
 }
 
 // 입력 및 로직 처리
@@ -64,14 +66,17 @@ void StartScene::Update() {
 	// 위쪽 방향키 누름
 	if (GetAsyncKeyState(VK_UP) & 0x8000) {
 		currentIndex = 0;
+		SetNeedsRender(true); // 렌더링
 	}
 	// 아래쪽 방향키 누름
 	if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
 		currentIndex = 1;
+		SetNeedsRender(true); // 렌더링
 	}
 
 	// 스페이스바(VK_SPACE) 또는 엔터(VK_RETURN) 누름
 	if ((GetAsyncKeyState(VK_SPACE) & 0x8000) || GetAsyncKeyState(VK_RETURN) & 0x8000) {
+		SetNeedsRender(true); // 렌더링
 		system("cls");
 
 		if (currentIndex == 0) {

@@ -4,7 +4,7 @@
 #include "Monster/Monster.h"
 
 ConsumableItem::ConsumableItem(std::string id, const std::string& name, ItemRank rank, TargetStat stat, int amount, bool isDamage)
-	: ItemBase(id, name, rank), m_targetStat(stat), m_amount(amount), m_isDamage(isDamage)
+	: ItemBase(id, name, stat, rank), m_amount(amount), m_isDamage(isDamage)
 {
 	static const std::unordered_map<TargetStat, std::string> StatNames = {
 		{ TargetStat::HP, "체력" },
@@ -40,7 +40,7 @@ ConsumableItem::~ConsumableItem()
 
 void ConsumableItem::Use(Player& player) const
 {
-	int calculated_amount = m_amount * static_cast<int>(m_rank);
+	float calculated_amount = m_amount * static_cast<float>(m_rank);
 
 	if ( m_isDamage )
 	{
@@ -49,15 +49,15 @@ void ConsumableItem::Use(Player& player) const
 
 	if ( m_targetStat == TargetStat::HP )
 	{
-		player.SetStat().HP += calculated_amount;
+		player.SetStat().HP = StatClamp(player.Getstat().HP + calculated_amount, player.GetMaxStat().MaxHP);
 	}
 	else if ( m_targetStat == TargetStat::Stamina )
 	{
-		player.SetStat().Stamina += calculated_amount;
+		player.SetStat().Stamina += static_cast<int>(calculated_amount);
 	}
 	else if ( m_targetStat == TargetStat::Attack )
 	{
-		player.SetStat().Atk_Damage += calculated_amount;
+		player.SetStat().Atk_Damage = StatClamp(player.Getstat().Atk_Damage + calculated_amount, player.GetMaxStat().MaxAtk_Damage);
 	}
 }
 
@@ -72,4 +72,19 @@ void ConsumableItem::Use(Monster& target) const
 	{
 		target.takeDamage(-calculated_amount);
 	}
+}
+
+float ConsumableItem::StatClamp(float stat, float maxStat) const
+{
+	if ( stat < 0.0f )
+	{
+		return 0.0f;
+	}
+
+	if ( stat > maxStat )
+	{
+		return maxStat;
+	}
+
+	return stat;
 }

@@ -15,7 +15,6 @@ struct FPlayerStat{
     float HP = 200.f; // PlayerHP
     unsigned int Stamina = 0; // PlayerStamina
 	float Atk_Damage = 30; // Player Attack Damage
-	const float MaxAtk_Damage = 30.f;
 	unsigned int Level = 1; // PlayerLevel
 	unsigned short EXP = 0; // PlayerEXP
     std::string name = "None"; // PlayerName
@@ -24,8 +23,7 @@ struct FPlayerStat{
 
 struct FPlayerMaxStat
 {
-	friend class Player;
-private:
+public:
 	float MaxHP = 200.f;
 	float MaxAtk_Damage = 30.f;
 };
@@ -51,6 +49,7 @@ public:
     /*****Stat*****/
     void InitializeStat(float _hp,std::string _name,float _atkdamage, int _level,int _stamina = 0) override;
     _forceinline const FPlayerStat& Getstat() override{return Playerstat;}
+	_forceinline const FPlayerMaxStat& GetMaxStat() {return PlayerMaxstat;}
     _forceinline FPlayerStat& SetStat() override {return Playerstat;}
 	void AcquireEXP(int _exp);
 	
@@ -58,10 +57,19 @@ public:
     void Attack(Monster* _monster) override;
     void ApplyDamage(int _damage) override;
 	_forceinline bool bIsPlayerDead() const {return bIsDead;}
+	// 플레이어가 BattleScene에 진입시
+	_forceinline void bOnPlayerBattle() {bIsBattle = true;}
+	// 플레이어가 BattleScene에서 나갈시
+	void bOffPlayerBattle();
 	
 	/*****Utility*****/
+	// Inventory,Item
 	_forceinline Inventory* GetInventory() const {return PlayerInventory;}
 	void P_UseItem(int _index);
+	
+	// Gold
+	_forceinline int GetGoldAmount() const {return Gold;}
+	_forceinline void AcquireGold(const int _goldamount) {Gold += _goldamount;}
 	
 	// DebugFunc
 	// 플레이어 모든 스탯 출력용 디버그 함수입니다.
@@ -73,4 +81,9 @@ private:
 	FPlayerMaxStat PlayerMaxstat;
 	Inventory* PlayerInventory;
 	bool bIsDead = false;
+	// 플레이어가 배틀씬에 진입시(전투 상태)
+	bool bIsBattle = false;
+	
+	// 플레이어의 골드 보유량
+	int Gold = 0;
 };

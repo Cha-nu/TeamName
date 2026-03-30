@@ -43,7 +43,8 @@ public:
 	void AddItem(const std::string& id, int amount = 1);
 	void RemoveItem(const std::string& id, int amount = 1);
 
-	void PrintItemList();
+	void PrintItemList();//매개변수만 추가해서 사용할려고 했는데 이미 몬스터 파트에서 사용하고 있어서 따로 함수하나 더 구현했습니다. 
+	void PrintItemList(int inventoryState , int currentIndex);//인벤토리 씬 전용 프린트 함수 따로 구현했습니다.
 	const std::vector<ItemSlot>& GetItemSlots() const { return m_itemSlots; }
 	const ItemSlot& GetItemSlot(int index) const { return m_itemSlots.at(index); }
 

@@ -24,3 +24,11 @@ void SetCursorVisible(bool isVisible)
 	cursorInfo.bVisible = isVisible; // true면 보임, false면 숨김
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE) , &cursorInfo);
 }
+
+void WaitUntilKeyUp_Enter_Space() //Enter 또는 Space키 가 떼어질 때까지 프로그램의 실행을 일시 정지시키는 기능
+{
+	while ( (GetAsyncKeyState(VK_RETURN) & 0x8000) || (GetAsyncKeyState(VK_SPACE) & 0x8000) ) 
+	{
+		Sleep(10);
+	}
+}

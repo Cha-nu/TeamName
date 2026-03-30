@@ -171,8 +171,10 @@ void BattleScene::Update()
 
 	if ( battleState == 0 && SceneManager::getInstance().Get_UseItem_Name() != "" )//만약 아이템을 사용하고 왔다면
 	{
-		system("cls");//인벤토리를 사용하고왔는데 순간 전에 썻던 화면내용이 잠시 보여서 다 지우고 이 부분을 렌더링하게 구현
+		//system("cls");//인벤토리를 사용하고왔는데 순간 전에 썻던 화면내용이 잠시 보여서 다 지우고 이 부분을 렌더링하게 구현
+		//이제 씬 전화할때 마다 exit에서 해줌
 		battleState = 7;
+		SetNeedsRender(true);
 	}
 
 	if ( battleState == 0 )//Battle Scene에서 무슨 행동을 할 지 처리하는 부분 (선택지)
@@ -366,6 +368,7 @@ void BattleScene::Update()
 
 void BattleScene::Exit()
 {
+	system("cls");
 }
 
 void BattleScene::ClearTextBox()
@@ -387,7 +390,7 @@ void BattleScene::ClearMenuArrows()
 
 void BattleScene::ClearStatBox()
 {
-	for ( int i = 3; i <= 14; i++ ) 
+	for ( int i = 0; i <= 14; i++ ) 
 	{
 		Console_gotoxy(85 , i);
 		std::cout << "                         "; // 공백 25칸으로 덮어서 지움

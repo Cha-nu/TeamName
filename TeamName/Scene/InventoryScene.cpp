@@ -20,6 +20,12 @@ void InventoryScene::Init()
 
 void InventoryScene::Render()
 {
+	if ( !bNeedsRender ) 
+	{ 
+		return;
+	}
+	system("cls"); 
+
 	player->GetInventory()->PrintItemList(inventoryState , currentIndex);//아이템 리스트 뽑는 구문
 
 	if ( inventoryState == 0 && currentIndex == totalItems ) 
@@ -55,6 +61,8 @@ void InventoryScene::Render()
 			Console_gotoxy(popup_X + 9 , popup_Y + 5); std::cout << "->"; // 아니오
 		} 
 	}
+	Console_gotoxy(0 , 0);
+	SetNeedsRender(false);
 }
 
 void InventoryScene::Update()
@@ -130,9 +138,11 @@ void InventoryScene::Update()
 			}
 		}
 	}
+	SetNeedsRender(true);
 	Sleep(50);
 }
 
 void InventoryScene::Exit()
 {
+	system("cls");
 }

@@ -191,4 +191,5 @@ void MainScene::Update()
 
 void MainScene::Exit()
 {
+	system("cls");
 }

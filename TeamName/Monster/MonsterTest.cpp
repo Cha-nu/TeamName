@@ -2,6 +2,7 @@
 //#include <string>
 //#include "Monster.h"
 //#include "BossMonster.h"
+
 //int main(void) {
 //	NormalMonster* monster2 = new NormalMonster();
 //	monster2->getDropTableFromFile();

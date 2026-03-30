@@ -13,6 +13,8 @@ void InventoryScene::Init()
 {
 	system("cls");
 	SetCursorVisible(false);//인벤토리 print 함수를 빌려와서 일단 가시성을 위해 사용하지만 나중에 한번 고민해봐야 할듯 
+	std::cin.clear();// 입력 버퍼 초기화
+	SetNeedsRender(true); // 렌더링
 	player = GameManager::getInstance().GetPlayer();
 	totalItems = player->GetInventory()->GetItemSlots().size();
 	WaitUntilKeyUp_Enter_Space();
@@ -72,6 +74,7 @@ void InventoryScene::Update()
 	{
 		isKeyPressed = true;//키를 눌렀다고 인식을 함
 		WaitUntilKeyUp_Enter_Space();
+		SetNeedsRender(true);
 	}
 
 	if ( inventoryState == 0 ) 
@@ -82,6 +85,7 @@ void InventoryScene::Update()
 			{
 				currentIndex--;//"->"위치를 올리는 부분 (콘솔 좌표는 왼쪽위가 0,0이다)
 			}
+			SetNeedsRender(true);
 		}
 		else if ( GetAsyncKeyState(VK_DOWN) & 0x8000 ) 
 		{
@@ -89,6 +93,7 @@ void InventoryScene::Update()
 			{
 				currentIndex++;//"->"아래로 내리는  부분 
 			} 
+			SetNeedsRender(true);
 		}
 		if ( isKeyPressed )
 		{
@@ -101,6 +106,7 @@ void InventoryScene::Update()
 				inventoryState = 1;// 아이템을 선택한 경우 (팝업창 띄우기)
 				confirmIndex = 0; // 팝업창 '예','아니오'선택지 위치 '예'부터 시작하게 고정
 			}
+			SetNeedsRender(true);
 		}
 	}
 	else if ( inventoryState == 1 ) 
@@ -108,10 +114,12 @@ void InventoryScene::Update()
 		if ( GetAsyncKeyState(VK_UP) & 0x8000 ) 
 		{
 			confirmIndex = 0; // 예 (위)
+			SetNeedsRender(true);
 		}
 		else if ( GetAsyncKeyState(VK_DOWN) & 0x8000 ) 
 		{
 			confirmIndex = 1; // 아니오 (아래)
+			SetNeedsRender(true);
 		}
 
 		if ( isKeyPressed )
@@ -136,9 +144,10 @@ void InventoryScene::Update()
 			{
 				inventoryState = 0;
 			}
+			SetNeedsRender(true);
 		}
 	}
-	SetNeedsRender(true);
+	
 	Sleep(50);
 }
 

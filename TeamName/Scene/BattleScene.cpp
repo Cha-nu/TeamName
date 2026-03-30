@@ -37,10 +37,11 @@ void BattleScene::Render()
 {
 	if ( !bNeedsRender ) return;
 	//플레이어 UI
-	Console_gotoxy(Player_X , Player_Y);     std::cout << "[" << player->Getstat().name << "]";
-	Console_gotoxy(Player_X , Player_Y + 2); std::cout << "      O     ";
-	Console_gotoxy(Player_X , Player_Y + 3); std::cout << "     /|\\    ";
-	Console_gotoxy(Player_X , Player_Y + 4); std::cout << "     / \\    ";
+	Console_gotoxy(Player_X + 5 , Player_Y);     std::cout << "[" << player->Getstat().name << "]";
+	Console_gotoxy(Player_X , Player_Y + 2); std::cout << "     (o_o)   "; // 피곤하지만 부릅뜬 눈
+	Console_gotoxy(Player_X , Player_Y + 3); std::cout << "    /[_]|\\  "; // 무거운 백팩(또는 노트북 가방)
+	Console_gotoxy(Player_X , Player_Y + 4); std::cout << "      | |    ";
+	Console_gotoxy(Player_X , Player_Y + 5); std::cout << "     /   \\   ";
 
 	//몬스터 UI
 	DrawMonster(monster->getName() , Monster_X , Monster_Y);

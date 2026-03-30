@@ -9,7 +9,7 @@
 
 Shop::Shop()
 {
-
+	m_stockList.reserve(MAX_DISPLAY_NUM);
 }
 
 Shop::~Shop()

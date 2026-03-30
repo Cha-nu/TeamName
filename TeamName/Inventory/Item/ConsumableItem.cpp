@@ -63,7 +63,7 @@ void ConsumableItem::Use(Player& player) const
 	}
 	else if ( m_targetStat == TargetStat::Attack )
 	{
-		player.SetStat().Atk_Damage = StatClamp(player.Getstat().Atk_Damage + calculated_amount, player.GetMaxStat().MaxAtk_Damage);
+		player.SetStat().Atk_Damage += static_cast<int>(calculated_amount);
 	}
 }
 

@@ -1,11 +1,13 @@
 ﻿#pragma once
 #include<iostream>
 #include <string>
-#include <vector>
 #include <random>
 #include "../Player/Player.h"
 #include "../Inventory/Inventory.h"
 #include "../Inventory/Item/ItemBase.h"
+#include <fstream>
+#include <sstream>
+#include<algorithm>
 class ItemBase;
 
 struct MonsterStat {
@@ -59,7 +61,6 @@ public:
 	}
 
 
-
 	//name, hp, atk, exp, droptable getter setter
 	virtual std::string getName() const { return this->stat.name; }
 	virtual int getHealth() const { return this->stat.hp; }
@@ -71,6 +72,9 @@ public:
 	virtual void setHealth(int hp) { this->stat.hp = hp; }
 	virtual void setAttack(int atk) { this->stat.atk = atk; }
 	virtual void setExp(int exp) { this->stat.give_exp = exp; }
+
+	virtual bool getDropTableFromFile() = 0;
+
 
 	//드랍테이블(Inventory)에 아이템 추가
 	virtual void addToDroptable(const std::string& id, int amount) {
@@ -150,6 +154,7 @@ class NormalMonster : public Monster {
 public:
 	NormalMonster(MonsterStat stat = {});
 	virtual ~NormalMonster() {}
+	bool getDropTableFromFile() override;
 	//디버그용 연산자 오버라이딩
 	friend std::ostream& operator<<(std::ostream& os , const NormalMonster& m);
 };

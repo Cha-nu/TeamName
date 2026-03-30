@@ -10,6 +10,40 @@ void BossMonster::initializeIntro(std::string dialog) {
 	this->dialogue = dialog;
 }
 
+bool BossMonster::getDropTableFromFile() {
+	std::string url = "Monster/Data/BossDroptable.ini";
+	std::string txt;
+	std::string id;
+	int count;
+	std::fstream open_file(url);
+
+	if ( open_file.is_open() ) {
+		char bom[3];
+		open_file.read(bom , 3);
+		if ( !((unsigned char)bom[0] == 0xEF &&
+			(unsigned char)bom[1] == 0xBB &&
+			(unsigned char)bom[2] == 0xBF) ) {
+			open_file.seekg(0);
+		}
+		while ( std::getline(open_file , txt) ) {
+			if ( txt.empty() || txt[0] == '/' && txt[1] == '/' ) {
+				continue;
+			}
+			std::stringstream _tmp = std::stringstream(txt);
+			std::getline(_tmp , id , ',');
+			std::cout << id << std::endl;
+			std::getline(_tmp , txt , ',');
+			count = std::stoi(txt);
+			std::cout << count << std::endl;
+			droptable->AddItem(id , count);
+		}
+		return true;
+	}
+	else {
+		return false;
+	}	
+}
+
 //등장 대사 return
 std::string BossMonster::introMonster() {
 	std::string intro;

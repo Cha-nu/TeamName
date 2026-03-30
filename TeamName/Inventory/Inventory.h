@@ -48,11 +48,10 @@ public:
 	const std::vector<ItemSlot>& GetItemSlots() const { return m_itemSlots; }
 	const ItemSlot& GetItemSlot(int index) const { return m_itemSlots.at(index); }
 	size_t GetItemCount() const { return m_itemSlots.size(); }
+	bool IsFull() const { return m_itemSlots.size() >= MAX_INVENTORY_SIZE; }
 
 private:
 	std::vector<ItemSlot> m_itemSlots;
-
-	bool IsFull() const { return m_itemSlots.size() >= MAX_INVENTORY_SIZE; }
 
 	// ID에 해당하는 아이템이 있는지 확인한 후, 있다면 해당 아이템의 인덱스를 반환, 없다면 -1 반환
 	int IsExist(const std::string& id) const;

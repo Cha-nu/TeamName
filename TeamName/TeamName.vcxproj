@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConsoleHelper.cpp" />
+    <ClCompile Include="DrawHelper.cpp" />
     <ClCompile Include="Manager\SoundManager\SoundManager.cpp" />
     <ClCompile Include="Scene_M\EndingScene\EndingScene.cpp" />
     <ClCompile Include="Inventory\Inventory.cpp" />
@@ -230,6 +231,7 @@
   <ItemGroup>
     <ClInclude Include="ConsoleHelper.h" />
     <ClInclude Include="Data\ItemKey.h" />
+    <ClInclude Include="DrawHelper.h" />
     <ClInclude Include="Manager\SoundManager\SoundManager.h" />
     <ClInclude Include="Scene_M\EndingScene\EndingScene.h" />
     <ClInclude Include="Inventory\Inventory.h" />

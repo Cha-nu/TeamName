@@ -98,7 +98,8 @@ public:
 	} 
 
 	//드롭할 아이템 get
-	virtual ItemSlot getDropItem() {
+	virtual ItemSlot getDropItem() 
+	{
 		if ( this->droptable->GetItemCount() > 0 ) {
 			static std::random_device rd;
 			static std::mt19937 gen(rd());

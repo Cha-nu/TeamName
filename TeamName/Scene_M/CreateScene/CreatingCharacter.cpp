@@ -88,7 +88,10 @@ void CharacterChoice::Update() {
 	int cx, cy;
 	GetCreateScreenCenterXY(cx, cy);
 
-	std::cin.ignore(INT_MAX , '\n');
+	// OS 버퍼에 쌓인 모든 입력 강제 소각
+	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
+	std::cin.clear();
+
 	// 플레이어 이름 입력 받기 (위치는 중앙으로 설정)
 	Create_gotoxy(cx - 20, cy + 14);  std::cout << ">> 닉네임을 입력하세요: ";
 	std::cin >> name;

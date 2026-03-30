@@ -25,6 +25,7 @@ void BattleScene::Init()
 	//몬스터 호출 수정
 	GameManager::getInstance().CreateMonster(); // IsTutorial = GameManager::getInstance().CreateMonster();로 변경하시면 튜토리얼 보스 여부를 BattleScene에서 알 수 있습니다.
 	monster = GameManager::getInstance().GetMonster();//몬스터 동적할당
+	monster->getDropTableFromFile();
 	//battleScene 들어갈 때 전투상태로 변경
 	player->bOnPlayerBattle();
 
@@ -37,10 +38,11 @@ void BattleScene::Render()
 {
 	if ( !bNeedsRender ) return;
 	//플레이어 UI
-	Console_gotoxy(Player_X , Player_Y);     std::cout << "[" << player->Getstat().name << "]";
-	Console_gotoxy(Player_X , Player_Y + 2); std::cout << "      O     ";
-	Console_gotoxy(Player_X , Player_Y + 3); std::cout << "     /|\\    ";
-	Console_gotoxy(Player_X , Player_Y + 4); std::cout << "     / \\    ";
+	Console_gotoxy(Player_X + 5 , Player_Y);     std::cout << "[" << player->Getstat().name << "]";
+	Console_gotoxy(Player_X , Player_Y + 2); std::cout << "     (o_o)   "; // 피곤하지만 부릅뜬 눈
+	Console_gotoxy(Player_X , Player_Y + 3); std::cout << "    /[_]|\\  "; // 무거운 백팩(또는 노트북 가방)
+	Console_gotoxy(Player_X , Player_Y + 4); std::cout << "      | |    ";
+	Console_gotoxy(Player_X , Player_Y + 5); std::cout << "     /   \\   ";
 
 	//몬스터 UI
 	DrawMonster(monster->getName() , Monster_X , Monster_Y);
@@ -377,7 +379,7 @@ void BattleScene::Update()
 			}
 		}
 	}
-	else if ( battleState == 8 ) 
+	else if ( battleState == 8 ) //보스잡고나서 처리하는 부분
 	{
 		if ( isKeyPressed )
 		{

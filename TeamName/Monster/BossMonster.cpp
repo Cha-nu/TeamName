@@ -32,10 +32,10 @@ bool BossMonster::getDropTableFromFile() {
 			}
 			std::stringstream _tmp = std::stringstream(txt);
 			std::getline(_tmp , id , ',');
-			std::cout << id << std::endl;
+			//std::cout << id << std::endl;
 			std::getline(_tmp , txt , ',');
 			count = std::stoi(txt);
-			std::cout << count << std::endl;
+			//std::cout << count << std::endl;
 			droptable->AddItem(id , count);
 		}
 		open_file.close();

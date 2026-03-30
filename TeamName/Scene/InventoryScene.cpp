@@ -118,7 +118,7 @@ void InventoryScene::Update()
 			}
 			else if ( totalItems > 0 )
 			{
-				if ( player->GetIsBattle() == true ) //전투 상태일 때 나오는 창
+				if ( player->bIsPlayerBattle() == true ) //전투 상태일 때 나오는 창
 				{
 					inventoryState = 1;// 아이템을 선택한 경우 (팝업창 띄우기)
 					confirmIndex = 0; // 팝업창 '예','아니오'선택지 위치 '예'부터 시작하게 고정

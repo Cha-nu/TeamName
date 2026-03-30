@@ -64,8 +64,7 @@ public:
 	_forceinline void bOnPlayerBattle() {bIsBattle = true;}
 	// 플레이어가 BattleScene에서 나갈시
 	void bOffPlayerBattle();
-	//Get함수 구현했습니다.
-	_forceinline bool GetIsBattle() const { return bIsBattle; }
+
 
 
 	/*****Utility*****/

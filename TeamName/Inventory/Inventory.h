@@ -46,6 +46,7 @@ public:
 	void PrintItemList();
 	const std::vector<ItemSlot>& GetItemSlots() const { return m_itemSlots; }
 	const ItemSlot& GetItemSlot(int index) const { return m_itemSlots.at(index); }
+	size_t GetItemCount() const { return m_itemSlots.size(); }
 
 private:
 	std::vector<ItemSlot> m_itemSlots;

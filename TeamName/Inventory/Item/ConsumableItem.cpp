@@ -3,8 +3,8 @@
 #include "Player/Player.h"
 #include "Monster/Monster.h"
 
-ConsumableItem::ConsumableItem(std::string id, const std::string& name, ItemRank rank, TargetStat stat, int amount, bool isDamage)
-	: ItemBase(id, name, stat, rank), m_amount(amount), m_isDamage(isDamage)
+ConsumableItem::ConsumableItem(std::string id, const std::string& name, ItemRank rank, TargetStat stat, int gold, int amount, bool isDamage)
+	: ItemBase(id, name, stat, rank, gold), m_amount(amount), m_isDamage(isDamage)
 {
 	static const std::unordered_map<TargetStat, std::string> StatNames = {
 		{ TargetStat::HP, "체력" },

@@ -17,6 +17,18 @@ void InventoryScene::Init()
 	SetNeedsRender(true); // 렌더링
 	player = GameManager::getInstance().GetPlayer();
 	totalItems = player->GetInventory()->GetItemSlots().size();
+
+
+	int cx , cy;
+	GetScreen_Center_XY(cx , cy); // 헬퍼 함수 호출
+
+	invX = cx - 31; // 인벤토리 폭(62)의 절반을 왼쪽으로
+	invY = cy - 10; // 중앙보다 살짝 위에서 시작
+
+	popup_X = cx - 17; // 팝업창 폭의 절반
+	popup_Y = cy - 2;  // 화면 정중앙 부근
+
+
 	WaitUntilKeyUp_Enter_Space();
 }
 
@@ -26,11 +38,20 @@ void InventoryScene::Render()
 	{ 
 		return;
 	}
-	system("cls");
 
-	player->GetInventory()->PrintItemList(inventoryState , currentIndex);//아이템 리스트 뽑는 구문
+	if ( inventoryState == 0 )
+	{
+		for ( int i = 0; i <= 7; i++ )
+		{
+			// 헤더에 저장된 popup_X, popup_Y 사용!
+			Console_gotoxy(popup_X , popup_Y + i);
+			std::cout << "                                    "; // 36칸 공백 지우개
+		}
+	}
 
-	if ( inventoryState == 0 && currentIndex == totalItems ) 
+	nextY = player->GetInventory()->PrintItemList(inventoryState , currentIndex , invX , invY);
+	Console_gotoxy(invX , nextY);
+	if ( inventoryState == 0 && currentIndex == totalItems )
 	{
 		std::cout << "  ->  ";
 	}
@@ -54,6 +75,9 @@ void InventoryScene::Render()
 		Console_gotoxy(popup_X , popup_Y + 6); std::cout << "|                                  |";
 		Console_gotoxy(popup_X , popup_Y + 7); std::cout << "+----------------------------------+";
 
+		// 팝업창 내부 화살표 지우개
+		//Console_gotoxy(popup_X + 9 , popup_Y + 4); std::cout << "  ";
+		//Console_gotoxy(popup_X + 9 , popup_Y + 5); std::cout << "  ";
 		if ( confirmIndex == 0 ) 
 		{ 
 			Console_gotoxy(popup_X + 9 , popup_Y + 4); std::cout << "->"; // 예

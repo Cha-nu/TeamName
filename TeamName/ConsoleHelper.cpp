@@ -32,3 +32,15 @@ void WaitUntilKeyUp_Enter_Space() //Enter 또는 Space키 가 떼어질 때까�
 		Sleep(10);
 	}
 }
+
+void GetScreen_Center_XY(int& centerX , int& centerY) 
+{
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE) , &csbi);
+	int width = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+	int height = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+
+	// 가로, 세로의 중앙 지점 계산
+	centerX = width / 2;
+	centerY = height / 2;
+}

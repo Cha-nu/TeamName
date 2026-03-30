@@ -21,11 +21,13 @@ private:
 	void ClearTextBox();//텍스트 삭제하는 부분
 	void ClearMenuArrows();//텍스트 나올 때 화살표 사라지게 해서 선택이 안되게
 	void ClearStatBox();//능력치 팝업창 삭제
+	void DrawFistEffect(); // 공격할 때 타격감 주는 효과
 public:
 	~BattleScene() override;
 	void Init() override;
 	void Render() override;
 	void Update() override;
 	void Exit() override;
+	
 };
 

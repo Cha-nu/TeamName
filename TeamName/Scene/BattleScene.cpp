@@ -16,7 +16,7 @@
 void BattleScene::Init()
 {
 	system("cls");
-	SetCursorVisible(true);
+	SetCursorVisible(false);
 	std::cin.clear(); // 입력 버퍼 초기화
 	player = GameManager::getInstance().GetPlayer();
 

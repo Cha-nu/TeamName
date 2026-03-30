@@ -111,7 +111,7 @@ bool GameManager::CreateMonster()
 	{
 		delete CurrentMonster;
 		int randomMonsterNum = rand() % static_cast<int>(MonsterName.size()); // 몬스터 수에 맞춰 랜덤 번호 생성
-		std::cout << "랜덤 몬스터 번호: " << randomMonsterNum << '\n'; // 디버그용 랜덤 번호 출력	
+		//std::cout << "랜덤 몬스터 번호: " << randomMonsterNum << '\n'; // 디버그용 랜덤 번호 출력	
 		if (DebugKey) CurrentMonster = new NormalMonster({ MonsterName[randomMonsterNum], 1, 1, 100 });
 		else CurrentMonster = new NormalMonster({ MonsterName[randomMonsterNum], level*20, level*5, level * 10 });
 	}

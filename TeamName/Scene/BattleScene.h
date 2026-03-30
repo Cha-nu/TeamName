@@ -9,6 +9,8 @@ class BattleScene :public Scene
 private:
 	Player* player;
 	Monster* monster;
+	std::string monster_dropItem_name = "";
+	int monster_drop_Gold = 0;
 	int Player_X = 15 , Player_Y = 4;//Player 이미지 위치
 	int Monster_X = 55 , Monster_Y = 0;//Monster 이미지 위치
 	int currentIndex = 0;//현재 화살표 위치값

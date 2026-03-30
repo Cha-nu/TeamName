@@ -57,7 +57,7 @@ void BattleScene::Render()
 	int hpY = cy - 5;       
 
 	//플레이어 UI
-	Console_gotoxy(Player_X + 3 , Player_Y);     std::cout << "[" << player->Getstat().name << "]";
+	Console_gotoxy(Player_X + 4 , Player_Y);     std::cout << "[" << player->Getstat().name << "]";
 	Console_gotoxy(Player_X , Player_Y + 2); std::cout << "     (o_o)   "; // 피곤하지만 부릅뜬 눈
 	Console_gotoxy(Player_X , Player_Y + 3); std::cout << "    /[_]|\\  "; // 무거운 백팩(또는 노트북 가방)
 	Console_gotoxy(Player_X , Player_Y + 4); std::cout << "      | |    ";

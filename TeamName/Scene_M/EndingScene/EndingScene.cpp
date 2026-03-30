@@ -45,18 +45,18 @@ void EndingScene::Render() {
 	GetScreenCenterXY(cx , cy);
 
 	// 타이틀 고정 출력 (콘솔 중앙쯤 위치하도록 좌표 설정)
-	Ending_gotoxy(cx - 40 , cy - 12); std::cout << " _   _  _        _                        _ ";
-	Ending_gotoxy(cx - 40 , cy - 11); std::cout << "| | | |(_)      | |                      | |";
-	Ending_gotoxy(cx - 40 , cy - 10); std::cout << "| | | | _   ___ | |_   ___   _ __  _   _ | |";
-	Ending_gotoxy(cx - 40 , cy - 9); std::cout << "| | | || | / __|| __| / _ \\ | '__|| | | || |";
-	Ending_gotoxy(cx - 40 , cy - 8); std::cout << "\\ \\_/ /| || (__ | |_ | (_) || |   | |_| ||_|";
-	Ending_gotoxy(cx - 40 , cy - 7); std::cout << " \\___/ |_| \\___| \\__| \\___/ |_|    \\__, |(_)";
-	Ending_gotoxy(cx - 40 , cy - 6); std::cout << "                                    __/ |   ";
-	Ending_gotoxy(cx - 40 , cy - 5); std::cout << "                                   |___/    ";
+	Ending_gotoxy(cx - 20 , cy - 12); std::cout << " _   _  _        _                        _ ";
+	Ending_gotoxy(cx - 20 , cy - 11); std::cout << "| | | |(_)      | |                      | |";
+	Ending_gotoxy(cx - 20 , cy - 10); std::cout << "| | | | _   ___ | |_   ___   _ __  _   _ | |";
+	Ending_gotoxy(cx - 20 , cy - 9); std::cout << "| | | || | / __|| __| / _ \\ | '__|| | | || |";
+	Ending_gotoxy(cx - 20 , cy - 8); std::cout << "\\ \\_/ /| || (__ | |_ | (_) || |   | |_| ||_|";
+	Ending_gotoxy(cx - 20 , cy - 7); std::cout << " \\___/ |_| \\___| \\__| \\___/ |_|    \\__, |(_)";
+	Ending_gotoxy(cx - 20 , cy - 6); std::cout << "                                    __/ |   ";
+	Ending_gotoxy(cx - 20 , cy - 5); std::cout << "                                   |___/    ";
 
-	Ending_gotoxy(cx - 40 , cy - 3); std::cout << "=========================================";
-	Ending_gotoxy(cx - 40 , cy - 2); std::cout << "            취업에 성공했습니다!            ";
-	Ending_gotoxy(cx - 40 , cy - 1); std::cout << "=========================================";
+	Ending_gotoxy(cx - 20 , cy - 3); std::cout << "=========================================";
+	Ending_gotoxy(cx - 20 , cy - 2); std::cout << "            취업에 성공했습니다!            ";
+	Ending_gotoxy(cx - 20 , cy - 1); std::cout << "=========================================";
 
 	Ending_gotoxy(cx - 7 , cy + 3); std::cout << "* 다시 시작";
 	Ending_gotoxy(cx - 7, cy + 5); std::cout << "* 게임 나가기";
@@ -102,8 +102,8 @@ void EndingScene::Update() {
 			Ending_gotoxy(cx - 20 , cy - 3); std::cout << "=========================================";
 			Sleep(1500); // 1.5초 대기 후 진행
 
-			// 생성 화면(CreateScene)으로 이동
-			SceneManager::getInstance().Replace_Scene(new EndingScene());
+			// 시작 화면(StartScene)으로 이동
+			SceneManager::getInstance().Replace_Scene(new StartScene());
 			return; // 씬이 교체되었으므로 Update 종료
 		}
 		else if ( currentIndex == 1 ) {

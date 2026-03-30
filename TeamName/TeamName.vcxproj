@@ -259,6 +259,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\ItemData.csv" />
+    <None Include="Monster\Data\BossDroptable.ini" />
+    <None Include="Monster\Data\NormalDroptable.ini" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Player\PlayerTypes.h" />

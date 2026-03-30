@@ -11,7 +11,7 @@
 class ConsumableItem : public ItemBase
 {
 public:
-	ConsumableItem(std::string id, const std::string& name, ItemRank rank, TargetStat stat, int amount, bool isDamage = false);
+	ConsumableItem(std::string id, const std::string& name, ItemRank rank, TargetStat stat, int gold, int amount, bool isDamage = false);
 	virtual ~ConsumableItem();
 	
 	virtual void Use(Player& player) const override;

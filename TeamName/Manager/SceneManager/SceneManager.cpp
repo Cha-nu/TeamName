@@ -38,15 +38,6 @@ void SceneManager::Return_Scene()
 
 		SceneStack.pop();//꺼내야하니까 pop
 	}
-
-	//if ( !SceneStack.empty() ) //꺼냈으니 전에 있던 씬을 불러오기
-	//{
-	//	//SceneStack.top()->Init();//저장되어있던 씬 초기값 호출
-	//}
-	//else //아예 씬이 없는데 pop을 할려고 하는거라 
-	//{
-	//	//오류가 나오는 출력 부분 
-	//}
 }
 
 void SceneManager::Replace_Scene(Scene* newScene)

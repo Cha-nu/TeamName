@@ -47,6 +47,7 @@ public:
 	void PrintItemList(int inventoryState , int currentIndex);//인벤토리 씬 전용 프린트 함수 따로 구현했습니다.
 	const std::vector<ItemSlot>& GetItemSlots() const { return m_itemSlots; }
 	const ItemSlot& GetItemSlot(int index) const { return m_itemSlots.at(index); }
+	size_t GetItemCount() const { return m_itemSlots.size(); }
 
 private:
 	std::vector<ItemSlot> m_itemSlots;

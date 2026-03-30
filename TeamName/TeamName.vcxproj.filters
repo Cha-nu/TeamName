@@ -84,6 +84,7 @@
     <ClCompile Include="Scene_M\EndingScene\EndingScene.cpp" />
     <ClCompile Include="Manager\SoundManager\SoundManager.cpp" />
     <ClCompile Include="Shop\Shop.cpp" />
+    <ClCompile Include="DrawHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Manager\GameManager\GameManager.h">
@@ -148,6 +149,7 @@
     <ClInclude Include="Scene_M\EndingScene\EndingScene.h" />
     <ClInclude Include="Manager\SoundManager\SoundManager.h" />
     <ClInclude Include="Shop\Shop.h" />
+    <ClInclude Include="DrawHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\ItemData.csv" />

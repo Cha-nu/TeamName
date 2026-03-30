@@ -6,9 +6,9 @@
 #include "Manager/SceneManager/SceneManager.h"
 #include"Scene_M/EndScene/EndScene.h"
 #include"Scene\InventoryScene.h"
-#include<iostream>
 #include<iomanip>
 #include"ConsoleHelper.h"
+#include"DrawHelper.h"
 
 #include"Data/ItemKey.h"
 
@@ -43,10 +43,7 @@ void BattleScene::Render()
 	Console_gotoxy(Player_X , Player_Y + 4); std::cout << "     / \\    ";
 
 	//몬스터 UI
-	Console_gotoxy(Monster_X , Monster_Y);     std::cout << "[" << monster->getName() << "]";
-	Console_gotoxy(Monster_X , Monster_Y + 2); std::cout << "      O     ";
-	Console_gotoxy(Monster_X , Monster_Y + 3); std::cout << "     /|\\    ";
-	Console_gotoxy(Monster_X , Monster_Y + 4); std::cout << "     / \\    ";
+	DrawMonster(monster->getName() , Monster_X , Monster_Y);
 
 	// 실시간 HP 표기
 	Console_gotoxy(Player_X , 10); std::cout << "HP:      ";

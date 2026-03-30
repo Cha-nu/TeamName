@@ -56,6 +56,9 @@ public:
     /*****Battle*****/
     void Attack(Monster* _monster) override;
     void ApplyDamage(int _damage) override;
+	// 현재 플레이어가 배틀중인지
+	_forceinline bool bIsPlayerBattle() const {return bIsBattle;}
+	// 플레이어의 생존 여부
 	_forceinline bool bIsPlayerDead() const {return bIsDead;}
 	// 플레이어가 BattleScene에 진입시
 	_forceinline void bOnPlayerBattle() {bIsBattle = true;}

@@ -16,6 +16,18 @@ void Ending_gotoxy(int x, int y) {
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE) , pos);
 }
 
+// 화면의 중앙 좌표를 구하는 도우미 함수
+static void GetScreenCenterXY(int& centerX , int& centerY) {
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE) , &csbi);
+	int width = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+	int height = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+
+	// 가로, 세로의 중앙 지점 계산
+	centerX = width / 2;
+	centerY = height / 2;
+}
+
 // 초기화 함수 (1회 실행)
 void EndingScene::Init() {
 	// 씬 진입 시 변수 초기화 및 추가할 변수 작성
@@ -28,33 +40,37 @@ void EndingScene::Init() {
 // 화면 출력
 void EndingScene::Render() {
 	if ( !bNeedsRender ) return;
+
+	int cx , cy;
+	GetScreenCenterXY(cx , cy);
+
 	// 타이틀 고정 출력 (콘솔 중앙쯤 위치하도록 좌표 설정)
-	Ending_gotoxy(40 , 5); std::cout << " _   _  _        _                        _ ";
-	Ending_gotoxy(40 , 6); std::cout << "| | | |(_)      | |                      | |";
-	Ending_gotoxy(40 , 7); std::cout << "| | | | _   ___ | |_   ___   _ __  _   _ | |";
-	Ending_gotoxy(40 , 8); std::cout << "| | | || | / __|| __| / _ \\ | '__|| | | || |";
-	Ending_gotoxy(40 , 9); std::cout << "\\ \\_/ /| || (__ | |_ | (_) || |   | |_| ||_|";
-	Ending_gotoxy(40 , 10); std::cout << " \\___/ |_| \\___| \\__| \\___/ |_|    \\__, |(_)";
-	Ending_gotoxy(40 , 11); std::cout << "                                    __/ |   ";
-	Ending_gotoxy(40 , 12); std::cout << "                                   |___/    ";
+	Ending_gotoxy(cx - 20 , cy - 12); std::cout << " _   _  _        _                        _ ";
+	Ending_gotoxy(cx - 20 , cy - 11); std::cout << "| | | |(_)      | |                      | |";
+	Ending_gotoxy(cx - 20 , cy - 10); std::cout << "| | | | _   ___ | |_   ___   _ __  _   _ | |";
+	Ending_gotoxy(cx - 20 , cy - 9); std::cout << "| | | || | / __|| __| / _ \\ | '__|| | | || |";
+	Ending_gotoxy(cx - 20 , cy - 8); std::cout << "\\ \\_/ /| || (__ | |_ | (_) || |   | |_| ||_|";
+	Ending_gotoxy(cx - 20 , cy - 7); std::cout << " \\___/ |_| \\___| \\__| \\___/ |_|    \\__, |(_)";
+	Ending_gotoxy(cx - 20 , cy - 6); std::cout << "                                    __/ |   ";
+	Ending_gotoxy(cx - 20 , cy - 5); std::cout << "                                   |___/    ";
 
-	Ending_gotoxy(40 , 14); std::cout << "=========================================";
-	Ending_gotoxy(40 , 15); std::cout << "            취업에 성공했습니다!            ";
-	Ending_gotoxy(40 , 16); std::cout << "=========================================";
+	Ending_gotoxy(cx - 20 , cy - 3); std::cout << "=========================================";
+	Ending_gotoxy(cx - 20 , cy - 2); std::cout << "            취업에 성공했습니다!            ";
+	Ending_gotoxy(cx - 20 , cy - 1); std::cout << "=========================================";
 
-	Ending_gotoxy(53 , 18); std::cout << "* 다시 시작";
-	Ending_gotoxy(53 , 20); std::cout << "* 게임 나가기";
+	Ending_gotoxy(cx - 7 , cy + 3); std::cout << "* 다시 시작";
+	Ending_gotoxy(cx - 7, cy + 5); std::cout << "* 게임 나가기";
 
 	// 3. 화살표 그리기 (기존 위치는 지우고 새 위치에 그리기)
-	Ending_gotoxy(50 , 18); std::cout << " "; // 1번 앞 공백으로 지우기
-	Ending_gotoxy(50 , 20); std::cout << " "; // 2번 앞 공백으로 지우기
+	Ending_gotoxy(cx - 10, cy + 3); std::cout << " "; // 1번 앞 공백으로 지우기
+	Ending_gotoxy(cx - 10, cy + 5); std::cout << " "; // 2번 앞 공백으로 지우기
 
 	// 3-1. 화살표 그리기 (공백으로 지운 위치에 화살표 출력)
 	if ( currentIndex == 0 ) {
-		Ending_gotoxy(50 , 18); std::cout << "▶"; // 1번 위치에 화살표
+		Ending_gotoxy(cx - 10 , cy + 3); std::cout << "▶"; // 1번 위치에 화살표
 	}
 	else {
-		Ending_gotoxy(50 , 20); std::cout << "▶"; // 2번 위치에 화살표
+		Ending_gotoxy(cx - 10 , cy + 5); std::cout << "▶"; // 2번 위치에 화살표
 	}
 	SetNeedsRender(false); // 렌더링 잠금
 }
@@ -77,20 +93,23 @@ void EndingScene::Update() {
 		SetNeedsRender(true); // 렌더링
 		system("cls");
 
+		int cx , cy;
+		GetScreenCenterXY(cx , cy);
+
 		if ( currentIndex == 0 ) {
-			Ending_gotoxy(40 , 10); std::cout << "=========================================";
-			Ending_gotoxy(40 , 11); std::cout << "               돌아가는 중...             ";
-			Ending_gotoxy(40 , 12); std::cout << "=========================================";
+			Ending_gotoxy(cx - 20 , cy - 5); std::cout << "=========================================";
+			Ending_gotoxy(cx - 20 , cy - 4); std::cout << "               돌아가는 중...             ";
+			Ending_gotoxy(cx - 20 , cy - 3); std::cout << "=========================================";
 			Sleep(1500); // 1.5초 대기 후 진행
 
-			// 생성 화면(CreateScene)으로 이동
-			SceneManager::getInstance().Replace_Scene(new EndingScene());
+			// 시작 화면(StartScene)으로 이동
+			SceneManager::getInstance().Replace_Scene(new StartScene());
 			return; // 씬이 교체되었으므로 Update 종료
 		}
 		else if ( currentIndex == 1 ) {
-			Ending_gotoxy(40 , 10); std::cout << "=========================================";
-			Ending_gotoxy(40 , 11); std::cout << "            현실로 돌아갑니다...           ";
-			Ending_gotoxy(40 , 12); std::cout << "=========================================";
+			Ending_gotoxy(cx - 20 , cy - 5); std::cout << "=========================================";
+			Ending_gotoxy(cx - 20 , cy - 4); std::cout << "            현실로 돌아갑니다...           ";
+			Ending_gotoxy(cx - 20 , cy - 3); std::cout << "=========================================";
 			Sleep(1000); // 1초 대기 후 진행
 			exit(0);
 		}

@@ -26,8 +26,6 @@ void InventoryScene::Render()
 	{ 
 		return;
 	}
-	
-	system("cls");
 
 	player->GetInventory()->PrintItemList(inventoryState , currentIndex);//아이템 리스트 뽑는 구문
 

@@ -115,7 +115,7 @@ void MainScene::Render()
 
 	// 메뉴 텍스트 출력
 	Console_gotoxy(leftTextX, topMenuY);  std::cout << "전투 시작";
-	Console_gotoxy(rightTextX, topMenuY); std::cout << "아이템 확인 (가방)";
+	Console_gotoxy(rightTextX, topMenuY); std::cout << "아이템 확인";
 	Console_gotoxy(leftTextX, botMenuY);  std::cout << "상점";
 	Console_gotoxy(rightTextX, botMenuY); std::cout << "게임 종료";
 
@@ -142,7 +142,9 @@ void MainScene::Render()
 	{
 		Console_gotoxy(rightArrowX, botMenuY); std::cout << "->";
 	}
-	
+
+	Console_gotoxy(0 , 0); //이게 있어야 화살표 움직일때 잔상이 제거됨
+	//보이지 않는 커서가 마지막으로 출력한 글자 바로 뒤에 남아있게 되서 윈도우 콘솔 창이 마지막 커서 위치를 화면에 업데이트 할려다가 생기는 문제
 	SetNeedsRender(false); // 렌더링 잠금
 }
 

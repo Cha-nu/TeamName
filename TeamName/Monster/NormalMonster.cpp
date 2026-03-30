@@ -3,7 +3,6 @@
 //생성자
 NormalMonster::NormalMonster(MonsterStat stat) {
 	InitializeStat(stat);
-	this->droptable = new Inventory();
 }
 
 // 디버그용

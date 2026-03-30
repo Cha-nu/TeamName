@@ -4,6 +4,7 @@
 
 #pragma once
 #include <unordered_map>
+#include <vector>
 #include "Inventory/Item/ItemBase.h"
 
 class ItemManager
@@ -20,9 +21,14 @@ public:
 		static ItemManager instance;
 		return instance;
 	}
+
+	size_t GetItemCount() const { return m_itemDataBase.size(); }
+	const std::vector<std::string>& GetAllItemIDs() const { return m_itemIDs; }
 private:
 	// 아이템 ID를 키로, 아이템 데이터를 값으로 저장하는 해시맵입니다.
 	std::unordered_map<std::string, ItemBase*> m_itemDataBase;
+	// 아이템 ID 목록을 저장하는 벡터입니다.
+	std::vector<std::string> m_itemIDs; 
 
 	// CSV 파일에서 아이템 데이터를 읽어와 m_itemDataBase에 저장하는 함수입니다.
 	void LoadItemsFromFile(const std::string& filename);

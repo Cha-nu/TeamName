@@ -127,7 +127,6 @@ void Player::LevelUp()
 	
 	if (Playerstat.Level >= MAX_LEVEL || count <= 0) return;
 	
-	
 	for (int i = 0; i < count; i++)
 	{
 		if (Playerstat.Level >= MAX_LEVEL) break;

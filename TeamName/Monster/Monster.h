@@ -29,7 +29,7 @@ public:
 
 	//등장 대사
 	virtual void introMonster() {
-		std::cout << "몬스터 " << this->stat.name << "(이)가 나타났다!";
+		//std::cout << "몬스터 " << this->stat.name << "(이)가 나타났다!";
 	}
 
 
@@ -54,9 +54,11 @@ public:
 		this->droptable->RemoveItem(id , amount);
 	}
 
+	//몬스터가 가지고 있는 아이템을 반환하는 Get함수 하나 만들어주시면 감사하겠습니다.
+
 	//드랍테이블(Inventory) 출력
 	virtual void printDropTable() {
-		std::cout << "드랍 테이블 " << std::endl;
+		//std::cout << "드랍 테이블 " << std::endl;
 		this->droptable->PrintItemList();
 	}
 
@@ -70,12 +72,12 @@ public:
 		if ( !this->isDead() ) {
 			if ( this->stat.hp - damage > 0 ) {
 				this->stat.hp -= damage;
-				std::cout << "몬스터 " << this->stat.name << "가 " << damage << " 데미지를 입었습니다!" << std::endl;
-				std::cout << this->stat.name << " 남은 체력: " << this->stat.hp << std::endl;
+				//std::cout << "몬스터 " << this->stat.name << "가 " << damage << " 데미지를 입었습니다!" << std::endl;
+				//std::cout << this->stat.name << " 남은 체력: " << this->stat.hp << std::endl;
 			}
 			else {
 				this->stat.hp = 0;
-				std::cout << "몬스터 " << this->stat.name << "가 " << "사망했습니다!" << std::endl;				
+				//std::cout << "몬스터 " << this->stat.name << "가 " << "사망했습니다!" << std::endl;				
 
 			}
 		}
@@ -84,7 +86,7 @@ public:
 
 	//몬스터 공격
 	virtual bool attackPlayer(Player* player) {
-		std::cout << "몬스터 " << this->stat.name << "가 플레이어를 " << this->stat.atk << " 데미지로 공격합니다!" << std::endl;
+		//std::cout << "몬스터 " << this->stat.name << "가 플레이어를 " << this->stat.atk << " 데미지로 공격합니다!" << std::endl; 문구 출력 오류때문에 삭제 
 		player->ApplyDamage(this->stat.atk);
 		return true; // 공격 성공
 		

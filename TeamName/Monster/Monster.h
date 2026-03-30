@@ -6,6 +6,7 @@
 #include "../Player/Player.h"
 #include "../Inventory/Inventory.h"
 #include "../Inventory/Item/ItemBase.h"
+class ItemBase;
 
 struct MonsterStat {
 	std::string name = "Test Monster";
@@ -20,7 +21,7 @@ struct GoldRange {
 	int min_gold = 10;
 	int max_gold = 20;
 };
-class ItemBase; 
+
 
 class Monster{
 protected:
@@ -93,7 +94,18 @@ public:
 	} 
 
 	//드롭할 아이템 get
-	virtual ItemSlot getDropItem();
+	virtual ItemSlot getDropItem() {
+		if ( this->droptable->GetItemCount() > 0 ) {
+			static std::random_device rd;
+			static std::mt19937 gen(rd());
+			static std::uniform_int_distribution<int> dis(1 , 100);
+			if ( dis(gen) <= this->stat.drop_percent ) {
+				dis.param(std::uniform_int_distribution<int>::param_type(0 , this->droptable->GetItemCount() - 1));
+				return this->droptable->GetItemSlot(dis(gen));
+			}
+		}
+		return ItemSlot();
+	}
 
 
 

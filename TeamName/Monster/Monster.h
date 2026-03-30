@@ -2,14 +2,24 @@
 #include<iostream>
 #include <string>
 #include <vector>
+#include <random>
 #include "../Player/Player.h"
 #include "../Inventory/Inventory.h"
+#include "../Inventory/Item/ItemBase.h"
+class ItemBase;
 
 struct MonsterStat {
 	std::string name = "Test Monster";
 	int hp = 100;
 	int atk = 10;
-	int give_exp = 20;
+	int give_exp = 20;	
+	int drop_percent = 20; // 아이템 드롭 확률
+};
+
+//드롭 골드 최저/최대값
+struct GoldRange {
+	int min_gold = 10;
+	int max_gold = 20;
 };
 
 
@@ -17,7 +27,8 @@ class Monster{
 protected:
 	Inventory* droptable = nullptr;
 	MonsterStat stat;	
-	Monster() : droptable(new Inventory()) , stat() {}
+	GoldRange drop_gold;
+	Monster() : droptable(new Inventory()) , stat(), drop_gold() {}
 public:
 	virtual ~Monster() { 
 		if ( droptable ) {
@@ -29,6 +40,13 @@ public:
 	//스탯 초기화
 	virtual void InitializeStat(MonsterStat stat = {}) {
 		this->stat = stat;
+	}
+
+	virtual void InitialGold(GoldRange drop_gold = {}) {
+		if(drop_gold.min_gold > drop_gold.max_gold ){
+			std::swap(drop_gold.min_gold , drop_gold.max_gold);
+		}
+		this->drop_gold = drop_gold;
 	}
 
 	//등장 대사 return
@@ -48,6 +66,7 @@ public:
 	virtual int getAttack() const { return this->stat.atk; }
 	virtual int getExp() const { return this->stat.give_exp; }
 	virtual Inventory* getDroptable() const { return this->droptable; }
+
 	virtual void setName(std::string name) { this->stat.name = name; }
 	virtual void setHealth(int hp) { this->stat.hp = hp; }
 	virtual void setAttack(int atk) { this->stat.atk = atk; }
@@ -62,6 +81,34 @@ public:
 	virtual void removeToDroptable(const std::string& id , int amount) {
 		this->droptable->RemoveItem(id , amount);
 	}
+
+
+
+	//드롭할 돈 get
+	virtual int getDropGold() {
+		static std::random_device rd;
+		static std::mt19937 gen(rd());
+		static std::uniform_int_distribution<int> dis;
+		dis.param(std::uniform_int_distribution<int>::param_type(this->drop_gold.min_gold , this->drop_gold.max_gold));
+		return dis(gen);
+	} 
+
+	//드롭할 아이템 get
+	virtual ItemSlot getDropItem() 
+	{
+		if ( this->droptable->GetItemCount() > 0 ) {
+			static std::random_device rd;
+			static std::mt19937 gen(rd());
+			static std::uniform_int_distribution<int> dis(1 , 100);
+			if ( dis(gen) <= this->stat.drop_percent ) {
+				dis.param(std::uniform_int_distribution<int>::param_type(0 , this->droptable->GetItemCount() - 1));
+				return this->droptable->GetItemSlot(dis(gen));
+			}
+		}
+		return ItemSlot();
+	}
+
+
 
 	//몬스터 사망 플래그
 	virtual bool isDead() const { 

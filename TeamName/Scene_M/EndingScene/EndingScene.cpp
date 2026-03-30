@@ -84,7 +84,7 @@ void EndingScene::Update() {
 			Sleep(1500); // 1.5초 대기 후 진행
 
 			// 생성 화면(CreateScene)으로 이동
-			SceneManager::getInstance().Replace_Scene(new StartScene());
+			SceneManager::getInstance().Replace_Scene(new EndingScene());
 			return; // 씬이 교체되었으므로 Update 종료
 		}
 		else if ( currentIndex == 1 ) {

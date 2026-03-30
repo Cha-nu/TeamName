@@ -5,10 +5,11 @@
 #include "Manager/GameManager/GameManager.h"
 #include "Manager/SceneManager/SceneManager.h"
 #include"Scene_M/EndScene/EndScene.h"
-#include"Scene\InventoryScene.h"
-#include<iostream>
+#include"Scene/InventoryScene.h"
+#include"Scene_M/EndingScene/EndingScene.h"
 #include<iomanip>
 #include"ConsoleHelper.h"
+#include"DrawHelper.h"
 
 #include"Data/ItemKey.h"
 
@@ -24,7 +25,6 @@ void BattleScene::Init()
 	//몬스터 호출 수정
 	GameManager::getInstance().CreateMonster(); // IsTutorial = GameManager::getInstance().CreateMonster();로 변경하시면 튜토리얼 보스 여부를 BattleScene에서 알 수 있습니다.
 	monster = GameManager::getInstance().GetMonster();//몬스터 동적할당
-	
 	//battleScene 들어갈 때 전투상태로 변경
 	player->bOnPlayerBattle();
 
@@ -43,10 +43,7 @@ void BattleScene::Render()
 	Console_gotoxy(Player_X , Player_Y + 4); std::cout << "     / \\    ";
 
 	//몬스터 UI
-	Console_gotoxy(Monster_X , Monster_Y);     std::cout << "[" << monster->getName() << "]";
-	Console_gotoxy(Monster_X , Monster_Y + 2); std::cout << "      O     ";
-	Console_gotoxy(Monster_X , Monster_Y + 3); std::cout << "     /|\\    ";
-	Console_gotoxy(Monster_X , Monster_Y + 4); std::cout << "     / \\    ";
+	DrawMonster(monster->getName() , Monster_X , Monster_Y);
 
 	// 실시간 HP 표기
 	Console_gotoxy(Player_X , 10); std::cout << "HP:      ";
@@ -85,8 +82,18 @@ void BattleScene::Render()
 	if ( battleState == 0 )//기본 디폴트로 들어오게 함
 	{
 		//텍스트 출력 부분
-		Console_gotoxy(textX , 16); std::cout << "적 " << monster->getName() << "이(가) 나타났다!";
-		Console_gotoxy(textX , 17); std::cout << "무엇을 할까?";
+		if ( monster->getName() == "취업" )
+		{
+			//보스 몬스터 텍스트
+			Console_gotoxy(textX , 16); std::cout << "이제 일반 몬스터는 상대도 안 된다!";
+			Console_gotoxy(textX , 17); std::cout << "최종 보스 [" << monster->getName() << "]이 등장했다!";
+		}
+		else
+		{
+			// 기존 일반 몬스터 텍스트
+			Console_gotoxy(textX , 16); std::cout << "적 " << monster->getName() << "이(가) 나타났다!";
+			Console_gotoxy(textX , 17); std::cout << "무엇을 할까?";
+		}
 
 		//화살표 움직여서 어디 고를지 위치 보여줌
 		if ( currentIndex == 0 ) //0 (왼쪽 위)
@@ -116,7 +123,17 @@ void BattleScene::Render()
 	{
 		// [상단 박스] 승리 결과
 		Console_gotoxy(textX , 16); std::cout << "전투에서 승리하였다!! " << monster->getExp() << " 경험치를 획득했다!";
-		Console_gotoxy(textX , 17); std::cout << "아이템을 획득하고 마을로 돌아갑니다.  ▶ (Enter)";//몬스터 인벤토리의 아이템을 get으로 받아와서 여기에 name을 받아오게 수정 예정
+		Console_gotoxy(textX , 17);
+		if ( monster_dropItem_name != "" )
+		{
+			// 아이템이 나왔을 때
+			std::cout << "아이템 [" << monster_dropItem_name << "] 과 " << monster_drop_Gold << " Gold를 획득했다! ▶ (Enter)";
+		}
+		else
+		{
+			//아이템이 안나왔ㅇ르때
+			std::cout << monster_drop_Gold << " Gold를 획득했다! ▶ (Enter)";
+		}
 	}
 	else if ( battleState == 3 ) {
 		// [상단 박스] 몬스터 공격 결과
@@ -156,6 +173,11 @@ void BattleScene::Render()
 	{
 		Console_gotoxy(textX , 16); std::cout << "플레이어는 [" << SceneManager::getInstance().Get_UseItem_Name() << "] 을(를) 사용했다";//인벤토리에서 받아온 아이템을 사용
 		Console_gotoxy(textX , 17); std::cout << "  ▶ (Enter)";
+	}
+	else if ( battleState == 8 )
+	{
+		Console_gotoxy(textX , 16); std::cout << "마침내 기나긴 취업 준비생의 끝이 보인다...!";
+		Console_gotoxy(textX , 17); std::cout << "보스 [" << monster->getName() << "]을(를) 쓰러뜨렸다! ▶ (Enter)";
 	}
 	Console_gotoxy(0 , 0);
 
@@ -262,13 +284,24 @@ void BattleScene::Update()
 			if ( monster->isDead() ) 
 			{
 				player->AcquireEXP(monster->getExp());//플레이어한테 경험치를 주는 부분
+				monster_drop_Gold = monster->getDropGold();
+				player->AcquireGold(monster_drop_Gold);//플레이어 골드 획득 부분
+				ItemSlot dropItem = monster->getDropItem();
+				if ( dropItem.GetItem() != nullptr ) //드랍할 아이템이 배정 받았다면
+				{
+					monster_dropItem_name = dropItem.GetItem()->GetName();
+					player->GetInventory()->AddItem(dropItem.GetItem()->GetID() , 1);
+				}
+				//player->GetInventory()->AddItem(ItemKey::Health_Potion_Common , 1);  //get함수가 없어서 테스트 용으로 생성
 
-				//몬스터한테 드랍될 아이템을 문자열에 저장
-				//플레이어 AddItem 추가 (몬스터가 무슨 아이템을 주는지 get으로 받아와야함)
-				//Test용 몬스터한테 받아와야함
-				player->GetInventory()->AddItem(ItemKey::Health_Potion_Common , 1);  //get함수가 없어서 테스트 용으로 생성
-
-				battleState = 2; // 승리!
+				if ( monster->getName() == "취업" ) 
+				{
+					battleState = 8;// 보스 몬스터 승리 후 엔딩으로 가기 위함
+				}
+				else 
+				{
+					battleState = 2; // 일반 몬스터 승리
+				}
 			}
 			else 
 			{
@@ -342,6 +375,15 @@ void BattleScene::Update()
 				monster->attackPlayer(player);
 				battleState = 3; // 몬스터 공격 텍스트 출력 상태로!
 			}
+		}
+	}
+	else if ( battleState == 8 ) 
+	{
+		if ( isKeyPressed )
+		{
+			// 전투 상태를 off함
+			player->bOffPlayerBattle();
+			SceneManager::getInstance().Replace_Scene(new EndingScene());
 		}
 	}
 

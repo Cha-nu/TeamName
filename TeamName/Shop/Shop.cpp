@@ -70,12 +70,48 @@ void Shop::DisplayStock() const
 	}
 	std::cout << "===========================================================\n";
 }
+
 void Shop::BuyItem(Player& player , int itemIndex)
 {
-	
+	itemIndex--;
+
+	if (itemIndex < 0 || itemIndex >= m_stockList.size())
+	{
+		std::cout << "잘못된 번호입니다. 다시 선택해주세요.\n";
+		return;
+	}
+
+	int playerGold = player.GetGoldAmount();
+	if (playerGold - m_stockList[itemIndex]->GetGold() < 0)
+	{
+		std::cout << "골드가 부족합니다.\n";
+	}
+	else if (player.GetInventory()->IsFull())
+	{
+		std::cout << "인벤토리가 가득 찼습니다. 아이템을 판매하여 공간을 확보하세요.\n";
+	}
+	else
+	{
+		std::cout << "[" << m_stockList[itemIndex]->GetName() << "] 아이템을 구매하였습니다.\n";
+		player.AcquireGold(-m_stockList[itemIndex]->GetGold());
+		player.GetInventory()->AddItem(m_stockList[itemIndex]->GetID());
+		m_stockList.erase(m_stockList.begin() + itemIndex);
+	}
 }
 
 void Shop::SellItem(Player& player , int itemIndex)
-{
+{	
+	itemIndex--;
+	const ItemBase* item = player.GetInventory()->GetItemSlot(itemIndex).GetItem();
 
+	if (itemIndex < 0 || itemIndex >= player.GetInventory()->GetItemCount())
+	{
+		std::cout << "잘못된 번호입니다. 다시 선택해주세요.\n";
+		return;
+	}
+	std::cout << "[" << item->GetName() << "] 아이템을 판매하였습니다.\n";
+
+	// 판매 시에는 아이템 가격의 60%를 획득하나, 소수점은 버림 처리합니다.
+	player.AcquireGold(static_cast<int>(item->GetGold() * 0.6f));
+	player.GetInventory()->RemoveItem(item->GetID());
 }

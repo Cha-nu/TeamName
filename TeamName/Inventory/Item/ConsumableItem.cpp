@@ -40,6 +40,12 @@ ConsumableItem::~ConsumableItem()
 
 void ConsumableItem::Use(Player& player) const
 {
+	//if (IsMaxStat(player))
+	//{
+	//	// 이미 최대치인 경우 아이템 사용을 무시하고 메시지를 출력할 수 있습니다.
+	//	return;
+	//}
+
 	float calculated_amount = m_amount * static_cast<float>(m_rank);
 
 	if ( m_isDamage )
@@ -73,6 +79,20 @@ void ConsumableItem::Use(Monster& target) const
 		target.takeDamage(-calculated_amount);
 	}
 }
+
+//bool ConsumableItem::IsMaxStat(Player& player) const
+//{
+//	if (m_targetStat == TargetStat::HP)
+//	{
+//		return player.Getstat().HP == player.GetMaxStat().MaxHP;
+//	}
+//	else if (m_targetStat == TargetStat::Attack)
+//	{
+//		return player.Getstat().Atk_Damage == player.GetMaxStat().MaxAtk_Damage;
+//	}
+//
+//	return false;
+//}
 
 float ConsumableItem::StatClamp(float stat, float maxStat) const
 {

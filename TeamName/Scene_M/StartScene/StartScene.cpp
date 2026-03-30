@@ -18,7 +18,7 @@ void Start_gotoxy(int x, int y) {
 }
 
 // 화면의 중앙 좌표를 구하는 도우미 함수
-void GetScreenCenterXY(int& centerX, int& centerY) {
+static void GetScreenCenterXY(int& centerX, int& centerY) {
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
 	int width = csbi.srWindow.Right - csbi.srWindow.Left + 1;

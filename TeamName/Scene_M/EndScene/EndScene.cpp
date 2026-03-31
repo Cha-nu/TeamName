@@ -37,12 +37,15 @@ void GameOverScene::Init() {
 	// 씬 진입 시 변수 초기화 및 추가할 변수 작성
 	currentIndex = 0; // [0327 추가] 게임 시작에 화살표가 있도록 초기화
 
+	SetNeedsRender(true); // 렌더링
+
 	// 콘솔 화면을 깨끗히 지우기
 	system("cls");
 }
 
 // 화면 출력
 void GameOverScene::Render() {
+	if ( !bNeedsRender ) return;
 
 	int cx , cy;
 	GetScreenCenterXY(cx , cy);
@@ -80,14 +83,18 @@ void GameOverScene::Update() {
 	// 위쪽 방향키 누름
 	if (GetAsyncKeyState(VK_UP) & 0x8000) {
 		currentIndex = 0;
+		SetNeedsRender(true); // 렌더링
 	}
 	// 아래쪽 방향키 누름
 	if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
 		currentIndex = 1;
+		SetNeedsRender(true); // 렌더링
 	}
 
 	// 스페이스바(VK_SPACE) 또는 엔터(VK_RETURN) 누름
 	if ( (GetAsyncKeyState(VK_SPACE) & 0x8000) || (GetAsyncKeyState(VK_RETURN) & 0x8000) ) {
+		SetNeedsRender(true); // 렌더링
+
 		system("cls");
 
 		int cx , cy;
@@ -97,7 +104,7 @@ void GameOverScene::Update() {
 			End_gotoxy(cx - 30 , cy - 5); std::cout << "============================================================";
 			End_gotoxy(cx - 30 , cy - 4); std::cout << "                    시작화면으로 이동합니다..                   ";
 			End_gotoxy(cx - 30 , cy - 3); std::cout << "============================================================";
-			Sleep(1500); // 1.5초 대기 후 진행
+			Sleep(1000); // 1초 대기 후 진행
 
 			// 처음 시작 화면(StartScene)으로 이동
 			SceneManager::getInstance().Replace_Scene(new StartScene());
@@ -107,7 +114,7 @@ void GameOverScene::Update() {
 			End_gotoxy(cx - 20 , cy - 5); std::cout << "=========================================";
 			End_gotoxy(cx - 20 , cy - 4); std::cout << "            현실로 돌아갑니다...           ";
 			End_gotoxy(cx - 20 , cy - 3); std::cout << "=========================================";
-			Sleep(300); // 1초 대기 후 진행
+			Sleep(300); // 0.3초 대기 후 진행
 
 			exit(0);
 		}

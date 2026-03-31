@@ -100,7 +100,7 @@ void EndingScene::Update() {
 			Ending_gotoxy(cx - 20 , cy - 5); std::cout << "=========================================";
 			Ending_gotoxy(cx - 20 , cy - 4); std::cout << "               돌아가는 중...             ";
 			Ending_gotoxy(cx - 20 , cy - 3); std::cout << "=========================================";
-			Sleep(1500); // 1.5초 대기 후 진행
+			Sleep(1000); // 1초 대기 후 진행
 
 			// 시작 화면(StartScene)으로 이동
 			SceneManager::getInstance().Replace_Scene(new StartScene());
@@ -110,7 +110,7 @@ void EndingScene::Update() {
 			Ending_gotoxy(cx - 20 , cy - 5); std::cout << "=========================================";
 			Ending_gotoxy(cx - 20 , cy - 4); std::cout << "            현실로 돌아갑니다...           ";
 			Ending_gotoxy(cx - 20 , cy - 3); std::cout << "=========================================";
-			Sleep(1000); // 1초 대기 후 진행
+			Sleep(500); // 0.5초 대기 후 진행
 			exit(0);
 		}
 	}

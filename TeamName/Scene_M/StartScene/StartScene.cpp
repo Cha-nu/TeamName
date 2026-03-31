@@ -102,7 +102,7 @@ void StartScene::Update() {
 			Start_gotoxy(cx - 20, cy - 5); std::cout << "=========================================";
 			Start_gotoxy(cx - 20, cy - 4); std::cout << "       한국 남자의 세계로 들어갑니다...      ";
 			Start_gotoxy(cx - 20, cy - 3); std::cout << "=========================================";
-			Sleep(1500); // 1.5초 대기 후 진행
+			Sleep(1000); // 1초 대기 후 진행
 
 			// 생성 화면(CreateScene)으로 이동
 			SceneManager::getInstance().Replace_Scene(new CharacterChoice());
@@ -112,7 +112,7 @@ void StartScene::Update() {
 			Start_gotoxy(cx - 20, cy - 5); std::cout << "=========================================";
 			Start_gotoxy(cx - 20, cy - 4); std::cout << "            현실로 돌아갑니다...           ";
 			Start_gotoxy(cx - 20, cy - 3); std::cout << "=========================================";
-			Sleep(1000); // 1초 대기 후 진행
+			Sleep(500); // 0.5초 대기 후 진행
 			exit(0);
 		}
 	}

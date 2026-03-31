@@ -11,6 +11,7 @@
 // 몬스터 헤더 추가
 #include "../../Monster/Monster.h"
 #include "../../Monster/BossMonster.h"
+#include "Manager/SoundManager/SoundManager.h"
 
 GameManager::GameManager() : IsRunning(true) , Character(nullptr)
 {}
@@ -26,7 +27,7 @@ bool GameManager::Init()
 	SceneManager::getInstance().Add_Scene(new StartScene()); 
 
 	void DisableQuickEdit();//마우스 클릭해도 화면이 안멈추게 하는 함수
-
+	SoundManager::GetInstance().PlayBGM("Music/Bgm.wav");
 	//if ( DebugKey ) std::cout << "[GameManager] Init 완료" << '\n';
 	return true;
 

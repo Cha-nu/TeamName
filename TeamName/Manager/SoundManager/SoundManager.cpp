@@ -7,6 +7,7 @@ void SoundManager::PlayBGM(const std::string& filename){
 	
 	std::string command = "open \"" + filename + "\" type mpegvideo alias bgm";
 	mciSendStringA(command.c_str(), NULL, 0, NULL);
+	mciSendString(TEXT("setaudio bgm volume to 200") , NULL , 0 , NULL);
 	mciSendString(TEXT("play bgm repeat"), NULL, 0, NULL);
 	
 }

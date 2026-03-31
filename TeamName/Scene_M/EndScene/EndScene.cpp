@@ -67,8 +67,8 @@ void GameOverScene::Render() {
 	End_gotoxy(cx - 7 , cy + 5); std::cout << "* 게임 나가기";
 
 	// 3. 화살표 그리기 (기존 위치는 지우고 새 위치에 그리기)
-	End_gotoxy(cx - 10 , cy + 3); std::cout << " "; // 1번 앞 공백으로 지우기
-	End_gotoxy(cx - 10 , cy + 5); std::cout << " "; // 2번 앞 공백으로 지우기
+	End_gotoxy(cx - 10 , cy + 3); std::cout << "  "; // 1번 앞 공백으로 지우기
+	End_gotoxy(cx - 10 , cy + 5); std::cout << "  "; // 2번 앞 공백으로 지우기
 
 	if (currentIndex == 0) {
 		End_gotoxy(cx - 10 , cy + 3); std::cout << "▶"; // 1번 위치에 화살표

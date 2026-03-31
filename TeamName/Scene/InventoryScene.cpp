@@ -107,7 +107,7 @@ void InventoryScene::Render()
 		Console_gotoxy(popup_X , popup_Y);     std::cout << "+----------------------------------+";
 		Console_gotoxy(popup_X , popup_Y + 1); std::cout << "|                                  |";
 		Console_gotoxy(popup_X , popup_Y + 2); std::cout << "|  이 아이템을 판매하시겠습니까?   |";
-		Console_gotoxy(popup_X , popup_Y + 3); std::cout << "|       (판매가: " << std::left << std::setw(4) << player->GetInventory()->GetItemSlots()[currentIndex].GetItem()->GetGold() * 0.6f << " G)            |";
+		Console_gotoxy(popup_X , popup_Y + 3); std::cout << "|       (판매가: " << std::left << std::setw(4) << player->GetInventory()->GetItemSlots()[currentIndex].GetItem()->GetGold() * 0.6f << " G)           |";
 		Console_gotoxy(popup_X , popup_Y + 4); std::cout << "|             예                   |";
 		Console_gotoxy(popup_X , popup_Y + 5); std::cout << "|             아니오               |";
 		Console_gotoxy(popup_X , popup_Y + 6); std::cout << "|                                  |";

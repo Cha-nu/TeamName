@@ -3,7 +3,7 @@
 #include "StartScene.h"
 #include "Manager/SceneManager/SceneManager.h" // Scene 매니저
 #include "Scene_M/CreateScene/CreatingCharacter.h" // 씬 전환을 위해 추가
-
+#include "Manager/SoundManager/SoundManager.h"
 #include <iostream>
 #include <string>
 #include <windows.h> // [0327 추가] 좌표 이동(gotoxy), GetAsyncKeyState 사용을 위해 추가
@@ -83,17 +83,27 @@ void StartScene::Render() {
 void StartScene::Update() {
 	// 위쪽 방향키 누름
 	if (GetAsyncKeyState(VK_UP) & 0x8000) {
+		if ( currentIndex != 0 ) 
+		{
+			SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+		}
 		currentIndex = 0;
 		SetNeedsRender(true); // 렌더링
 	}
 	// 아래쪽 방향키 누름
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
+	if (GetAsyncKeyState(VK_DOWN) & 0x8000) 
+	{
+		if ( currentIndex != 1 ) 
+		{
+			SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+		}
 		currentIndex = 1;
 		SetNeedsRender(true); // 렌더링
 	}
 
 	// 엔터(VK_RETURN) 누름
-	if (GetAsyncKeyState(VK_RETURN) & 0x8000) {
+	if (GetAsyncKeyState(VK_RETURN) & 0x8000) 
+	{
 		SetNeedsRender(true); // 렌더링
 		system("cls");
 

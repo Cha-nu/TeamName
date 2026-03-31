@@ -3,6 +3,7 @@
 #include "EndingScene.h"
 #include "Manager/SceneManager/SceneManager.h" // Scene 매니저
 #include "Scene_M/StartScene/StartScene.h" // 씬 전환을 위해 추가
+#include"Manager\/SoundManager\SoundManager.h"
 
 #include <iostream>
 #include <string>
@@ -128,12 +129,22 @@ void EndingScene::Render() {
 // 입력 및 로직 처리
 void EndingScene::Update() {
 	// 위쪽 방향키 누름
-	if ( GetAsyncKeyState(VK_UP) & 0x8000 ) {
+	if ( GetAsyncKeyState(VK_UP) & 0x8000 ) 
+	{
+		if ( currentIndex != 0 ) 
+		{
+			SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+		}
 		currentIndex = 0;
 		SetNeedsRender(true); // 렌더링
 	}
 	// 아래쪽 방향키 누름
-	if ( GetAsyncKeyState(VK_DOWN) & 0x8000 ) {
+	if ( GetAsyncKeyState(VK_DOWN) & 0x8000 ) 
+	{
+		if ( currentIndex != 1 ) 
+		{
+			SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+		}
 		currentIndex = 1;
 		SetNeedsRender(true); // 렌더링
 	}

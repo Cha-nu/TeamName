@@ -4,6 +4,7 @@
 #include"Scene/ShopScene.h"
 #include "../Manager/SceneManager/SceneManager.h"
 #include"Manager/GameManager/GameManager.h"
+#include"Manager\SoundManager\SoundManager.h"
 #include"Player/Player.h"
 #include"ConsoleHelper.h"
 #include<iostream>
@@ -156,10 +157,18 @@ void MainScene::Update()
 	{
 		if ( currentIndex == 2 ) 
 		{
+			if ( currentIndex != 0 ) 
+			{
+				SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+			}
 			currentIndex = 0;
 		}
 		else if ( currentIndex == 3 ) 
 		{
+			if ( currentIndex != 1 ) 
+			{
+				SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+			}
 			currentIndex = 1; 
 		}
 		SetNeedsRender(true); // 렌더링
@@ -168,10 +177,18 @@ void MainScene::Update()
 	{
 		if ( currentIndex == 0 ) 
 		{
+			if ( currentIndex != 2 ) 
+			{
+				SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+			}
 			currentIndex = 2; 
 		}
 		else if ( currentIndex == 1 )
 		{
+			if ( currentIndex != 3 ) 
+			{
+				SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+			}
 			currentIndex = 3;
 		}
 		SetNeedsRender(true); // 렌더링
@@ -180,10 +197,18 @@ void MainScene::Update()
 	{
 		if ( currentIndex == 1 ) 
 		{
+			if ( currentIndex != 0 ) 
+			{
+				SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+			}
 			currentIndex = 0;
 		}
 		else if ( currentIndex == 3 ) 
 		{ 
+			if ( currentIndex != 2 )
+			{
+				SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+			}
 			currentIndex = 2; 
 		}
 		SetNeedsRender(true); // 렌더링
@@ -192,10 +217,18 @@ void MainScene::Update()
 	{
 		if ( currentIndex == 0 )
 		{
+			if ( currentIndex != 1 ) 
+			{
+				SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+			}
 			currentIndex = 1;
 		}
 		else if ( currentIndex == 2 ) 
 		{
+			if ( currentIndex != 3 )
+			{
+				SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+			}
 			currentIndex = 3;
 		}
 		SetNeedsRender(true); // 렌더링

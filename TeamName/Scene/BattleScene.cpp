@@ -28,6 +28,10 @@ void BattleScene::Init()
 	//battleScene 들어갈 때 전투상태로 변경
 	player->bOnPlayerBattle();
 
+	if ( monster->getName() == "취업" ) 
+	{
+		//연출 그리는 함수
+	}
 	// 이전 씬에서 누른 엔터/스페이스바를 뗄 때까지 무한 대기 (잔상 방지)
 	WaitUntilKeyUp_Enter_Space();
 }

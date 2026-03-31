@@ -10,9 +10,7 @@
 # =====================================================================
 
 # key,name,rank,target_stat,basic_amount,is_damage,basic_gold
-Health_Potion_Common,Health_Potion_Common,Common,HP,10,0,10
-Health_Potion_Rare,Health_Potion_Rare,Rare,HP,10,0,10
-Stamina_Potion_Common,Stamina_Potion_Common,Common,Stamina,10,0,10
-Stamina_Potion_Rare,Stamina_Potion_Rare,Rare,Stamina,10,0,10
-Power_Potion_Common,Power_Potion_Common,Common,Attack,5,0,10
-Power_Potion_Rare,Power_Potion_Rare,Rare,Attack,5,0,10
+Health_Potion_Common,Health_Potion_Common,Common,HP,70,0,10
+Health_Potion_Rare,Health_Potion_Rare,Rare,HP,120,0,20
+Power_Potion_Common,Power_Potion_Common,Common,Attack,40,0,10
+Power_Potion_Rare,Power_Potion_Rare,Rare,Attack,80,0,20

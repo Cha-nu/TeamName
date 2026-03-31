@@ -116,7 +116,10 @@ void GameOverScene::Update() {
 			End_gotoxy(cx - 20 , cy - 3); std::cout << "=========================================";
 			Sleep(300); // 0.3초 대기 후 진행
 
-			exit(0);
+			// 메모리 해제 후 게임 종료
+			GameManager::getInstance().SetRunning(false);
+
+			return;
 		}
 	}
 

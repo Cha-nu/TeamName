@@ -114,13 +114,12 @@ void CharacterChoice::Update() {
 	Create_gotoxy(statX , resStartY + 4); std::cout << " [ 닉네임 ]   : " << GameManager::getInstance().GetPlayer()->Getstat().name;  // GameManager용 출력
 	Create_gotoxy(statX , resStartY + 5); std::cout << " [ Lv ]       : " << GameManager::getInstance().GetPlayer()->Getstat().Level;
 	Create_gotoxy(statX , resStartY + 6); std::cout << " [ 체력 ]     : " << GameManager::getInstance().GetPlayer()->Getstat().HP;
-	//Create_gotoxy(statX , resStartY + 7); std::cout << " [ 스테미나 ] : " << GameManager::getInstance().GetPlayer()->Getstat().Stamina;
 	Create_gotoxy(statX , resStartY + 7); std::cout << " [ 공격력 ]   : " << GameManager::getInstance().GetPlayer()->Getstat().Atk_Damage;
 	Create_gotoxy(statX , resStartY + 8); std::cout << " [ EXP ]      : " << GameManager::getInstance().GetPlayer()->Getstat().EXP;
 	
-	Create_gotoxy(resUiX , resStartY + 11); std::cout << "============================================================";
+	Create_gotoxy(resUiX , resStartY + 10); std::cout << "============================================================";
 
-	Create_gotoxy(resUiX , resStartY + 13); system("pause"); // 잠시 멈추기(사용자에게 메시지 보여주기 위해 작성)
+	Create_gotoxy(resUiX , resStartY + 12); system("pause"); // 잠시 멈추기(사용자에게 메시지 보여주기 위해 작성)
 
 	// SceneManager를 통해 다음 씬으로 전환
 	SceneManager::getInstance().Replace_Scene(new MainScene());

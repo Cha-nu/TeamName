@@ -10,4 +10,4 @@ void DrawMonster(const std::string& monsterName , int x , int y);
 
 QuizData GetRandomQuiz();
 
-void DrawBossEntranceEffect();
+void DrawBossEntranceScene();

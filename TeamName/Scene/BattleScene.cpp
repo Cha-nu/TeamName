@@ -122,7 +122,7 @@ void BattleScene::Render()
 		{
 			//보스 몬스터 텍스트
 			Console_gotoxy(textX , textY + 1); std::cout << "이제 일반 몬스터는 상대도 안 된다!";
-			Console_gotoxy(textX , textY + 2); std::cout << "최종 보스 [" << monster->getName() << "]이 등장했다!";
+			Console_gotoxy(textX , textY + 2); std::cout << "보스 [" << monster->getName() << "]이 등장했다!";
 		}
 		else
 		{
@@ -152,8 +152,8 @@ void BattleScene::Render()
 	else if ( battleState == 1 ) //선택지 결과에 따라 나오는 텍스트 출력
 	{
 		// [상단 박스] 내 공격 결과
-				Console_gotoxy(textX , textY + 1); std::cout << "플레이어의 공격!";
-				Console_gotoxy(textX , textY + 2); std::cout << "몬스터에게 " << player->Getstat().Atk_Damage << "의 데미지를 주었다!  ▶ (Enter)";
+		Console_gotoxy(textX , textY + 1); std::cout << "[" << player->Getstat().name << "]의 공격!";
+		Console_gotoxy(textX , textY + 2); std::cout << "[" << monster->getName() << "]에게 " << player->Getstat().Atk_Damage << "의 데미지를 주었다!▶(Enter)";
 	}
 	else if ( battleState == 2 ) 
 	{
@@ -171,12 +171,12 @@ void BattleScene::Render()
 	}
 	else if ( battleState == 3 ) {
 		// [상단 박스] 몬스터 공격 결과
-		Console_gotoxy(textX , textY + 1); std::cout << "몬스터의 공격!";
-		Console_gotoxy(textX , textY + 2); std::cout << "플레이어는 " << monster->getAttack() << "의 데미지를 받았다!  ▶ (Enter)";
+		Console_gotoxy(textX , textY + 1); std::cout << "[" << monster->getName() << "]의 공격!";
+		Console_gotoxy(textX , textY + 2); std::cout << "[" << player->Getstat().name << "]는 " << monster->getAttack() << "의 데미지를 받았다!  ▶ (Enter)";
 	}
 	else if ( battleState == 4 ) {
 		// [상단 박스] 패배 결과
-		Console_gotoxy(textX , textY + 1); std::cout << "플레이어는 쓰러졌다...";
+		Console_gotoxy(textX , textY + 1); std::cout << "[" << player->Getstat().name << "]는 쓰러졌다...";
 		Console_gotoxy(textX , textY + 2); std::cout << "눈앞이 깜깜해졌다.  ▶ (Enter)";
 	}
 	else if ( battleState == 5 ) 
@@ -203,11 +203,11 @@ void BattleScene::Render()
 	{
 		// [상단 박스] 도망 결과
 		Console_gotoxy(textX , textY + 1); std::cout << "의지가 나약한 자여...";
-		Console_gotoxy(textX , textY + 2); std::cout << "도망치다 몬스터에게 당했습니다.  ▶ (Enter)";
+		Console_gotoxy(textX , textY + 2); std::cout << "도망친 자에게는 낙원따윈 없습니다.  ▶ (Enter)";
 	}
 	else if ( battleState == 7 ) //아이템 사용 텍스트 출력 
 	{
-		Console_gotoxy(textX , textY + 1); std::cout << "플레이어는 [" << SceneManager::getInstance().Get_UseItem_Name() << "] 을(를) 사용했다";
+		Console_gotoxy(textX , textY + 1); std::cout << "[" << player->Getstat().name << "]는 [" << SceneManager::getInstance().Get_UseItem_Name() << "] 을(를) 사용했다";
 		Console_gotoxy(textX , textY + 2); std::cout << "  ▶ (Enter)";
 	}
 	else if ( battleState == 8 )
@@ -224,7 +224,7 @@ void BattleScene::Render()
 	{
 		// 문제 출제(위치 고민)
 		Console_gotoxy(textX , textY + 1); std::cout << currentQuiz.question;
-		Console_gotoxy(textX , textY + 2); std::cout << "  (방향키로 정답을 선택하고 Enter를 누르세요)";
+		Console_gotoxy(textX , textY + 2); std::cout << "  (방향키로 정답을 선택하고 Enter/Space를 누르세요)";
 
 		// 항목
 		Console_gotoxy(leftText , topMenuRow); std::cout << currentQuiz.choices[0] << "        ";
@@ -252,8 +252,8 @@ void BattleScene::Render()
 	}
 	else if ( battleState == 11 ) // 정답 텍스트
 	{
-		Console_gotoxy(textX , textY + 1); std::cout << "정답! 보스가 당황했다!";
-		Console_gotoxy(textX , textY + 2); std::cout << "보스에게 치명적인 데미지를 주었다! ▶ (Enter)";
+		Console_gotoxy(textX , textY + 1); std::cout << "정답! [" << monster->getName() << "]이 당황했다!";
+		Console_gotoxy(textX , textY + 2); std::cout << "[" << monster->getName() << "]에게 치명적인 데미지를 주었다! ▶ (Enter)";
 	}
 	else if ( battleState == 12 ) // 오답 텍스트
 	{

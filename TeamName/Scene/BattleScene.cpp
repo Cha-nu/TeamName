@@ -381,6 +381,7 @@ void BattleScene::Update()
 
 				// 타격 연출
 				DrawFistEffect();
+				SoundManager::GetInstance().PlayEffectSound("Music/PlayerAttack.wav");
 
 				Sleep(200);
 

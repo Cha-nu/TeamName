@@ -3,6 +3,7 @@
 #include "ShopScene.h"
 #include "Manager/SceneManager/SceneManager.h"
 #include "Manager/GameManager/GameManager.h"
+#include"Manager\SoundManager\SoundManager.h"
 #include"Scene/InventoryScene.h"
 #include "Player/Player.h"
 #include "Inventory/Inventory.h"
@@ -163,6 +164,7 @@ void ShopScene::Update()
 		{ 
 			if ( currentIndex > 0 ) 
 			{ 
+				SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
 				currentIndex--;  
 			}
 			SetNeedsRender(true);
@@ -172,6 +174,7 @@ void ShopScene::Update()
 		{ 
 			if ( currentIndex < maxMenuIndex )
 			{ 
+				SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
 				currentIndex++; 
 			}
 			SetNeedsRender(true);
@@ -204,11 +207,19 @@ void ShopScene::Update()
 	{
 		if ( GetAsyncKeyState(VK_UP) & 0x8000 ) 
 		{
+			if ( confirmIndex != 0 ) 
+			{
+				SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+			}
 			confirmIndex = 0;
 			SetNeedsRender(true);
 		}
 		else if ( GetAsyncKeyState(VK_DOWN) & 0x8000 ) 
 		{
+			if ( confirmIndex != 1 ) 
+			{
+				SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+			}
 			confirmIndex = 1;
 			SetNeedsRender(true);
 		}

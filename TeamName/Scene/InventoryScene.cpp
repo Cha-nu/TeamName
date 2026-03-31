@@ -2,6 +2,7 @@
 #include"BattleScene.h"
 #include "../Manager/SceneManager/SceneManager.h"
 #include"Manager/GameManager/GameManager.h"
+#include"Manager\SoundManager\SoundManager.h"
 #include"Inventory/Inventory.h"
 #include "Inventory/Item/ItemBase.h"
 #include"Player/Player.h"
@@ -144,6 +145,7 @@ void InventoryScene::Update()
 		{
 			if ( currentIndex > 0 ) 
 			{
+				SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
 				currentIndex--;//"->"위치를 올리는 부분 (콘솔 좌표는 왼쪽위가 0,0이다)
 			}
 			SetNeedsRender(true);
@@ -153,6 +155,7 @@ void InventoryScene::Update()
 		{
 			if ( currentIndex < totalItems ) 
 			{
+				SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
 				currentIndex++;//"->"아래로 내리는  부분 
 			} 
 			SetNeedsRender(true);
@@ -193,11 +196,19 @@ void InventoryScene::Update()
 	{
 		if ( GetAsyncKeyState(VK_UP) & 0x8000 ) 
 		{
+			if ( confirmIndex != 0 ) 
+			{
+				SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+			}
 			confirmIndex = 0; // 예 (위)
 			SetNeedsRender(true);
 		}
 		else if ( GetAsyncKeyState(VK_DOWN) & 0x8000 ) 
 		{
+			if ( confirmIndex != 1 )
+			{
+				SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+			}
 			confirmIndex = 1; // 아니오 (아래)
 			SetNeedsRender(true);
 		}
@@ -240,11 +251,19 @@ void InventoryScene::Update()
 	{
 		if ( GetAsyncKeyState(VK_UP) & 0x8000 ) 
 		{ 
+			if ( confirmIndex != 0 ) 
+			{
+				SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+			}
 			confirmIndex = 0; 
 			SetNeedsRender(true); 
 		}
 		else if ( GetAsyncKeyState(VK_DOWN) & 0x8000 ) 
 		{ 
+			if ( confirmIndex != 1 ) 
+			{
+				SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+			}
 			confirmIndex = 1; 
 			SetNeedsRender(true); 
 		}

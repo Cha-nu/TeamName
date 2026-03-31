@@ -4,6 +4,7 @@
 #include"Monster/Monster.h"
 #include "Manager/GameManager/GameManager.h"
 #include "Manager/SceneManager/SceneManager.h"
+#include"Manager\SoundManager\SoundManager.h"
 #include"Scene_M/EndScene/EndScene.h"
 #include"Scene/InventoryScene.h"
 #include"Scene_M/EndingScene/EndingScene.h"
@@ -286,26 +287,82 @@ void BattleScene::Update()
 		// 방향키 이동 (메뉴에서만 작동)
 		if ( GetAsyncKeyState(VK_UP) & 0x8000 ) 
 		{
-			if ( currentIndex == 2 ) currentIndex = 0; 
-			else if ( currentIndex == 3 ) currentIndex = 1;
+			if ( currentIndex == 2 ) 
+			{ 
+				if ( currentIndex != 0 ) 
+				{
+					SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+				}
+				currentIndex = 0;
+			}
+			else if ( currentIndex == 3 ) 
+			{
+				if ( currentIndex != 1 ) 
+				{
+					SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+				}
+				currentIndex = 1;
+			}
 			SetNeedsRender(true); // 렌더링
 		}
 		else if ( GetAsyncKeyState(VK_DOWN) & 0x8000 ) 
 		{
-			if ( currentIndex == 0 ) currentIndex = 2;
-			else if ( currentIndex == 1 ) currentIndex = 3;
+			if ( currentIndex == 0 ) 
+			{ 
+				if ( currentIndex != 2 ) 
+				{
+					SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+				}
+				currentIndex = 2; 
+			}
+			else if ( currentIndex == 1 ) 
+			{ 
+				if ( currentIndex != 3 ) 
+				{
+					SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+				}
+				currentIndex = 3; 
+			}
 			SetNeedsRender(true); // 렌더링
 		}
 		else if ( GetAsyncKeyState(VK_LEFT) & 0x8000 ) 
 		{
-			if ( currentIndex == 1 ) currentIndex = 0;
-			else if ( currentIndex == 3 ) currentIndex = 2;
+			if ( currentIndex == 1 ) 
+			{ 
+				if ( currentIndex != 0 ) 
+				{
+					SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+				}
+				currentIndex = 0; 
+			}
+			else if ( currentIndex == 3 ) 
+			{
+				if ( currentIndex != 2 ) 
+				{
+					SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+				}
+				currentIndex = 2; 
+			}
 			SetNeedsRender(true); // 렌더링
 		}
 		else if ( GetAsyncKeyState(VK_RIGHT) & 0x8000 ) 
 		{
-			if ( currentIndex == 0 ) currentIndex = 1;
-			else if ( currentIndex == 2 ) currentIndex = 3;
+			if ( currentIndex == 0 ) 
+			{
+				if ( currentIndex != 1 ) 
+				{
+					SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+				}
+				currentIndex = 1; 
+			}
+			else if ( currentIndex == 2 ) 
+			{
+				if ( currentIndex != 3 ) 
+				{
+					SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+				}
+				currentIndex = 3; 
+			}
 			SetNeedsRender(true); // 렌더링
 		}
 
@@ -481,52 +538,85 @@ void BattleScene::Update()
 	}
 	else if ( battleState == 10 ) //퀴즈 4지선다 고르고 작동하는 부분
 	{
-		if ( GetAsyncKeyState(VK_UP) & 0x8000 ) 
+		if ( GetAsyncKeyState(VK_UP) & 0x8000 )
 		{
 			if ( currentIndex == 2 )
 			{
+				if ( currentIndex != 0 )
+				{
+					SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+				}
 				currentIndex = 0;
 			}
-			else if ( currentIndex == 3 ) 
-			{ 
-				currentIndex = 1; 
+			else if ( currentIndex == 3 )
+			{
+				if ( currentIndex != 1 )
+				{
+					SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+				}
+				currentIndex = 1;
 			}
-			SetNeedsRender(true);
+			SetNeedsRender(true); // 렌더링
 		}
-		else if ( GetAsyncKeyState(VK_DOWN) & 0x8000 ) 
+		else if ( GetAsyncKeyState(VK_DOWN) & 0x8000 )
 		{
-			if ( currentIndex == 0 ) 
-			{ 
-				currentIndex = 2; 
+			if ( currentIndex == 0 )
+			{
+				if ( currentIndex != 2 )
+				{
+					SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+				}
+				currentIndex = 2;
 			}
-			else if ( currentIndex == 1 ) 
-			{ 
-				currentIndex = 3; 
+			else if ( currentIndex == 1 )
+			{
+				if ( currentIndex != 3 )
+				{
+					SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+				}
+				currentIndex = 3;
 			}
-			SetNeedsRender(true);
+			SetNeedsRender(true); // 렌더링
 		}
-		else if ( GetAsyncKeyState(VK_LEFT) & 0x8000 ) 
+		else if ( GetAsyncKeyState(VK_LEFT) & 0x8000 )
 		{
-			if ( currentIndex == 1 ) 
-			{ 
-				currentIndex = 0; 
+			if ( currentIndex == 1 )
+			{
+				if ( currentIndex != 0 )
+				{
+					SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+				}
+				currentIndex = 0;
 			}
-			else if ( currentIndex == 3 ) 
-			{ 
-				currentIndex = 2; 
+			else if ( currentIndex == 3 )
+			{
+				if ( currentIndex != 2 )
+				{
+					SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+				}
+				currentIndex = 2;
 			}
-			SetNeedsRender(true);
+			SetNeedsRender(true); // 렌더링
 		}
-		else if ( GetAsyncKeyState(VK_RIGHT) & 0x8000 ) {
-			if ( currentIndex == 0 ) 
-			{ 
-				currentIndex = 1; 
+		else if ( GetAsyncKeyState(VK_RIGHT) & 0x8000 )
+		{
+			if ( currentIndex == 0 )
+			{
+				if ( currentIndex != 1 )
+				{
+					SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+				}
+				currentIndex = 1;
 			}
-			else if ( currentIndex == 2 ) 
-			{ 
-				currentIndex = 3; 
+			else if ( currentIndex == 2 )
+			{
+				if ( currentIndex != 3 )
+				{
+					SoundManager::GetInstance().PlayEffectSound("Music/Select_Sound.wav");
+				}
+				currentIndex = 3;
 			}
-			SetNeedsRender(true);
+			SetNeedsRender(true); // 렌더링
 		}
 
 		if ( isKeyPressed )

@@ -11,7 +11,6 @@
 // 몬스터 헤더 추가
 #include "../../Monster/Monster.h"
 #include "../../Monster/BossMonster.h"
-#include "Manager/SoundManager/SoundManager.h"
 
 GameManager::GameManager() : IsRunning(true) , Character(nullptr)
 {}
@@ -27,7 +26,6 @@ bool GameManager::Init()
 	SceneManager::getInstance().Add_Scene(new StartScene()); 
 
 	void DisableQuickEdit();//마우스 클릭해도 화면이 안멈추게 하는 함수
-	SoundManager::GetInstance().PlayBGM("Music/Bgm.wav");
 	//if ( DebugKey ) std::cout << "[GameManager] Init 완료" << '\n';
 	return true;
 
@@ -105,7 +103,8 @@ bool GameManager::CreateMonster()
 	int level = Character->Getstat().Level;
 	if ( level < 2)
 	{
-		CurrentMonster = new BossMonster({ "수능", 60, 1, 100 });
+		if ( DebugKey ) CurrentMonster = new BossMonster({ "수능", 1, 1, 500 });
+		else CurrentMonster = new BossMonster({ "수능", 60, 1, 100 });
 		return true;
 	}
 	else if (level < 10)
@@ -119,7 +118,7 @@ bool GameManager::CreateMonster()
 		int monsterAtk = 5 + (level * 8);                         // 적당한 공격력 증가량 (레벨 2~3: 16~24, 레벨 8~9: 64~72)
 		int monsterExp = 20 + (level * 10);                 // 안정적인 레벨업을 위한 경험치량
 
-		if (DebugKey) CurrentMonster = new NormalMonster({ MonsterName[randomMonsterNum], 1, 1, 100 });
+		if (DebugKey) CurrentMonster = new NormalMonster({ MonsterName[randomMonsterNum], 1, 1, 500 });
 		else CurrentMonster = new NormalMonster({ MonsterName[randomMonsterNum], monsterHP, monsterAtk, monsterExp });
 	}
 	else if ( level >= 10 )

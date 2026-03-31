@@ -38,6 +38,7 @@ void StartScene::Init() {
 	SetNeedsRender(true); // 렌더링
 	// 콘솔 화면을 깨끗히 지우기
 	system("cls");
+	SoundManager::GetInstance().PlayBGM("Music/Bgm.wav");
 }
 
 // 화면 출력

@@ -6,6 +6,7 @@
 #include "Inventory/Inventory.h"
 #include "Inventory/Item/ItemBase.h"
 #include "Manager/ItemManager/ItemManager.h"
+#include"ConsoleHelper.h"
 
 Shop::Shop()
 {
@@ -37,63 +38,83 @@ void Shop::InitializeStock()
 	}
 }
 
-void Shop::DisplayStock() const
+int Shop::DisplayStock(int shopState , int currentIndex , int startX , int startY) const
 {
-	std::cout << "\n======================== [ 상 점 ] ========================\n";
+	Console_gotoxy(startX , startY++);
+	std::cout << "======================== [ 상 점 ] ========================";
 
 	if ( m_stockList.empty() )
 	{
-		std::cout << "현재 판매 중인 물건이 없습니다.\n";
-		std::cout << "===========================================================\n";
-		return;
+		std::cout << "현재 판매 중인 물건이 없습니다.";
+		std::cout << "===========================================================";
+		return startY;
 	}
-
+	Console_gotoxy(startX , startY++);
 	std::cout << std::left
 		<< std::setw(8) << "[번호]"
 		<< std::setw(20) << "이름"
 		<< std::setw(10) << "가격"
-		<< "설명\n";
-	std::cout << "-----------------------------------------------------------\n";
+		<< "설명";
+	Console_gotoxy(startX , startY++);
+	std::cout << "-----------------------------------------------------------";
 
 	for ( int i = 0; i < m_stockList.size(); i++ )
 	{
-		const ItemBase* item = m_stockList[i];
+		const ItemBase* item = m_stockList[i]; 
 
-		if ( item != nullptr )
+		if ( item != nullptr ) 
 		{
+			Console_gotoxy(startX , startY++); // 줄바꿈
+
+			// shopState가 1(구매 리스트 진입)일 때만 화살표를 그림
+			if ( shopState == 0 && currentIndex == i ) 
+			{
+				std::cout << "  ->  ";
+			}
+			else 
+			{ 
+				std::cout << "      ";
+			}
+
 			std::cout << "[" << std::right << std::setw(2) << (i + 1) << "]   ";
 
+			// 이름, 가격(GetGold로 수정), 설명 출력 (끝에 \n 뺐음)
 			std::cout << std::left << std::setw(17) << item->GetName()
 				<< std::right << std::setw(4) << item->GetGold() << " G   "
-				<< std::left << item->GetDescription() << "\n";
+				<< std::left << item->GetDescription();
 		}
 	}
-	std::cout << "===========================================================\n";
+	Console_gotoxy(startX , startY++);
+	std::cout << "===========================================================";
+	return startY;
 }
 
-void Shop::BuyItem(Player& player , int itemIndex)
+int Shop::BuyItem(Player& player , int itemIndex)
 {
 	if (itemIndex < 0 || itemIndex >= m_stockList.size())
 	{
-		std::cout << "잘못된 번호입니다. 다시 선택해주세요.\n";
-		return;
+		//std::cout << "잘못된 번호입니다. 다시 선택해주세요.\n";
+		return -1; // 잘못된 접근
 	}
 
 	int playerGold = player.GetGoldAmount();
 	if (playerGold - m_stockList[itemIndex]->GetGold() < 0)
 	{
-		std::cout << "골드가 부족합니다.\n";
+		//std::cout << "골드가 부족합니다.\n";
+		return 1;// 1번: 골드 부족
 	}
 	else if (player.GetInventory()->IsFull())
 	{
-		std::cout << "인벤토리가 가득 찼습니다. 아이템을 판매하여 공간을 확보하세요.\n";
+		//std::cout << "인벤토리가 가득 찼습니다. 아이템을 판매하여 공간을 확보하세요.\n";
+		return 2; // 2번: 인벤토리 가득 참
 	}
 	else
 	{
-		std::cout << "[" << m_stockList[itemIndex]->GetName() << "] 아이템을 구매하였습니다.\n";
+		//std::cout << "[" << m_stockList[itemIndex]->GetName() << "] 아이템을 구매하였습니다.\n";
 		player.AcquireGold(-m_stockList[itemIndex]->GetGold());
 		player.GetInventory()->AddItem(m_stockList[itemIndex]->GetID());
 		m_stockList.erase(m_stockList.begin() + itemIndex);
+		return 0; // 0번: 구매
 	}
 }
 

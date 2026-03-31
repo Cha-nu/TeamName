@@ -183,16 +183,16 @@ void BattleScene::Render()
 		Console_gotoxy(textX , textY + 2); std::cout << "▶ (Enter를 눌러 닫기)";
 
 		// [우측 팝업] 스탯창 그리기
-		Console_gotoxy(statX , stY + 0);  std::cout << "+-----------------------+";
-		Console_gotoxy(statX , stY + 1);  std::cout << "|   [ 캐릭터 정보 ]     |";
-		Console_gotoxy(statX , stY + 2);  std::cout << "+-----------------------+";
-		Console_gotoxy(statX , stY + 5);  std::cout << " 이름   : " << player->Getstat().name;
-		Console_gotoxy(statX , stY + 7);  std::cout << " 레벨   : " << player->Getstat().Level;
-		Console_gotoxy(statX , stY + 8);  std::cout << " HP     : " << player->Getstat().HP;
-		Console_gotoxy(statX , stY + 9);  std::cout << " 공격력 : " << player->Getstat().Atk_Damage;
-		Console_gotoxy(statX , stY + 10); std::cout << " 경험치 : " << player->Getstat().EXP;
-		Console_gotoxy(statX , stY + 11); std::cout << " Gold   : " << player->GetGoldAmount();
-		Console_gotoxy(statX , stY + 12); std::cout << "+-----------------------+";
+		Console_gotoxy(statX + 10 , stY + 0);  std::cout << "+-----------------------+";
+		Console_gotoxy(statX + 10 , stY + 1);  std::cout << "|   [ 캐릭터 정보 ]     |";
+		Console_gotoxy(statX + 10 , stY + 2);  std::cout << "+-----------------------+";
+		Console_gotoxy(statX + 10 , stY + 5);  std::cout << " 이름   : " << player->Getstat().name;
+		Console_gotoxy(statX + 10 , stY + 7);  std::cout << " 레벨   : " << player->Getstat().Level;
+		Console_gotoxy(statX + 10 , stY + 8);  std::cout << " HP     : " << player->Getstat().HP;
+		Console_gotoxy(statX + 10 , stY + 9);  std::cout << " 공격력 : " << player->Getstat().Atk_Damage;
+		Console_gotoxy(statX + 10 , stY + 10); std::cout << " 경험치 : " << player->Getstat().EXP;
+		Console_gotoxy(statX + 10 , stY + 11); std::cout << " Gold   : " << player->GetGoldAmount();
+		Console_gotoxy(statX + 10 , stY + 12); std::cout << "+-----------------------+";
 	}
 	else if ( battleState == 6 ) 
 	{
@@ -447,7 +447,7 @@ void BattleScene::ClearStatBox()
 	int cx = (csbi.srWindow.Right - csbi.srWindow.Left + 1) / 2;
 	int cy = (csbi.srWindow.Bottom - csbi.srWindow.Top + 1) / 2;
 
-	int sX = cx + 25; 
+	int sX = cx + 35; 
 	int stY = cy - 15; 
 
 	for ( int i = stY; i <= stY + 14; i++ ) 

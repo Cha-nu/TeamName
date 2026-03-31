@@ -23,8 +23,18 @@ private:
 	int currentIndex = 0; // 아이템 목록이나 메뉴에서 '->' 가리키는 위치 변수
 	int confirmIndex = 0; // 팝업창(예/아니오)에서 '->' 가리키는 변수
 
-	size_t totalListCount = 0;
+	size_t maxMenuIndex = 0;
 	bool isKeyPressed = false;
+
+	// UI 중앙 배치용 좌표
+	int shopX = 0;// ShopUI 위치
+	int shopY = 0;
+	int popup_X = 0;// 팝업창 위치
+	int popup_Y = 0;
+	int statX = 0;// 스탯창 위치
+	int statY = 0; 
+	int nextY = 0;//화살표 위치
+	int stockCount = 0;
 
 public:
 	void Init() override;

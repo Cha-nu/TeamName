@@ -19,6 +19,8 @@ private:
 	int popup_X = 0;
 	int popup_Y = 0;
 	int nextY = 0;
+
+	bool isShopMode = false;
 public:
 	void Init() override;
 	void Render() override;

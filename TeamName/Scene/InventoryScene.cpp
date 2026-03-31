@@ -147,6 +147,7 @@ void InventoryScene::Update()
 				currentIndex--;//"->"위치를 올리는 부분 (콘솔 좌표는 왼쪽위가 0,0이다)
 			}
 			SetNeedsRender(true);
+			Sleep(100);
 		}
 		else if ( GetAsyncKeyState(VK_DOWN) & 0x8000 ) 
 		{
@@ -155,6 +156,7 @@ void InventoryScene::Update()
 				currentIndex++;//"->"아래로 내리는  부분 
 			} 
 			SetNeedsRender(true);
+			Sleep(100);
 		}
 		if ( isKeyPressed )
 		{

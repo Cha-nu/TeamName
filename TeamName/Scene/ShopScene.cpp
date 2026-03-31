@@ -163,9 +163,9 @@ void ShopScene::Update()
 		{ 
 			if ( currentIndex > 0 ) 
 			{ 
-				currentIndex--; 
-				SetNeedsRender(true); 
+				currentIndex--;  
 			}
+			SetNeedsRender(true);
 			Sleep(100); //두개씩 넘어가는 현상 없앨려고 추가 
 		}
 		else if ( GetAsyncKeyState(VK_DOWN) & 0x8000 ) 
@@ -173,8 +173,8 @@ void ShopScene::Update()
 			if ( currentIndex < maxMenuIndex )
 			{ 
 				currentIndex++; 
-				SetNeedsRender(true); 
 			}
+			SetNeedsRender(true);
 			Sleep(100);//두개씩 넘어가는 현상 없앨려고 추가
 		}
 		if ( isKeyPressed )

@@ -1,6 +1,9 @@
 ﻿#include "DrawHelper.h"
 #include "ConsoleHelper.h"
+#include<vector>
 #include <iostream>
+
+
 void DrawMonster(const std::string& monsterName , int x , int y)
 {
 	//else if로 추가하면 됨
@@ -67,4 +70,17 @@ void DrawMonster(const std::string& monsterName , int x , int y)
 		Console_gotoxy(x , y + 7); std::cout << "  |   /_|_|_\\   |  ";
 		Console_gotoxy(x , y + 8); std::cout << "  |_____________|  ";
 	}
+}
+
+
+static const std::vector<QuizData> bossQuizzes = {
+	// 문제 내용, 선택지 4개(무조건 4개), 정답 번호
+	{ "Q. 객체지향 프로그래밍(OOP)의 3대 핵심 특징이 아닌 것은?", {"1. 캡슐화", "2. 상속성", "3. 다형성", "4. 휘발성"}, 3 },
+};
+
+QuizData GetRandomQuiz()
+{
+	//퀴즈가 더 늘어아면 랜덤 변수생성
+	//int randomIndex = rand() % bossQuizzes.size();
+	return bossQuizzes[0];
 }

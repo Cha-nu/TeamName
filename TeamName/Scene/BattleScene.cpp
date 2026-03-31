@@ -9,7 +9,6 @@
 #include"Scene_M/EndingScene/EndingScene.h"
 #include<iomanip>
 #include"ConsoleHelper.h"
-#include"DrawHelper.h"
 
 #include"Data/ItemKey.h"
 
@@ -34,7 +33,10 @@ void BattleScene::Init()
 
 void BattleScene::Render()
 {
-	if ( !bNeedsRender ) return;
+	if ( !bNeedsRender ) 
+	{
+		return;
+	}
 
 	// 전체 화면 크기를 가져와 중앙 좌표(cx, cy) 계산
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
@@ -97,18 +99,21 @@ void BattleScene::Render()
 	int rightArr = cx + 2;   
 
 	// 메뉴 고정 텍스트
-	Console_gotoxy(leftText , topMenuRow); std::cout << "공격";
-	Console_gotoxy(rightText , topMenuRow); std::cout << "아이템 (가방)";
-	Console_gotoxy(leftText , botMenuRow); std::cout << "능력치 확인";
-	Console_gotoxy(rightText , botMenuRow); std::cout << "포기한다";
+	if ( battleState != 10 )//문제가 생기면 그냥 바로 밖으로 빼기 
+	{
+		Console_gotoxy(leftText , topMenuRow); std::cout << "공격";
+		Console_gotoxy(rightText , topMenuRow); std::cout << "아이템 (가방)";
+		Console_gotoxy(leftText , botMenuRow); std::cout << "능력치 확인";
+		Console_gotoxy(rightText , botMenuRow); std::cout << "포기한다";
 
-	Console_gotoxy(leftArr , topMenuRow); std::cout << "  ";
-	Console_gotoxy(rightArr , topMenuRow); std::cout << "  ";
-	Console_gotoxy(leftArr , botMenuRow); std::cout << "  ";
-	Console_gotoxy(rightArr , botMenuRow); std::cout << "  ";
-
+		Console_gotoxy(leftArr , topMenuRow); std::cout << "  ";
+		Console_gotoxy(rightArr , topMenuRow); std::cout << "  ";
+		Console_gotoxy(leftArr , botMenuRow); std::cout << "  ";
+		Console_gotoxy(rightArr , botMenuRow); std::cout << "  ";
+	}
 	ClearTextBox();     // 텍스트 창 닦기
 	ClearMenuArrows();  // 화살표 사라지게 함
+	
 
 	if ( battleState == 0 )//기본 디폴트로 들어오게 함
 	{
@@ -210,6 +215,51 @@ void BattleScene::Render()
 		Console_gotoxy(textX , textY + 1); std::cout << "마침내 기나긴 취업 준비생의 끝이 보인다...!";
 		Console_gotoxy(textX , textY + 2); std::cout << "보스 [" << monster->getName() << "]을(를) 쓰러뜨렸다! ▶ (Enter)";
 	}
+	else if ( battleState == 9 ) //보스 몬스터 전용 텍스트 출력 부분
+	{
+		Console_gotoxy(textX , textY + 1); std::cout << "보스 [" << monster->getName() << "]가 면접 질문을 던졌다!";
+		Console_gotoxy(textX , textY + 2); std::cout << "문제를 맞혀야 취업 할 수 있다... ▶ (Enter)";
+	}
+	else if ( battleState == 10 ) //퀴즈 출제 4지선다
+	{
+		// 문제 출제(위치 고민)
+		Console_gotoxy(textX , textY + 1); std::cout << currentQuiz.question;
+		Console_gotoxy(textX , textY + 2); std::cout << "  (방향키로 정답을 선택하고 Enter를 누르세요)";
+
+		// 항목
+		Console_gotoxy(leftText , topMenuRow); std::cout << currentQuiz.choices[0] << "        ";
+		Console_gotoxy(rightText , topMenuRow); std::cout << currentQuiz.choices[1] << "        ";
+		Console_gotoxy(leftText , botMenuRow); std::cout << currentQuiz.choices[2] << "        ";
+		Console_gotoxy(rightText , botMenuRow); std::cout << currentQuiz.choices[3] << "        ";
+
+		//화살표 움직여서 어디 고를지 위치 보여줌
+		if ( currentIndex == 0 ) //0 (왼쪽 위)
+		{
+			Console_gotoxy(leftArr , topMenuRow); std::cout << "->";
+		}
+		else if ( currentIndex == 1 ) //1 (오른쪽 위)
+		{
+			Console_gotoxy(rightArr , topMenuRow); std::cout << "->";
+		}
+		else if ( currentIndex == 2 ) //2 (왼쪽 아래)
+		{
+			Console_gotoxy(leftArr , botMenuRow); std::cout << "->";
+		}
+		else if ( currentIndex == 3 ) //3 (오른쪽 아래)
+		{
+			Console_gotoxy(rightArr , botMenuRow); std::cout << "->";
+		}
+	}
+	else if ( battleState == 11 ) // 정답 텍스트
+	{
+		Console_gotoxy(textX , textY + 1); std::cout << "정답! 보스가 당황했다!";
+		Console_gotoxy(textX , textY + 2); std::cout << "보스에게 치명적인 데미지를 주었다! ▶ (Enter)";
+	}
+	else if ( battleState == 12 ) // 오답 텍스트
+	{
+		Console_gotoxy(textX , textY + 1); std::cout << "틀렸습니다....";
+		Console_gotoxy(textX , textY + 2); std::cout << "압박감으로 정신적 피해를 입었습니다! ▶ (Enter)";
+	}
 	Console_gotoxy(0 , 0);
 
 	SetNeedsRender(false); // 렌더링 잠금
@@ -309,7 +359,7 @@ void BattleScene::Update()
 			SetNeedsRender(true); 
 		}
 	}
-	else if ( battleState == 1 ) //몬스터 공격 텍스트 출력
+	else if ( battleState == 1 ) //플레이어 몬스터 공격 상호작용
 	{
 		if ( isKeyPressed )
 		{
@@ -325,14 +375,28 @@ void BattleScene::Update()
 					player->GetInventory()->AddItem(dropItem.GetItem()->GetID() , 1);
 				}
 
-				if ( monster->getName() == "취업" ) battleState = 8;
-				else battleState = 2; 
+				if ( monster->getName() == "취업" ) 
+				{ 
+					battleState = 8; 
+				}
+				else 
+				{ 
+					battleState = 2;
+				}
 			}
 			else 
 			{
-				monster->attackPlayer(player);
-				battleState = 3; 
+				if ( monster->getName() == "취업" ) 
+				{ 
+					battleState = 9; 
+				}
+				else 
+				{
+					monster->attackPlayer(player);
+					battleState = 3;
+				}
 			}
+			//SetNeedsRender(true);
 		}
 	}
 	else if ( battleState == 2 ) // 승리 텍스트 후
@@ -383,9 +447,17 @@ void BattleScene::Update()
 			if ( monster->isDead() ) battleState = 2; 
 			else
 			{
-				monster->attackPlayer(player);
-				battleState = 3; 
+				if ( monster->getName() == "취업" ) 
+				{ 
+					battleState = 9;
+				}
+				else
+				{
+					monster->attackPlayer(player);
+					battleState = 3;
+				}
 			}
+			SetNeedsRender(true);
 		}
 	}
 	else if ( battleState == 8 ) //보스잡고나서 처리하는 부분
@@ -394,6 +466,106 @@ void BattleScene::Update()
 		{
 			player->bOffPlayerBattle();
 			SceneManager::getInstance().Replace_Scene(new EndingScene());
+		}
+	}
+	else if ( battleState == 9 ) //퀴즈 처리 부분
+	{
+		if ( isKeyPressed )
+		{
+			currentQuiz = GetRandomQuiz(); // 헬퍼에서 문제 하나 뽑아오기!
+			battleState = 10;
+			currentIndex = 0;
+			system("cls"); // 잔상 깔끔하게 청소
+			SetNeedsRender(true);
+		}
+	}
+	else if ( battleState == 10 ) //퀴즈 4지선다 고르고 작동하는 부분
+	{
+		if ( GetAsyncKeyState(VK_UP) & 0x8000 ) 
+		{
+			if ( currentIndex == 2 )
+			{
+				currentIndex = 0;
+			}
+			else if ( currentIndex == 3 ) 
+			{ 
+				currentIndex = 1; 
+			}
+			SetNeedsRender(true);
+		}
+		else if ( GetAsyncKeyState(VK_DOWN) & 0x8000 ) 
+		{
+			if ( currentIndex == 0 ) 
+			{ 
+				currentIndex = 2; 
+			}
+			else if ( currentIndex == 1 ) 
+			{ 
+				currentIndex = 3; 
+			}
+			SetNeedsRender(true);
+		}
+		else if ( GetAsyncKeyState(VK_LEFT) & 0x8000 ) 
+		{
+			if ( currentIndex == 1 ) 
+			{ 
+				currentIndex = 0; 
+			}
+			else if ( currentIndex == 3 ) 
+			{ 
+				currentIndex = 2; 
+			}
+			SetNeedsRender(true);
+		}
+		else if ( GetAsyncKeyState(VK_RIGHT) & 0x8000 ) {
+			if ( currentIndex == 0 ) 
+			{ 
+				currentIndex = 1; 
+			}
+			else if ( currentIndex == 2 ) 
+			{ 
+				currentIndex = 3; 
+			}
+			SetNeedsRender(true);
+		}
+
+		if ( isKeyPressed )
+		{
+			system("cls"); // 잔상 지우기
+			if ( currentIndex == currentQuiz.correctIndex ) // 정답!
+			{
+				battleState = 11;
+				// 정답시 보스한테 어떻게 피해를 줄지
+				player->Attack(monster);
+			}
+			else // 오답
+			{
+				battleState = 12;
+				//플레이어 처리 부분
+				monster->attackPlayer(player);
+			}
+			SetNeedsRender(true);
+		}
+	}
+	else if ( battleState == 11 || battleState == 12 ) // 퀴즈 결과 확인 후
+	{
+		if ( isKeyPressed )
+		{
+			system("cls");
+			if ( player->Getstat().HP <= 0 ) // 체력 다 닳았으면 게임오버
+			{ 
+				battleState = 4; 
+			} 
+			else if ( monster->isDead() ) // 보스가 죽었으면 엔딩
+			{ 
+				battleState = 8; 
+			}    
+			else// 둘다 살았으면 행동 선택화면으로 
+			{
+				battleState = 0; 
+				currentIndex = 0;
+			}
+			SetNeedsRender(true);
 		}
 	}
 

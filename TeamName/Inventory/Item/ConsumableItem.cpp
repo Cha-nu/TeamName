@@ -57,10 +57,6 @@ void ConsumableItem::Use(Player& player) const
 	{
 		player.SetStat().HP = StatClamp(player.Getstat().HP + calculated_amount, player.GetMaxStat().MaxHP);
 	}
-	else if ( m_targetStat == TargetStat::Stamina )
-	{
-		player.SetStat().Stamina += static_cast<int>(calculated_amount);
-	}
 	else if ( m_targetStat == TargetStat::Attack )
 	{
 		player.SetStat().Atk_Damage += static_cast<int>(calculated_amount);

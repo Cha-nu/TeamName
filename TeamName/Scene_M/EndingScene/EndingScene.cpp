@@ -8,6 +8,8 @@
 #include <string>
 #include <windows.h> // 좌표 이동(gotoxy), GetAsyncKeyState 사용을 위해 추가
 
+#include "Manager/GameManager/GameManager.h"
+
 // 지정한 X , Y 좌표로 콘솔 커서를 이동시키는 함수
 void Ending_gotoxy(int x, int y) {
 	COORD pos;
@@ -111,7 +113,11 @@ void EndingScene::Update() {
 			Ending_gotoxy(cx - 20 , cy - 4); std::cout << "            현실로 돌아갑니다...           ";
 			Ending_gotoxy(cx - 20 , cy - 3); std::cout << "=========================================";
 			Sleep(500); // 0.5초 대기 후 진행
-			exit(0);
+
+			// 메모리 해제 후 게임 종료
+			GameManager::getInstance().SetRunning(false);
+
+			return;
 		}
 	}
 

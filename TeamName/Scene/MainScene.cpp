@@ -219,6 +219,7 @@ void MainScene::Update()
 		{
 			system("cls");
 			GameManager::getInstance().SetRunning(false);
+			return;
 		}
 		SetNeedsRender(true); // 렌더링
 	}

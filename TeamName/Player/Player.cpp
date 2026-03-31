@@ -41,7 +41,6 @@ void Player::InitializeStat(float _hp, std::string _name, float _atkdamage, int 
 	Playerstat.name = _name;
 	Playerstat.Atk_Damage = _atkdamage;
 	Playerstat.Level = _level;
-	Playerstat.Stamina = _stamina;
 }
 
 void Player::AcquireEXP(int _exp)
@@ -116,7 +115,6 @@ void Player::ShowPlayerStat(){
 	std::cout << "Player HP: " << Playerstat.HP << "\n";
 	std::cout << "Player Atk_damage: " << Playerstat.Atk_Damage << "\n";
 	std::cout << "Player Level: " << Playerstat.Level << "\n";
-	std::cout << "Player Stamina: " << Playerstat.Stamina << "\n";
 	std::cout << "Player GoldAmount: " << Gold << "\n";
 }
 

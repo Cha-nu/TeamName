@@ -38,6 +38,12 @@ void SceneManager::Return_Scene()
 
 		SceneStack.pop();//꺼내야하니까 pop
 	}
+	//트러블 슈팅용
+	//if ( !SceneStack.empty() ) 
+	//{
+	//
+	//	SceneStack.top()->Init();
+	//}
 }
 
 void SceneManager::Replace_Scene(Scene* newScene)
@@ -76,4 +82,14 @@ void SceneManager::Set_UseItem_Name(std::string UseItemName)
 std::string SceneManager::Get_UseItem_Name()
 {
 	return Character_UseItem_Name;
+}
+
+void SceneManager::Set_IsShopMode(bool TF)
+{
+	this->isShopMode = TF;
+}
+
+bool SceneManager::Get_IsShopMode()
+{
+	return isShopMode;
 }

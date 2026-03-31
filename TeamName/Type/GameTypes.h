@@ -22,7 +22,6 @@ enum class TargetStat
 enum class ItemRank
 {
 	Common = 1,
-	Uncommon,
 	Rare,
 	Epic,
 	Legendary

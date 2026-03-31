@@ -40,6 +40,12 @@ ConsumableItem::~ConsumableItem()
 
 void ConsumableItem::Use(Player& player) const
 {
+	//if (IsMaxStat(player))
+	//{
+	//	// 이미 최대치인 경우 아이템 사용을 무시하고 메시지를 출력할 수 있습니다.
+	//	return;
+	//}
+
 	float calculated_amount = m_amount * static_cast<float>(m_rank);
 
 	if ( m_isDamage )
@@ -51,13 +57,9 @@ void ConsumableItem::Use(Player& player) const
 	{
 		player.SetStat().HP = StatClamp(player.Getstat().HP + calculated_amount, player.GetMaxStat().MaxHP);
 	}
-	else if ( m_targetStat == TargetStat::Stamina )
-	{
-		player.SetStat().Stamina += static_cast<int>(calculated_amount);
-	}
 	else if ( m_targetStat == TargetStat::Attack )
 	{
-		player.SetStat().Atk_Damage = StatClamp(player.Getstat().Atk_Damage + calculated_amount, player.GetMaxStat().MaxAtk_Damage);
+		player.SetStat().Atk_Damage += static_cast<int>(calculated_amount);
 	}
 }
 
@@ -73,6 +75,20 @@ void ConsumableItem::Use(Monster& target) const
 		target.takeDamage(-calculated_amount);
 	}
 }
+
+//bool ConsumableItem::IsMaxStat(Player& player) const
+//{
+//	if (m_targetStat == TargetStat::HP)
+//	{
+//		return player.Getstat().HP == player.GetMaxStat().MaxHP;
+//	}
+//	else if (m_targetStat == TargetStat::Attack)
+//	{
+//		return player.Getstat().Atk_Damage == player.GetMaxStat().MaxAtk_Damage;
+//	}
+//
+//	return false;
+//}
 
 float ConsumableItem::StatClamp(float stat, float maxStat) const
 {

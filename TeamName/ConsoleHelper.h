@@ -5,3 +5,4 @@ void Console_gotoxy(int x , int y);
 void DisableQuickEdit();
 void SetCursorVisible(bool isVisible);
 void WaitUntilKeyUp_Enter_Space();
+void GetScreen_Center_XY(int& centerX , int& centerY);

@@ -7,14 +7,28 @@
 #include <iostream>
 #include <string>
 #include <windows.h> // [0327 추가] 좌표 이동(gotoxy), GetAsyncKeyState 사용을 위해 추가
+
+#include "Manager/GameManager/GameManager.h"
 // #include <cstdlib> // system의 cls, pause 사용하기 위해 추가
 
 // [0327 추가] 지정한 X, Y 좌표로 콘솔 커서를 이동시키는 함수
-void Start_gotoxy(int x , int y) {
+void Start_gotoxy(int x, int y) {
 	COORD pos;
 	pos.X = x;
 	pos.Y = y;
-	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE) , pos);
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), pos);
+}
+
+// 화면의 중앙 좌표를 구하는 도우미 함수
+static void GetScreenCenterXY(int& centerX, int& centerY) {
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+	int width = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+	int height = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
+	
+	// 가로, 세로의 중앙 지점 계산
+	centerX = width / 2;
+	centerY = height / 2;
 }
 
 // 초기화 함수(1회 실행)
@@ -28,35 +42,39 @@ void StartScene::Init() {
 
 // 화면 출력
 void StartScene::Render() {
-	if ( !bNeedsRender ) return;
-	// 1. 타이틀 고정 출력 (콘솔 중앙쯤 위치하도록 좌표 설정)
-	Start_gotoxy(30, 5); std::cout << " _   __                                   ______ ______  _____ ";
-	Start_gotoxy(30, 6); std::cout << "| | / /                                   | ___ \\| ___ \\|  __ \\";
-	Start_gotoxy(30, 7); std::cout << "| |/ /   ______   _ __ ___    ___  _ __   | |_/ /| |_/ /| |  \\/";
-	Start_gotoxy(30, 8); std::cout << "|    \\  |______| | '_ ` _ \\  / _ \\| '_ \\  |    / |  __/ | | __ ";
-	Start_gotoxy(30, 9); std::cout << "| |\\  \\          | | | | | ||  __/| | | | | |\\ \\ | |    | |_\\ \\";
-	Start_gotoxy(30, 10); std::cout << "\\_| \\_/          |_| |_| |_| \\___||_| |_| \\_| \\_|\\_|    \\_____/";
+	if (!bNeedsRender) return;
+
+	int cx, cy;
+	GetScreenCenterXY(cx, cy);
+
+	// 1. 타이틀 고정 출력 (콘솔 중앙을 기준으로 상대 좌표 설정)
+	Start_gotoxy(cx - 30, cy - 10); std::cout << " _   __                                   ______ ______  _____ ";
+	Start_gotoxy(cx - 30, cy -  9); std::cout << "| | / /                                   | ___ \\| ___ \\|  __ \\";
+	Start_gotoxy(cx - 30, cy -  8); std::cout << "| |/ /   ______   _ __ ___    ___  _ __   | |_/ /| |_/ /| |  \\/";
+	Start_gotoxy(cx - 30, cy -  7); std::cout << "|    \\  |______| | '_ ` _ \\  / _ \\| '_ \\  |    / |  __/ | | __ ";
+	Start_gotoxy(cx - 30, cy -  6); std::cout << "| |\\  \\          | | | | | ||  __/| | | | | |\\ \\ | |    | |_\\ \\";
+	Start_gotoxy(cx - 30, cy -  5); std::cout << "\\_| \\_/          |_| |_| |_| \\___||_| |_| \\_| \\_|\\_|    \\_____/";
 
 
-	Start_gotoxy(40, 12); std::cout << "=========================================";
-	Start_gotoxy(40, 13); std::cout << "             [ 한국 남자 RPG ]            ";
-	Start_gotoxy(40, 14); std::cout << "=========================================";
+	Start_gotoxy(cx - 20, cy -  3); std::cout << "=========================================";
+	Start_gotoxy(cx - 20, cy -  2); std::cout << "             [ 한국 남자 RPG ]            ";
+	Start_gotoxy(cx - 20, cy -  1); std::cout << "=========================================";
 
 	// 2. 선택지 고정 출력
-	Start_gotoxy(44, 16); std::cout << "[이동: 방향키 | 상호작용: Enter키]";
-	Start_gotoxy(53, 18); std::cout << "* 게임 시작";
-	Start_gotoxy(53, 20); std::cout << "* 게임 나가기";
+	Start_gotoxy(cx - 16, cy + 1); std::cout << "[이동: 방향키 | 상호작용: Enter키]";
+	Start_gotoxy(cx - 7, cy + 3);  std::cout << "* 게임 시작";
+	Start_gotoxy(cx - 7, cy + 5);  std::cout << "* 게임 나가기";
 
 	// 3. 화살표 그리기 (기존 위치는 지우고 새 위치에 그리기)
-	Start_gotoxy(50, 18); std::cout << " "; // 1번 앞 공백으로 지우기
-	Start_gotoxy(50, 20); std::cout << " "; // 2번 앞 공백으로 지우기
+	Start_gotoxy(cx - 10, cy + 3); std::cout << "  "; // 1번 앞 공백으로 지우기 (특수문자 크기 고려 2칸)
+	Start_gotoxy(cx - 10, cy + 5); std::cout << "  "; // 2번 앞 공백으로 지우기
 
 	// 3-1. 화살표 그리기 (공백으로 지운 위치에 화살표 출력)
-	if ( currentIndex == 0 ) {
-		Start_gotoxy(50, 18); std::cout << "▶"; // 1번 위치에 화살표
+	if (currentIndex == 0) {
+		Start_gotoxy(cx - 10, cy + 3); std::cout << "▶"; // 1번 위치에 화살표
 	}
 	else {
-		Start_gotoxy(50, 20); std::cout << "▶"; // 2번 위치에 화살표
+		Start_gotoxy(cx - 10, cy + 5); std::cout << "▶"; // 2번 위치에 화살표
 	}
 	SetNeedsRender(false); // 렌더링 잠금
 }
@@ -79,22 +97,28 @@ void StartScene::Update() {
 		SetNeedsRender(true); // 렌더링
 		system("cls");
 
+		int cx, cy;
+		GetScreenCenterXY(cx, cy);
+
 		if (currentIndex == 0) {
-			Start_gotoxy(40, 10); std::cout << "=========================================";
-			Start_gotoxy(40, 11); std::cout << "       한국 남자의 세계로 들어갑니다...      ";
-			Start_gotoxy(40, 12); std::cout << "=========================================";
-			Sleep(1500); // 1.5초 대기 후 진행
+			Start_gotoxy(cx - 20, cy - 5); std::cout << "=========================================";
+			Start_gotoxy(cx - 20, cy - 4); std::cout << "       한국 남자의 세계로 들어갑니다...      ";
+			Start_gotoxy(cx - 20, cy - 3); std::cout << "=========================================";
+			Sleep(1000); // 1초 대기 후 진행
 
 			// 생성 화면(CreateScene)으로 이동
 			SceneManager::getInstance().Replace_Scene(new CharacterChoice());
 			return; // 씬이 교체되었으므로 Update 종료
 		}
 		else if (currentIndex == 1) {
-			Start_gotoxy(40, 10); std::cout << "=========================================";
-			Start_gotoxy(40, 11); std::cout << "            현실로 돌아갑니다...           ";
-			Start_gotoxy(40, 12); std::cout << "=========================================";
-			Sleep(1000); // 1초 대기 후 진행
-			exit(0);
+			Start_gotoxy(cx - 20, cy - 5); std::cout << "=========================================";
+			Start_gotoxy(cx - 20, cy - 4); std::cout << "            현실로 돌아갑니다...           ";
+			Start_gotoxy(cx - 20, cy - 3); std::cout << "=========================================";
+			Sleep(500); // 0.5초 대기 후 진행
+			// 메모리 해제 후 게임 종료
+			GameManager::getInstance().SetRunning(false);
+
+			return;
 		}
 	}
 

@@ -44,15 +44,14 @@ public:
 	void RemoveItem(const std::string& id, int amount = 1);
 
 	void PrintItemList();//매개변수만 추가해서 사용할려고 했는데 이미 몬스터 파트에서 사용하고 있어서 따로 함수하나 더 구현했습니다. 
-	void PrintItemList(int inventoryState , int currentIndex);//인벤토리 씬 전용 프린트 함수 따로 구현했습니다.
+	int PrintItemList(int inventoryState , int currentIndex , int startX , int startY);//인벤토리 씬 전용 프린트 함수 따로 구현했습니다.
 	const std::vector<ItemSlot>& GetItemSlots() const { return m_itemSlots; }
 	const ItemSlot& GetItemSlot(int index) const { return m_itemSlots.at(index); }
 	size_t GetItemCount() const { return m_itemSlots.size(); }
+	bool IsFull() const { return m_itemSlots.size() >= MAX_INVENTORY_SIZE; }
 
 private:
 	std::vector<ItemSlot> m_itemSlots;
-
-	bool IsFull() const { return m_itemSlots.size() >= MAX_INVENTORY_SIZE; }
 
 	// ID에 해당하는 아이템이 있는지 확인한 후, 있다면 해당 아이템의 인덱스를 반환, 없다면 -1 반환
 	int IsExist(const std::string& id) const;

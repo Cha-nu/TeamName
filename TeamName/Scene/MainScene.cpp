@@ -1,6 +1,7 @@
 ﻿#include "MainScene.h"
 #include"BattleScene.h"
 #include"Scene/InventoryScene.h"
+#include"Scene/ShopScene.h"
 #include "../Manager/SceneManager/SceneManager.h"
 #include"Manager/GameManager/GameManager.h"
 #include"Player/Player.h"
@@ -24,98 +25,127 @@ void MainScene::Init()
 
 void MainScene::Render()
 {
-	if ( !bNeedsRender ) return;
-	// 방 아스키 아트 (가운데 배치)
-	Console_gotoxy(artX , 2);  std::cout << "         .---------------------------.";
-	Console_gotoxy(artX , 3);  std::cout << "         |  _______________________  |";
-	Console_gotoxy(artX , 4);  std::cout << "         | |                       | |";
-	Console_gotoxy(artX , 5);  std::cout << "         | |  C:\\> KOREA_MAN_HOME  | |";
-	Console_gotoxy(artX , 6);  std::cout << "         | |                       | |";
-	Console_gotoxy(artX , 7);  std::cout << "         | |_______________________| |";
-	Console_gotoxy(artX , 8);  std::cout << "         |                           |";
-	Console_gotoxy(artX , 9);  std::cout << "         `---------------------------`";
-	Console_gotoxy(artX , 10); std::cout << "               |  |         |  |";
-	Console_gotoxy(artX , 11); std::cout << "        _______|__|_________|__|_______";
-	Console_gotoxy(artX , 12); std::cout << "       /       [==========]            \\";
-	Console_gotoxy(artX , 13); std::cout << "      /  [ ][ ][ ][ ][ ][ ][ ][ ][ ]    \\";
-	Console_gotoxy(artX , 14); std::cout << "     /                                   \\";
-	Console_gotoxy(artX , 15); std::cout << "    '====================================='";
+	if (!bNeedsRender) return;
 
-	// 실시간 스탯창 (오른쪽 배치)
-	Console_gotoxy(statX , 4);  std::cout << "+-----------------------+";
-	Console_gotoxy(statX , 5);  std::cout << "|   [ 캐릭터 정보 ]     |";
-	Console_gotoxy(statX , 6);  std::cout << "+-----------------------+";
-	Console_gotoxy(statX , 8);  std::cout << " 이름   : ";
-	Console_gotoxy(statX , 10); std::cout << " 레벨   : ";
-	Console_gotoxy(statX , 11); std::cout << " HP     : ";
-	Console_gotoxy(statX , 12); std::cout << " 공격력 : ";
-	Console_gotoxy(statX , 13); std::cout << " 경험치 : ";
-	Console_gotoxy(statX , 14); std::cout << " Gold : ";
-	Console_gotoxy(statX , 15); std::cout << "+-----------------------+";
+	// 콘솔 화면 전체 크기를 가져와서 가운데 좌표 구하기
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+	int width = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+	int height = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
 
-	// 실시간 스탯 알맹이 채우기
-	// 이름 (문자열이 길 수 있으니 10칸 띄워서 지움)
-	Console_gotoxy(statValX , 8);  std::cout << "          ";
-	Console_gotoxy(statValX , 8);  std::cout << player->Getstat().name;
+	int cx = width / 2;
+	int cy = height / 2;
 
-	// 2. 레벨
-	Console_gotoxy(statValX , 10); std::cout << "    ";
-	Console_gotoxy(statValX , 10); std::cout << player->Getstat().Level;
+	// 컴포넌트들의 상대적 X, Y 시작 위치 계산 (기준 해상도 대비 비율로 배치)
+	int localArtX = cx - 22;  // 방 그림을 중앙보다 조금 왼쪽에
+	int localStatX = cx + 27; // 스탯창을 중앙보다 조금 오른쪽에
+	int localStatValX = localStatX + 11; // 스탯창 내부 값 쓰기 위치 
+	int localMenuX = cx - 25; // 하단 메뉴창을 중앙에
+	int localMenuY = cy + 4;  // 하단 메뉴창 높이
 
-	// 3. HP
-	Console_gotoxy(statValX , 11); std::cout << "    ";
-	Console_gotoxy(statValX , 11); std::cout << player->Getstat().HP;
+	// 1. 방 아스키 아트
+	Console_gotoxy(localArtX, cy - 13);  std::cout << "         .---------------------------.";
+	Console_gotoxy(localArtX, cy - 12);  std::cout << "         |  _______________________  |";
+	Console_gotoxy(localArtX, cy - 11);  std::cout << "         | |                       | |";
+	Console_gotoxy(localArtX, cy - 10);  std::cout << "         | |  C:\\> KOREA_MAN_HOME  | |";
+	Console_gotoxy(localArtX, cy - 9);   std::cout << "         | |                       | |";
+	Console_gotoxy(localArtX, cy - 8);   std::cout << "         | |_______________________| |";
+	Console_gotoxy(localArtX, cy - 7);   std::cout << "         |                           |";
+	Console_gotoxy(localArtX, cy - 6);   std::cout << "         `---------------------------`";
+	Console_gotoxy(localArtX, cy - 5);   std::cout << "               |  |         |  |";
+	Console_gotoxy(localArtX, cy - 4);   std::cout << "        _______|__|_________|__|_______";
+	Console_gotoxy(localArtX, cy - 3);   std::cout << "       /       [==========]            \\";
+	Console_gotoxy(localArtX, cy - 2);   std::cout << "      /  [ ][ ][ ][ ][ ][ ][ ][ ][ ]    \\";
+	Console_gotoxy(localArtX, cy - 1);   std::cout << "     /                                   \\";
+	Console_gotoxy(localArtX, cy);       std::cout << "    '====================================='";
 
-	// 4. 공격력
-	Console_gotoxy(statValX , 12); std::cout << "    ";
-	Console_gotoxy(statValX , 12); std::cout << player->Getstat().Atk_Damage;
+	// 2. 실시간 스탯창 프레임
+	int statStart_Y = cy - 11;
+	Console_gotoxy(localStatX, statStart_Y);      std::cout << "+-----------------------+";
+	Console_gotoxy(localStatX, statStart_Y + 1);  std::cout << "|   [ 캐릭터 정보 ]     |";
+	Console_gotoxy(localStatX, statStart_Y + 2);  std::cout << "+-----------------------+";
+	Console_gotoxy(localStatX, statStart_Y + 4);  std::cout << " 이름   : ";
+	Console_gotoxy(localStatX, statStart_Y + 6);  std::cout << " 레벨   : ";
+	Console_gotoxy(localStatX, statStart_Y + 7);  std::cout << " HP     : ";
+	Console_gotoxy(localStatX, statStart_Y + 8);  std::cout << " 공격력 : ";
+	Console_gotoxy(localStatX, statStart_Y + 9);  std::cout << " 경험치 : ";
+	Console_gotoxy(localStatX, statStart_Y + 10); std::cout << " Gold   : ";
+	Console_gotoxy(localStatX, statStart_Y + 11); std::cout << "+-----------------------+";
 
-	// 5. 경험치
-	Console_gotoxy(statValX , 13); std::cout << "    ";
-	Console_gotoxy(statValX , 13); std::cout << player->Getstat().EXP;
+	// 3. 실시간 스탯 데이터 채우기 (포맷 맞추기 위해 지우고 쓰기)
+	Console_gotoxy(localStatValX, statStart_Y + 4);  std::cout << "          ";
+	Console_gotoxy(localStatValX, statStart_Y + 4);  std::cout << player->Getstat().name;
 
-	// 6. 골드
-	Console_gotoxy(statValX , 14); std::cout << "    ";
-	Console_gotoxy(statValX , 14); std::cout << player->GetGoldAmount();
+	Console_gotoxy(localStatValX, statStart_Y + 6);  std::cout << "    ";
+	Console_gotoxy(localStatValX, statStart_Y + 6);  std::cout << player->Getstat().Level;
 
-	// 하단 메뉴 박스 및 고정 텍스트
-	Console_gotoxy(menuX , 18); std::cout << "+------------------------------------------------+";
-	Console_gotoxy(menuX , 19); std::cout << "| [ 내 방 ]                                      |";
-	Console_gotoxy(menuX , 20); std::cout << "| 다음 목적지를 선택해 주세요.                   |";
-	Console_gotoxy(menuX , 21); std::cout << "+------------------------------------------------+";
-	Console_gotoxy(menuX , 22); std::cout << "|                                                |";
-	Console_gotoxy(menuX , 23); std::cout << "|                                                |";
-	Console_gotoxy(menuX , 24); std::cout << "|                                                |";
-	Console_gotoxy(menuX , 25); std::cout << "+------------------------------------------------+";
+	Console_gotoxy(localStatValX, statStart_Y + 7);  std::cout << "    ";
+	Console_gotoxy(localStatValX, statStart_Y + 7);  std::cout << player->Getstat().HP;
 
-	Console_gotoxy(menuX + 3 , 27); std::cout << "[이동: 방향키(상하좌우) | 선택: SPACE / ENTER]";
+	Console_gotoxy(localStatValX, statStart_Y + 8);  std::cout << "    ";
+	Console_gotoxy(localStatValX, statStart_Y + 8);  std::cout << player->Getstat().Atk_Damage;
 
-	Console_gotoxy(41 , 22); std::cout << "전투 시작";
-	Console_gotoxy(65 , 22); std::cout << "아이템 확인 (가방)";
-	Console_gotoxy(41 , 24); std::cout << "상점";
-	Console_gotoxy(65 , 24); std::cout << "게임 종료";
+	Console_gotoxy(localStatValX, statStart_Y + 9);  std::cout << "    ";
+	Console_gotoxy(localStatValX, statStart_Y + 9);  std::cout << player->Getstat().EXP;
 
-	Console_gotoxy(38 , 22); std::cout << "  ";
-	Console_gotoxy(62 , 22); std::cout << "  ";
-	Console_gotoxy(38 , 24); std::cout << "  ";
-	Console_gotoxy(62 , 24); std::cout << "  ";
+	Console_gotoxy(localStatValX, statStart_Y + 10); std::cout << "    ";
+	Console_gotoxy(localStatValX, statStart_Y + 10); std::cout << player->GetGoldAmount();
 
-	if ( currentIndex == 0 ) //0 (왼쪽 위)
+	// 4. 하단 메뉴 박스 프레임
+	Console_gotoxy(localMenuX, localMenuY);     std::cout << "+------------------------------------------------+";
+	Console_gotoxy(localMenuX, localMenuY + 1); std::cout << "| [ 내 방 ]                                      |";
+	Console_gotoxy(localMenuX, localMenuY + 2); std::cout << "| 다음 목적지를 선택해 주세요.                   |";
+	Console_gotoxy(localMenuX, localMenuY + 3); std::cout << "+------------------------------------------------+";
+	Console_gotoxy(localMenuX, localMenuY + 4); std::cout << "|                                                |";
+	Console_gotoxy(localMenuX, localMenuY + 5); std::cout << "|                                                |";
+	Console_gotoxy(localMenuX, localMenuY + 6); std::cout << "|                                                |";
+	Console_gotoxy(localMenuX, localMenuY + 7); std::cout << "+------------------------------------------------+";
+
+
+	// 조작 설명
+	Console_gotoxy(localMenuX + 3, localMenuY + 9); std::cout << "[이동: 방향키(상하좌우) | 선택: SPACE / ENTER]";
+
+	// 메뉴 텍스트 및 선택지 위치 변수 계산 (박스 내부 위치)
+	int leftArrowX  = localMenuX + 6;
+	int leftTextX   = leftArrowX + 3;
+	int rightArrowX = localMenuX + 30;
+	int rightTextX  = rightArrowX + 3;
+
+	int topMenuY = localMenuY + 4;
+	int botMenuY = localMenuY + 6;
+
+	// 메뉴 텍스트 출력
+	Console_gotoxy(leftTextX, topMenuY);  std::cout << "전투 시작";
+	Console_gotoxy(rightTextX, topMenuY); std::cout << "아이템 확인";
+	Console_gotoxy(leftTextX, botMenuY);  std::cout << "상점";
+	Console_gotoxy(rightTextX, botMenuY); std::cout << "게임 종료";
+
+	// 화살표 있던 자리 청소
+	Console_gotoxy(leftArrowX, topMenuY);  std::cout << "  ";
+	Console_gotoxy(rightArrowX, topMenuY); std::cout << "  ";
+	Console_gotoxy(leftArrowX, botMenuY);  std::cout << "  ";
+	Console_gotoxy(rightArrowX, botMenuY); std::cout << "  ";
+
+	// 화살표 그리기
+	if (currentIndex == 0) // 왼쪽 위
 	{
-		Console_gotoxy(38 , 22); std::cout << "->";
+		Console_gotoxy(leftArrowX, topMenuY); std::cout << "->";
 	}
-	else if ( currentIndex == 1 ) //1 (오른쪽 위)
+	else if (currentIndex == 1) // 오른쪽 위
 	{
-		Console_gotoxy(62 , 22); std::cout << "->";
+		Console_gotoxy(rightArrowX, topMenuY); std::cout << "->";
 	}
-	else if ( currentIndex == 2 ) //2 (왼쪽 아래)
+	else if (currentIndex == 2) // 왼쪽 아래
 	{
-		Console_gotoxy(38 , 24); std::cout << "->";
+		Console_gotoxy(leftArrowX, botMenuY); std::cout << "->";
 	}
-	else if ( currentIndex == 3 ) //3 (오른쪽 아래)
+	else if (currentIndex == 3) // 오른쪽 아래
 	{
-		Console_gotoxy(62 , 24); std::cout << "->";
+		Console_gotoxy(rightArrowX, botMenuY); std::cout << "->";
 	}
+
+	Console_gotoxy(0 , 0); //이게 있어야 화살표 움직일때 잔상이 제거됨
+	//보이지 않는 커서가 마지막으로 출력한 글자 바로 뒤에 남아있게 되서 윈도우 콘솔 창이 마지막 커서 위치를 화면에 업데이트 할려다가 생기는 문제
 	SetNeedsRender(false); // 렌더링 잠금
 }
 
@@ -183,13 +213,13 @@ void MainScene::Update()
 		}
 		else if ( currentIndex == 2 ) //상점
 		{
-			// SceneManager::getInstance().Add_Scene(new ShopScene());
-			//std::cout << "상점 시스템은 아직 준비 중입니다..." << std::endl;
+			SceneManager::getInstance().Add_Scene(new ShopScene());
 		}
 		else if ( currentIndex == 3 ) //게임종료
 		{
 			system("cls");
 			GameManager::getInstance().SetRunning(false);
+			return;
 		}
 		SetNeedsRender(true); // 렌더링
 	}

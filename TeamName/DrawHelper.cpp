@@ -86,11 +86,11 @@ static const std::vector<QuizData> bossQuizzes = {
 	{ "Q. 보기 중 unique_ptr, shared_ptr과 같은 클래스를 부르는 말로 옳은 것은?", {"1. 스마트 포인터", "2. 하이퍼 포인터", "3. 특수 포인터", "4. 사용자 정의 포인터"}, 0 },
 	{ "Q. 부모 클래스의 멤버변수를 자식이 사용하게 하기 위해 사용하는 최소 접근 제한자는?", {"1. public", "2. protected", "3. private", "4. 접근제한자 생략"}, 1 },
 	{ "Q. 다음 중 MyClass 클래스의 생성자로 올바르게 선언된 것은?", {"1. virtual MyClass()", "2. virtual MyClass()=0", "3. MyClass()", "4. ~MyClass()"}, 2 },
+	{ "Q. 다음 중 유효하지 않은 메모리 영역을 가리키는 포인터를 나타내는 말은?", {"1. 와일드 포인터", "2. 널 포인터", "3. 데드 포인터", "4. 댕글링 포인터"}, 3 },
 };
 
 QuizData GetRandomQuiz()
 {
-	//퀴즈가 더 늘어아면 랜덤 변수생성
 	int randomIndex = rand() % bossQuizzes.size();
 	return bossQuizzes[randomIndex];
 }

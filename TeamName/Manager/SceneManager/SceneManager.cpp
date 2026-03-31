@@ -83,3 +83,13 @@ std::string SceneManager::Get_UseItem_Name()
 {
 	return Character_UseItem_Name;
 }
+
+void SceneManager::Set_IsShopMode(bool TF)
+{
+	this->isShopMode = TF;
+}
+
+bool SceneManager::Get_IsShopMode()
+{
+	return isShopMode;
+}

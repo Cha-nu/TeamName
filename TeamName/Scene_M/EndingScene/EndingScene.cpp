@@ -62,8 +62,8 @@ void EndingScene::Render() {
 	Ending_gotoxy(cx - 7, cy + 5); std::cout << "* 게임 나가기";
 
 	// 3. 화살표 그리기 (기존 위치는 지우고 새 위치에 그리기)
-	Ending_gotoxy(cx - 10, cy + 3); std::cout << " "; // 1번 앞 공백으로 지우기
-	Ending_gotoxy(cx - 10, cy + 5); std::cout << " "; // 2번 앞 공백으로 지우기
+	Ending_gotoxy(cx - 10, cy + 3); std::cout << "  "; // 1번 앞 공백으로 지우기
+	Ending_gotoxy(cx - 10, cy + 5); std::cout << "  "; // 2번 앞 공백으로 지우기
 
 	// 3-1. 화살표 그리기 (공백으로 지운 위치에 화살표 출력)
 	if ( currentIndex == 0 ) {
@@ -100,7 +100,7 @@ void EndingScene::Update() {
 			Ending_gotoxy(cx - 20 , cy - 5); std::cout << "=========================================";
 			Ending_gotoxy(cx - 20 , cy - 4); std::cout << "               돌아가는 중...             ";
 			Ending_gotoxy(cx - 20 , cy - 3); std::cout << "=========================================";
-			Sleep(1500); // 1.5초 대기 후 진행
+			Sleep(1000); // 1초 대기 후 진행
 
 			// 시작 화면(StartScene)으로 이동
 			SceneManager::getInstance().Replace_Scene(new StartScene());
@@ -110,7 +110,7 @@ void EndingScene::Update() {
 			Ending_gotoxy(cx - 20 , cy - 5); std::cout << "=========================================";
 			Ending_gotoxy(cx - 20 , cy - 4); std::cout << "            현실로 돌아갑니다...           ";
 			Ending_gotoxy(cx - 20 , cy - 3); std::cout << "=========================================";
-			Sleep(1000); // 1초 대기 후 진행
+			Sleep(500); // 0.5초 대기 후 진행
 			exit(0);
 		}
 	}

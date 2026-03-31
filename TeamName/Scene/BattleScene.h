@@ -1,4 +1,5 @@
 ﻿#include "Scene.h"
+#include"DrawHelper.h"
 #include<string>
 
 class Player;
@@ -17,6 +18,7 @@ private:
 	int battleState = 0;//battle씬에서 현재 무슨상태인지(무슨 처리를 해야하고 무슨 텍스트를 출력해야하는지 정하는 변수)
 	int textX = 14;//텍스트 위치
 	int statX = 85;//스택창 위치
+	QuizData currentQuiz; // 출제될 퀴즈를 들고 있을 변수
 	bool isKeyPressed = false;//키를 눌렀는지 안눌렀는지 확인하는 값
 	void ClearTextBox();//텍스트 삭제하는 부분
 	void ClearMenuArrows();//텍스트 나올 때 화살표 사라지게 해서 선택이 안되게

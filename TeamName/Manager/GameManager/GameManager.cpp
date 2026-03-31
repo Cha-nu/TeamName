@@ -119,7 +119,7 @@ bool GameManager::CreateMonster()
 	{
 		delete CurrentMonster;
 		if (DebugKey) CurrentMonster = new BossMonster({ "취업", 1, 1, 0 });
-		else CurrentMonster = new BossMonster({ "취업",level * 30 , level * 10, 0 });
+		else CurrentMonster = new BossMonster({ "취업",level * 300 , level * 10, 0 });
 	}
 	return false;
 }

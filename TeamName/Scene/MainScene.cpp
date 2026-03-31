@@ -1,6 +1,7 @@
 ﻿#include "MainScene.h"
 #include"BattleScene.h"
 #include"Scene/InventoryScene.h"
+#include"Scene/ShopScene.h"
 #include "../Manager/SceneManager/SceneManager.h"
 #include"Manager/GameManager/GameManager.h"
 #include"Player/Player.h"
@@ -212,8 +213,7 @@ void MainScene::Update()
 		}
 		else if ( currentIndex == 2 ) //상점
 		{
-			// SceneManager::getInstance().Add_Scene(new ShopScene());
-			//std::cout << "상점 시스템은 아직 준비 중입니다..." << std::endl;
+			SceneManager::getInstance().Add_Scene(new ShopScene());
 		}
 		else if ( currentIndex == 3 ) //게임종료
 		{

@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include<stack>
+#include<string>
 class Scene;
 
 class SceneManager
@@ -7,7 +8,8 @@ class SceneManager
 private:
 	std::stack<Scene*>SceneStack; //씬들이 들어가서 저장되는 stack
 	SceneManager() {}; //외부 생성금지
-
+	std::string Character_UseItem_Name = "";
+	bool isShopMode = false;
 public:
 	void Render();//UI이미지를 계속 출력하는 부분
 
@@ -25,7 +27,6 @@ public:
 	//게임을 종료하거나 전투 중간에 게임을 종료하고 싶을 때 남아있는 SceneStack을 비워준다.
 
 
-
 	static SceneManager& getInstance()//씬 매니저를 외부코드에서 사용하고 싶으면 사용하는 함수 (싱글톤)
 	{
 		static SceneManager instance;
@@ -35,5 +36,10 @@ public:
 	SceneManager(const SceneManager&) = delete; //복사 방지(싱글톤)
 	SceneManager& operator=(const SceneManager&) = delete; //대입 방지 (싱글톤)
 
+	void Set_UseItem_Name(std::string UseItemName);//사용한 아이템인 뭔지 이름을 넘겨줄려고 구현
+	std::string Get_UseItem_Name();
+
+	void Set_IsShopMode(bool TF);
+	bool Get_IsShopMode();
 };
 

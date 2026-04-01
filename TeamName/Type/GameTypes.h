@@ -12,15 +12,16 @@ enum class TargetStat
 {
 	HP,
 	Stamina,
-	Attack
+	Attack,
 	// 추가적인 스탯이 필요한 경우 여기에 추가
+
+	None = 99
 };
 
 // 아이템의 등급을 정의하는 열거형입니다.
 enum class ItemRank
 {
 	Common = 1,
-	Uncommon,
 	Rare,
 	Epic,
 	Legendary

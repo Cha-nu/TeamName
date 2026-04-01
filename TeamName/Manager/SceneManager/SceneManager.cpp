@@ -38,15 +38,12 @@ void SceneManager::Return_Scene()
 
 		SceneStack.pop();//꺼내야하니까 pop
 	}
-
-	if ( !SceneStack.empty() ) //꺼냈으니 전에 있던 씬을 불러오기
-	{
-		SceneStack.top()->Init();//저장되어있던 씬 초기값 호출
-	}
-	else //아예 씬이 없는데 pop을 할려고 하는거라 
-	{
-		//오류가 나오는 출력 부분 
-	}
+	//트러블 슈팅용
+	//if ( !SceneStack.empty() ) 
+	//{
+	//
+	//	SceneStack.top()->Init();
+	//}
 }
 
 void SceneManager::Replace_Scene(Scene* newScene)
@@ -75,4 +72,24 @@ void SceneManager::SceneStack_Clear()
 		delete SceneStack.top();
 		SceneStack.pop();
 	}
+}
+
+void SceneManager::Set_UseItem_Name(std::string UseItemName)
+{
+	this->Character_UseItem_Name = UseItemName;
+}
+
+std::string SceneManager::Get_UseItem_Name()
+{
+	return Character_UseItem_Name;
+}
+
+void SceneManager::Set_IsShopMode(bool TF)
+{
+	this->isShopMode = TF;
+}
+
+bool SceneManager::Get_IsShopMode()
+{
+	return isShopMode;
 }

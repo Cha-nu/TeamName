@@ -86,11 +86,60 @@ static const std::vector<QuizData> bossQuizzes = {
 	{ "Q. 보기 중 unique_ptr, shared_ptr과 같은 클래스를 부르는 말로 옳은 것은?", {"1. 스마트 포인터", "2. 하이퍼 포인터", "3. 특수 포인터", "4. 사용자 정의 포인터"}, 0 },
 	{ "Q. 부모 클래스의 멤버변수를 자식이 사용하게 하기 위해 사용하는 최소 접근 제한자는?", {"1. public", "2. protected", "3. private", "4. 접근제한자 생략"}, 1 },
 	{ "Q. 다음 중 MyClass 클래스의 생성자로 올바르게 선언된 것은?", {"1. virtual MyClass()", "2. virtual MyClass()=0", "3. MyClass()", "4. ~MyClass()"}, 2 },
+	{ "Q. 다음 중 유효하지 않은 메모리 영역을 가리키는 포인터를 나타내는 말은?", {"1. 와일드 포인터", "2. 널 포인터", "3. 데드 포인터", "4. 댕글링 포인터"}, 3 },
 };
 
 QuizData GetRandomQuiz()
 {
-	//퀴즈가 더 늘어아면 랜덤 변수생성
 	int randomIndex = rand() % bossQuizzes.size();
 	return bossQuizzes[randomIndex];
+}
+
+void DrawBossEntranceScene()
+{
+	// 콘솔창의 현재 정보를 담을 구조체 변수 선언
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+
+	// 현재 콘솔의 화면 버퍼 정보(창 크기, 커서 위치 등)를 csbi에 저장
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE) , &csbi);
+
+	// csbi에 저장된 창의 오른쪽 끝과 왼쪽 끝 좌표를 이용해 가로 중앙(cx) 계산
+	int cx = (csbi.srWindow.Right - csbi.srWindow.Left + 1) / 2;
+	// csbi에 저장된 창의 아래쪽 끝과 위쪽 끝 좌표를 이용해 세로 중앙(cy) 계산
+	int cy = (csbi.srWindow.Bottom - csbi.srWindow.Top + 1) / 2;
+
+	// 경고 문구 출력 
+	system("cls"); // 화면을 먼저 깨끗이 지움
+
+	// 화면 중앙에 WARNING 박스 출력
+	Console_gotoxy(cx - 17 , cy - 2); std::cout << "==================================";
+	Console_gotoxy(cx - 17 , cy);     std::cout << "    W A R N I N G !  B O S S !    ";
+	Console_gotoxy(cx - 17 , cy + 2); std::cout << "==================================";
+
+	Sleep(1000); // 1초 동안 화면을 그대로 유지 
+
+	// 화면 지우고 정적...
+	system("cls");
+	Sleep(800);
+
+	Console_gotoxy(cx - 22 , cy - 1);
+	std::cout << "취업 성공이 눈앞까지 왔습니다..."; // ★ 드디어 화면에 출력!
+
+	Sleep(1000); // 문장 사이 짧은 대기
+
+	Console_gotoxy(cx - 24 , cy + 1);
+	std::cout << "보스 [ 취업 ]이 당신 앞을 가로막았습니다!!";
+
+
+	Sleep(1500); // 유저가 문구를 충분히 읽을 시간 제공
+	system("cls"); // 연출 종료 후 화면 정리
+
+	// 연출 도중 발생한 키보드 입력 찌꺼기 제거
+	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
+	GetAsyncKeyState(VK_RETURN);
+	GetAsyncKeyState(VK_SPACE);
+	GetAsyncKeyState(VK_UP);
+	GetAsyncKeyState(VK_DOWN);
+	GetAsyncKeyState(VK_LEFT);
+	GetAsyncKeyState(VK_RIGHT);
 }

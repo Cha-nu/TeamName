@@ -9,3 +9,5 @@ struct QuizData
 void DrawMonster(const std::string& monsterName , int x , int y);
 
 QuizData GetRandomQuiz();
+
+void DrawBossEntranceScene();

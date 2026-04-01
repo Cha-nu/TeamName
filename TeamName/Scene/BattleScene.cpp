@@ -28,6 +28,11 @@ void BattleScene::Init()
 	//battleScene 들어갈 때 전투상태로 변경
 	player->bOnPlayerBattle();
 
+	if ( monster->getName() == "취업" ) 
+	{
+		//연출 그리는 함수
+		DrawBossEntranceScene();
+	}
 	// 이전 씬에서 누른 엔터/스페이스바를 뗄 때까지 무한 대기 (잔상 방지)
 	WaitUntilKeyUp_Enter_Space();
 }
@@ -122,7 +127,7 @@ void BattleScene::Render()
 		if ( monster->getName() == "취업" )
 		{
 			//보스 몬스터 텍스트
-			Console_gotoxy(textX , textY + 1); std::cout << "이제 일반 몬스터는 상대도 안 된다!";
+			Console_gotoxy(textX , textY + 1); std::cout << "이때 동안 당신이 한 노력의 결과물을 보여줘라!";
 			Console_gotoxy(textX , textY + 2); std::cout << "보스 [" << monster->getName() << "]이 등장했다!";
 		}
 		else
